@@ -6,7 +6,8 @@
 <title>RevendePro - Controle de Revendedora</title>
 <meta name="theme-color" content="#db2777">
 <style>
-*{box-sizing:border-box;font-family:Arial,sans-serif}body{margin:0;background:#fdf2f8;padding:12px}.card{background:#fff;border-radius:18px;padding:20px;max-width:560px;margin:0 auto}h1{color:#db2777;text-align:center;margin:6px 0}h2{color:#1e293b}p{text-align:center;color:#555}input,select{width:100%;padding:13px;border:1px solid #ddd;border-radius:12px;margin:6px 0;font-size:15px}button{width:100%;padding:14px;border:0;border-radius:12px;background:#db2777;color:#fff;font-weight:bold;font-size:15px;cursor:pointer}button.outline{background:#fff;color:#db2777;border:2px solid #db2777}button.gray{background:#64748b}button.green{background:#16a34a}button.red{background:#ef4444}button.orange{background:#f97316}button.small{width:auto;padding:9px 11px;font-size:13px}.hidden{display:none!important}.cliente,.pedido{background:#f8fafc;border:1px solid #e2e8f0;padding:12px;border-radius:12px;margin:8px 0}.cliente b{font-size:17px}.linha{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}.box{background:#fdf2f8;border:1px solid #fbcfe8;padding:12px;border-radius:12px;margin:10px 0}.kpi{display:flex;gap:8px}.kpi div{flex:1;background:#fff;border:2px solid #fbcfe8;border-radius:12px;padding:10px;text-align:center}.kpi b{font-size:18px;display:block}.badge{padding:4px 10px;border-radius:20px;font-size:12px;font-weight:bold}.badge-green{background:#dcfce7;color:#166534}.badge-red{background:#fee2e2;color:#991b1b}.badge-orange{background:#ffedd5;color:#9a3412}.plano{border:2px solid #db2777;background:#fff;padding:14px;border-radius:12px;margin:10px 0}.plano.destaque{border-color:#16a34a;background:#f0fdf4}.pix-box{background:#e0f2fe;border:2px solid #0284c7;padding:14px;border-radius:12px;margin:10px 0;text-align:center}.pix-codigo{word-break:break-all;font-size:11px;background:#fff;padding:10px;border-radius:10px;border:1px dashed #0284c7;text-align:left}.menu{display:grid;grid-template-columns:1fr 1fr;gap:10px}.menu button{padding:16px 6px;background:#db2777!important}.menu button:nth-child(5){grid-column:span 2}.topo-app{display:flex;justify-content:space-between;align-items:center;gap:8px}.btn-menu-topo{width:46px!important;height:46px!important;padding:0!important;font-size:24px!important;background:#db2777!important;border-radius:50%!important;flex-shrink:0}.menu-flutuante-wrap{position:relative}.menu-drop{position:absolute;right:0;top:52px;background:#fff;border:1px solid #e2e8f0;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.2);width:230px;z-index:99;overflow:hidden}.menu-drop button{width:100%;background:#fff!important;color:#1e293b!important;text-align:left;padding:14px 16px!important;border-radius:0!important;font-size:15px;border-bottom:1px solid #f1f5f9!important}.menu-drop button.sair{color:#ef4444!important}.fundo-menu{position:fixed;inset:0;background:rgba(0,0,0,.25);z-index:90}.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;display:flex;align-items:center;justify-content:center;padding:20px}.modal-box{background:#fff;border-radius:18px;padding:20px;max-width:420px;width:100%;text-align:center}
+*{box-sizing:border-box;font-family:Arial,sans-serif}body{margin:0;background:#fdf2f8;padding:12px}.card{background:#fff;border-radius:18px;padding:20px;max-width:560px;margin:0 auto}h1{color:#db2777;text-align:center;margin:6px 0}h2{color:#1e293b}p{text-align:center;color:#555}input,select{width:100%;padding:13px;border:1px solid #ddd;border-radius:12px;margin:6px 0;font-size:15px}button{width:100%;padding:14px;border:0;border-radius:12px;background:#db2777;color:#fff;font-weight:bold;font-size:15px;cursor:pointer}button.outline{background:#fff;color:#db2777;border:2px solid #db2777}button.gray{background:#64748b}button.green{background:#16a34a}button.red{background:#ef4444}button.orange{background:#f97316}button.small{width:auto;padding:9px 11px;font-size:13px}.hidden{display:none!important}.cliente,.pedido{background:#f8fafc;border:1px solid #e2e8f0;padding:12px;border-radius:12px;margin:8px 0}.cliente b{font-size:17px}.linha{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}.box{background:#fdf2f8;border:1px solid #fbcfe8;padding:12px;border-radius:12px;margin:10px 0}.kpi{display:flex;gap:8px}.kpi div{flex:1;background:#fff;border:2px solid #fbcfe8;border-radius:12px;padding:10px;text-align:center}.kpi b{font-size:18px;display:block}.badge{padding:4px 10px;border-radius:20px;font-size:12px;font-weight:bold}.badge-green{background:#dcfce7;color:#166534}.badge-red{background:#fee2e2;color:#991b1b}.badge-orange{background:#ffedd5;color:#9a3412}.plano{border:2px solid #db2777;background:#fff;padding:14px;border-radius:12px;margin:10px 0}.plano.destaque{border-color:#16a34a;background:#f0fdf4}.pix-box{background:#e0f2fe;border:2px solid #0284c7;padding:14px;border-radius:12px;margin:10px 0;text-align:center}.pix-codigo{word-break:break-all;font-size:11px;background:#fff;padding:10px;border-radius:10px;border:1px dashed #0284c7;text-align:left}.menu{display:grid;grid-template-columns:1fr 1fr;gap:10px}.menu button{padding:16px 6px;background:#db2777!important}.topo-app{display:flex;justify-content:space-between;align-items:center;gap:8px}.btn-menu-topo{width:46px!important;height:46px!important;padding:0!important;font-size:24px!important;background:#db2777!important;border-radius:50%!important;flex-shrink:0}.menu-flutuante-wrap{position:relative}.menu-drop{position:absolute;right:0;top:52px;background:#fff;border:1px solid #e2e8f0;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.2);width:230px;z-index:99;overflow:hidden}.menu-drop button{width:100%;background:#fff!important;color:#1e293b!important;text-align:left;padding:14px 16px!important;border-radius:0!important;font-size:15px;border-bottom:1px solid #f1f5f9!important}.menu-drop button.sair{color:#ef4444!important}.fundo-menu{position:fixed;inset:0;background:rgba(0,0,0,.25);z-index:90}.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;display:flex;align-items:center;justify-content:center;padding:20px}.modal-box{background:#fff;border-radius:18px;padding:20px;max-width:420px;width:100%;text-align:center;max-height:85vh;overflow-y:auto}
+.cat{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:14px;margin:10px 0}.cat-icon{width:48px;height:48px;background:#FFF0F7;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px}.cat-top{display:flex;gap:12px;align-items:center}
 </style>
 </head>
 <body>
@@ -27,7 +28,7 @@
 <div style="width:120px;height:120px;background:#db2777;border-radius:22px;display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:70px">💄</div>
 <h1>RevendePro</h1><p>💄 Avon • Natura • Boticário • Eudora</p>
 <div class="box" style="text-align:center"><b>Para de perder dinheiro com fiado!</b><br>Controle clientes, pedidos e quem tá devendo em 1 lugar só.</div>
-<p>✅ Clientes<br>✅ Pedidos<br>✅ Cobrança automática no WhatsApp<br>✅ Total a receber</p>
+<p>✅ Clientes<br>✅ Pedidos<br>✅ Cobrança automática no WhatsApp<br>✅ Total a receber<br>✅ Catálogos no WhatsApp</p>
 <button onclick="mostrar('telaLogin')">🔑 JÁ TENHO CONTA - ENTRAR</button>
 <button class="outline" style="margin-top:10px" onclick="mostrar('telaCadastro')">✨ SOU NOVA - CRIAR CONTA GRÁTIS</button>
 <p style="font-weight:bold;color:#16a34a">🎁 7 dias grátis • 💳 Sem cartão</p>
@@ -52,7 +53,6 @@
 <button class="gray" style="margin-top:10px" onclick="mostrar('telaHome')">🏠 VOLTAR</button>
 </div>
 
-<!-- PAGINA COMPLETA DA REVENDEDORA - ADM - SEM SENHA E SEM DADOS DOS CLIENTES, SO QUANTIDADE -->
 <div id="telaAdminDetalhe" class="card hidden">
 <div style="text-align:center"><div style="width:90px;height:90px;border-radius:50%;background:#fbcfe8;display:flex;align-items:center;justify-content:center;font-size:48px;margin:0 auto">👤</div><h2 id="detRevNome" style="margin:6px 0">-</h2><p id="detRevSub" style="color:#888;font-size:13px"></p><span id="detRevStatus"></span></div>
 <div class="box" style="text-align:left" id="detRevInfo"></div>
@@ -72,7 +72,7 @@
 <div id="telaPlanos" class="card hidden">
 <div style="display:flex;justify-content:space-between;align-items:center"><span></span><div class="menu-flutuante-wrap"><button class="btn-menu-topo" onclick="toggleMenuFlutuante(event)">☰</button><div id="menuDropPlanos" class="menu-drop hidden"><button onclick="irMenuPlanos('secPerfil')">👤 Perfil</button><button onclick="irMenuPlanos('secPlanoApp')">💳 Plano</button><button onclick="irMenuPlanos('secSuporte')">💬 Suporte</button><button onclick="irMenuPlanos('secTermos')">📄 Termos</button><button class="sair" onclick="sair()">🚪 Sair</button></div></div></div>
 <div style="text-align:center;font-size:56px">🔒</div><h1>Seus 7 dias acabaram!</h1><p>Olá, <b id="nomePlano"></b>!</p><p>Escolha seu plano e continue vendendo!</p><p style="font-size:13px;color:#888">☰ Menu no canto superior direito: Perfil, Plano, Suporte, Termos</p>
-<div class="plano"><h2 style="text-align:center">📅 Mensal</h2><p style="font-size:28px;font-weight:bold;color:#db2777;text-align:center">R$ 19,90 / mês</p><p>✅ Clientes ilimitadas<br>✅ Pedidos ilimitados<br>✅ Cobrança no WhatsApp<br>⏳ Vale por 30 dias</p><button style="background:#009ee3" onclick="abrirPagamentoPlano('mensal')">💙 PAGAR MENSAL - PIX R$ 19,90</button></div>
+<div class="plano"><h2 style="text-align:center">📅 Mensal</h2><p style="font-size:28px;font-weight:bold;color:#db2777;text-align:center">R$ 19,90 / mês</p><p>✅ Clientes ilimitadas<br>✅ Pedidos ilimitados<br>✅ Cobrança no WhatsApp<br>✅ Catálogos no WhatsApp<br>⏳ Vale por 30 dias</p><button style="background:#009ee3" onclick="abrirPagamentoPlano('mensal')">💙 PAGAR MENSAL - PIX R$ 19,90</button></div>
 <div class="plano" style="border-color:#f97316"><h2 style="text-align:center">📅 Anual ⭐ ECONOMIA</h2><p style="font-size:28px;font-weight:bold;color:#f97316;text-align:center">R$ 190,00 / ano</p><p>✅ Tudo do mensal<br>✅ 2 meses grátis<br>⏳ Vale por 365 dias</p><button style="background:#009ee3" onclick="abrirPagamentoPlano('anual')">💙 PAGAR ANUAL - PIX R$ 190,00</button></div>
 <div class="plano destaque"><h2 style="text-align:center">♾️ Vitalício ⭐ MAIS VENDIDO</h2><p style="font-size:28px;font-weight:bold;color:#16a34a;text-align:center">R$ 450 - uma vez só</p><p>✅ Tudo do mensal<br>✅ Pra sempre, sem mensalidade<br>♾️ Nunca vence</p><button style="background:#009ee3" onclick="abrirPagamentoPlano('vitalicio')">💙 PAGAR VITALÍCIO - PIX R$ 450</button></div>
 <p>Já tem código?</p><input id="codigoPlanoInput" placeholder="🔢 Digite o código"><button style="background:#16a34a" onclick="liberarComCodigo()">🔓 LIBERAR</button><button class="gray" style="margin-top:8px" onclick="mostrar('telaHome')">🏠 VOLTAR</button><p id="msgPlano" style="color:red"></p>
@@ -93,7 +93,7 @@
 <div id="cabecalhoApp">
 <p>👤 Olá, <b id="nomeUser"></b> | <b id="marcaUser"></b> | 📱 <b id="whatsUser"></b></p>
 <div class="kpi"><div><small>💰 A Receber</small><b id="kDevendo">R$ 0</b></div><div><small>✅ Recebido</small><b id="kPago">R$ 0</b></div><div><small>👥 Clientes</small><b id="kClientes">0</b></div></div>
-<div class="menu" style="margin-top:12px"><button onclick="mostrarSecao('secClientes')">👥<br>Clientes</button><button onclick="mostrarSecao('secPedidos')">📦<br>Pedidos</button><button onclick="mostrarSecao('secNovoPedido')">➕<br>Novo Pedido</button><button onclick="mostrarSecao('secCaixa')">💰<br>Caixa</button><button onclick="mostrarSecao('secPendentes')">⏳<br>Pendentes</button></div>
+<div class="menu" style="margin-top:12px"><button onclick="mostrarSecao('secClientes')">👥<br>Clientes</button><button onclick="mostrarSecao('secPedidos')">📦<br>Pedidos</button><button onclick="mostrarSecao('secNovoPedido')">➕<br>Novo Pedido</button><button onclick="mostrarSecao('secCaixa')">💰<br>Caixa</button><button onclick="mostrarSecao('secPendentes')">⏳<br>Pendentes</button><button onclick="mostrarSecao('secCatalogos')">📚<br>Catálogos</button></div>
 </div>
 
 <div id="secHomeApp"><h2>📦 Últimos Pedidos</h2><div id="listaHome"></div></div>
@@ -108,13 +108,36 @@
 
 <div id="secPendentes" class="hidden"><div style="text-align:center"><div style="width:80px;height:80px;background:#ffedd5;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto">⏳</div><h2>⏳ Pagamentos Pendentes</h2><p style="color:#9a3412">Quem ainda não te pagou</p></div><div class="box" style="background:#fff7ed;border-color:#fdba74;text-align:center"><b style="font-size:22px;color:#ea580c" id="pendenteTotalTxt">R$ 0,00</b><br><small>💸 Total a receber de clientes</small><br><small>👥 <span id="pendenteQtdTxt">0</span> clientes devendo</small></div><button class="orange" onclick="cobrarTodosPendentes()">💰 COBRAR TODO MUNDO DE UMA VEZ</button><div id="listaPendentes" style="margin-top:12px"></div><button class="gray" style="margin-top:10px" onclick="mostrarSecao('secHomeApp')">🏠 VOLTAR</button></div>
 
+<div id="secCatalogos" class="hidden">
+<h2>📚 Meus Catálogos</h2>
+<p style="text-align:left;color:#666;font-size:14px">Suba seu catálogo e envie para suas clientes no WhatsApp em 1 clique.</p>
+<div class="kpi" style="margin:10px 0"><div><small>📚 Catálogos</small><b id="totalCat">0</b></div><div><small>📤 Envios</small><b id="totalEnviosCat">0</b></div></div>
+<div class="box" style="background:#FFF0F7;text-align:left">
+<b>➕ Adicionar Novo Catálogo</b><br>
+<label style="font-size:12px;font-weight:bold">NOME DO CATÁLOGO</label>
+<input id="cat-nome" placeholder="Ex: Natura Ciclo 12, Avon Moda, Boticário Natal">
+<label style="font-size:12px;font-weight:bold">MARCA / CATEGORIA</label>
+<input id="cat-marca" placeholder="Ex: Natura, Avon, Boticário, Eudora">
+<label style="font-size:12px;font-weight:bold">LINK DO CATÁLOGO (PDF / Drive / Canva)</label>
+<input id="cat-link" placeholder="Cole aqui o link do seu PDF">
+<small style="color:#888;font-size:12px">Dica: Sobe no Google Drive > Compartilhar > Qualquer pessoa com link > Cola aqui.</small>
+<label style="font-size:12px;font-weight:bold">OU SUBIR ARQUIVO (PDF / FOTO)</label>
+<input type="file" id="cat-arquivo" accept=".pdf,image/*">
+<button onclick="salvarCatalogo()">SALVAR CATÁLOGO →</button>
+</div>
+<input id="buscaCat" placeholder="🔍 Buscar catálogo... Ex: Natura" oninput="listarCatalogos()">
+<div id="listaCatalogos"></div>
+<div class="box" style="text-align:left"><b>💡 Como enviar?</b><br><small>1. Clique em <b style="color:#16a34a">Enviar no WhatsApp</b><br>2. Vai abrir direto o Compartilhar do celular<br>3. Escolhe WhatsApp > Escolhe a cliente lá dentro > PDF já vai junto!</small></div>
+<button class="gray" onclick="mostrarSecao('secHomeApp')">🏠 VOLTAR</button>
+</div>
+
 <div id="secDetalheCliente" class="hidden"><h2>👤 Detalhes da Cliente</h2><div style="text-align:center"><div style="width:90px;height:90px;border-radius:50%;background:#fbcfe8;display:flex;align-items:center;justify-content:center;font-size:48px;margin:0 auto">👤</div><h2 id="detNomeCliente" style="margin:6px 0">-</h2><p id="detSubCliente" style="color:#888;font-size:13px"></p></div><div class="box" id="detInfoCliente" style="text-align:left"></div><div class="box" style="background:#f0fdf4;border-color:#86efac;text-align:left"><b>💰 RESUMO DELA</b><br><b>🛍️ Total comprado:</b> <span id="detTotalCliente"></span><br><b>✅ Já pagou:</b> <span id="detPagoCliente"></span><br><b>💸 Tá devendo:</b> <span id="detDevendoCliente" style="color:red;font-weight:bold"></span><br><b>📦 Qtd pedidos:</b> <span id="detQtdPedidos"></span></div><h3>📦 Pedidos dela</h3><div id="detPedidosCliente"></div><div style="display:flex;flex-direction:column;gap:8px;margin-top:10px"><button class="green" style="background:#25D366" onclick="whatsClienteDetalhe()">📱 CHAMAR NO WHATSAPP</button><button class="orange" onclick="cobrarClienteDetalhe()">💰 COBRAR TUDO QUE DEVE</button><button class="orange" onclick="editarClienteDetalhe()">✏️ EDITAR CLIENTE</button><button class="red" onclick="excluirClienteDetalhe()">🗑️ EXCLUIR CLIENTE</button></div><button class="gray" style="margin-top:10px" onclick="mostrarSecao('secClientes')">⬅ VOLTAR P/ CLIENTES</button></div>
 
 <div id="secPerfil" class="hidden"><h2>👤 Meu Perfil</h2><div style="width:90px;height:90px;border-radius:50%;background:#fbcfe8;display:flex;align-items:center;justify-content:center;font-size:48px;margin:0 auto">👤</div><p style="text-align:center"><b id="perfilNomeTxt"></b></p><div class="box"><b>👤 Nome:</b> <span id="perfilNome"></span><br><b>📱 WhatsApp:</b> <span id="perfilWhats"></span><br><b>📧 E-mail:</b> <span id="perfilEmail"></span><br><b>🏷️ Marca:</b> <span id="perfilMarca"></span><br><b>📦 Plano:</b> <span id="perfilPlano"></span><br><b>👥 Total de clientes:</b> <span id="perfilTotal"></span></div><button class="orange" onclick="toggleEditarPerfil()">✏️ EDITAR PERFIL</button><div id="formPerfil" class="hidden" style="background:#f8fafc;border:2px solid #f97316;padding:14px;border-radius:12px;margin:10px 0"><label>👤 Seu nome</label><input id="editNome"><label>📱 Seu WhatsApp</label><input id="editWhats"><label>🏷️ Marca</label><select id="editMarca"><option>💄 Avon</option><option>🌿 Natura</option><option>✨ O Boticário</option><option>💅 Eudora</option><option>🌸 Mary Kay</option><option>💄 Várias marcas</option></select><button class="green" onclick="salvarPerfil()">✅ SALVAR</button><button class="gray" style="margin-top:6px" onclick="toggleEditarPerfil()">❌ CANCELAR</button></div><button class="gray" style="margin-top:10px" onclick="mostrarSecao('secHomeApp')">🏠 VOLTAR</button></div>
 
-<div id="secPlanoApp" class="hidden"><div style="text-align:center"><div style="width:80px;height:80px;background:#fdf2f8;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto">💳</div><h2>Meu Plano</h2><p>Gerencie sua assinatura</p></div><div class="box" style="background:linear-gradient(135deg,#db2777,#f472b6);color:#fff;border:none"><b style="color:#fff">👤 <span id="planoNomeCliente"></span></b><br><span style="font-size:13px">📦 Plano atual: <b id="planoAtualTxt"></b></span><br><span style="font-size:13px">⏳ Status: <b id="planoDiasTxt"></b></span><br><span style="font-size:13px">📅 Vence em: <b id="planoVenceTxt"></b></span></div><div class="plano"><div style="display:flex;justify-content:space-between;align-items:center"><h2>📅 Mensal</h2><span class="badge badge-orange">FLEXÍVEL</span></div><p style="font-size:28px;font-weight:bold;color:#db2777;text-align:center">R$ 19,90 <span style="font-size:14px;color:#64748b">/ mês</span></p><p>✅ Clientes ilimitadas<br>✅ Pedidos ilimitados<br>✅ Cobrança no WhatsApp<br>✅ Controle de fiado e parcelas<br>✅ Suporte direto</p><button style="background:#009ee3" onclick="abrirPagamentoPlano('mensal')">💙 QUERO O MENSAL - PIX R$ 19,90</button></div><div class="plano"><div style="display:flex;justify-content:space-between;align-items:center"><h2>📅 Anual</h2><span class="badge badge-orange">ECONOMIA</span></div><p style="font-size:28px;font-weight:bold;color:#f97316;text-align:center">R$ 190 <span style="font-size:14px;color:#64748b">/ ano</span></p><p>✅ Tudo do Mensal<br>✅ 2 meses grátis<br>✅ Vale 365 dias</p><button style="background:#009ee3" onclick="abrirPagamentoPlano('anual')">💙 QUERO O ANUAL - PIX R$ 190</button></div><div class="plano destaque"><div style="display:flex;justify-content:space-between;align-items:center"><h2>♾️ Vitalício</h2><span class="badge badge-green">⭐ MAIS VENDIDO</span></div><p style="font-size:28px;font-weight:bold;color:#16a34a;text-align:center">R$ 450 <span style="font-size:14px;color:#64748b">uma vez só</span></p><p>✅ Tudo do Mensal<br>✅ <b>Paga uma vez, usa pra sempre</b><br>✅ Sem mensalidade nunca mais<br>✅ Todas as atualizações futuras<br>✅ Suporte prioritário</p><button style="background:#009ee3" onclick="abrirPagamentoPlano('vitalicio')">💙 QUERO O VITALÍCIO - PIX R$ 450</button></div><div class="box" style="text-align:center"><b>🔒 Pagamento seguro via PIX</b><br><small>Após o pagamento, manda o comprovante que liberamos na hora!</small></div><button class="gray" onclick="mostrarSecao('secHomeApp')">🏠 VOLTAR</button></div>
+<div id="secPlanoApp" class="hidden"><div style="text-align:center"><div style="width:80px;height:80px;background:#fdf2f8;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto">💳</div><h2>Meu Plano</h2><p>Gerencie sua assinatura</p></div><div class="box" style="background:linear-gradient(135deg,#db2777,#f472b6);color:#fff;border:none"><b style="color:#fff">👤 <span id="planoNomeCliente"></span></b><br><span style="font-size:13px">📦 Plano atual: <b id="planoAtualTxt"></b></span><br><span style="font-size:13px">⏳ Status: <b id="planoDiasTxt"></b></span><br><span style="font-size:13px">📅 Vence em: <b id="planoVenceTxt"></b></span></div><div class="plano"><div style="display:flex;justify-content:space-between;align-items:center"><h2>📅 Mensal</h2><span class="badge badge-orange">FLEXÍVEL</span></div><p style="font-size:28px;font-weight:bold;color:#db2777;text-align:center">R$ 19,90 <span style="font-size:14px;color:#64748b">/ mês</span></p><p>✅ Clientes ilimitadas<br>✅ Pedidos ilimitados<br>✅ Cobrança no WhatsApp<br>✅ Catálogos no WhatsApp<br>✅ Controle de fiado e parcelas<br>✅ Suporte direto</p><button style="background:#009ee3" onclick="abrirPagamentoPlano('mensal')">💙 QUERO O MENSAL - PIX R$ 19,90</button></div><div class="plano"><div style="display:flex;justify-content:space-between;align-items:center"><h2>📅 Anual</h2><span class="badge badge-orange">ECONOMIA</span></div><p style="font-size:28px;font-weight:bold;color:#f97316;text-align:center">R$ 190 <span style="font-size:14px;color:#64748b">/ ano</span></p><p>✅ Tudo do Mensal<br>✅ 2 meses grátis<br>✅ Vale 365 dias</p><button style="background:#009ee3" onclick="abrirPagamentoPlano('anual')">💙 QUERO O ANUAL - PIX R$ 190</button></div><div class="plano destaque"><div style="display:flex;justify-content:space-between;align-items:center"><h2>♾️ Vitalício</h2><span class="badge badge-green">⭐ MAIS VENDIDO</span></div><p style="font-size:28px;font-weight:bold;color:#16a34a;text-align:center">R$ 450 <span style="font-size:14px;color:#64748b">uma vez só</span></p><p>✅ Tudo do Mensal<br>✅ <b>Paga uma vez, usa pra sempre</b><br>✅ Sem mensalidade nunca mais<br>✅ Todas as atualizações futuras<br>✅ Suporte prioritário</p><button style="background:#009ee3" onclick="abrirPagamentoPlano('vitalicio')">💙 QUERO O VITALÍCIO - PIX R$ 450</button></div><div class="box" style="text-align:center"><b>🔒 Pagamento seguro via PIX</b><br><small>Após o pagamento, manda o comprovante que liberamos na hora!</small></div><button class="gray" onclick="mostrarSecao('secHomeApp')">🏠 VOLTAR</button></div>
 
-<div id="secSuporte" class="hidden"><div style="text-align:center"><div style="width:80px;height:80px;background:#dcfce7;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto">💬</div><h2>Central de Ajuda</h2><p>Estamos aqui pra te ajudar!</p></div><div class="box" style="background:#f0fdf4;border-color:#86efac;text-align:center"><div style="font-size:40px">💄</div><b>RevendePro Suporte</b><br><small>⏰ Seg a Sáb • 8h às 20h<br>⚡ Resposta em até 2h</small><br><br><button class="green" style="background:#25D366" onclick="abrirWhatsSuporte()">📱 CHAMAR NO WHATSAPP AGORA</button><p style="margin-top:8px">📞 (15) 99764-3116</p></div><div class="box"><h3 style="margin-top:0">❓ Perguntas Frequentes</h3><b>1. Como cobrar uma cliente?</b><br><small>Vá em Clientes > clique na cliente > COBRAR. A mensagem já vai pronta!</small><br><br><b>2. Esqueci minha senha, e agora?</b><br><small>Chama no WhatsApp que a gente reseta pra você.</small><br><br><b>3. Perdi meus dados se trocar de celular?</b><br><small>Não! É só entrar com seu e-mail e senha em qualquer celular.</small><br><br><b>4. Como funciona o Vitalício?</b><br><small>Você paga R$ 450 uma vez só e usa pra sempre, sem mensalidade.</small></div><div class="box"><h3 style="margin-top:0">🐛 Encontrou um erro?</h3><small>Print a tela e manda no WhatsApp que a gente arruma.</small><br><button class="orange" style="margin-top:8px" onclick="abrirWhatsSuporte()">📱 REPORTAR ERRO</button></div><button class="gray" onclick="mostrarSecao('secHomeApp')">🏠 VOLTAR</button></div>
+<div id="secSuporte" class="hidden"><div style="text-align:center"><div style="width:80px;height:80px;background:#dcfce7;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto">💬</div><h2>Central de Ajuda</h2><p>Estamos aqui pra te ajudar!</p></div><div class="box" style="background:#f0fdf4;border-color:#86efac;text-align:center"><div style="font-size:40px">💄</div><b>RevendePro Suporte</b><br><small>⏰ Seg a Sáb • 8h às 20h<br>⚡ Resposta em até 2h</small><br><br><button class="green" style="background:#25D366" onclick="abrirWhatsSuporte()">📱 CHAMAR NO WHATSAPP AGORA</button><p style="margin-top:8px">📞 (15) 99764-3116</p></div><div class="box"><h3 style="margin-top:0">❓ Perguntas Frequentes</h3><b>1. Como cobrar uma cliente?</b><br><small>Vá em Clientes > clique na cliente > COBRAR. A mensagem já vai pronta!</small><br><br><b>2. Esqueci minha senha, e agora?</b><br><small>Chama no WhatsApp que a gente reseta pra você.</small><br><br><b>3. Perdi meus dados se trocar de celular?</b><br><small>Não! É só entrar com seu e-mail e senha em qualquer celular.</small><br><br><b>4. Como funciona o Vitalício?</b><br><small>Você paga R$ 450 uma vez só e usa pra sempre, sem mensalidade.</small><br><br><b>5. Como enviar catálogo?</b><br><small>Vá em Catálogos > Enviar no WhatsApp > Escolha WhatsApp no Compartilhar > Escolha a cliente.</small></div><div class="box"><h3 style="margin-top:0">🐛 Encontrou um erro?</h3><small>Print a tela e manda no WhatsApp que a gente arruma.</small><br><button class="orange" style="margin-top:8px" onclick="abrirWhatsSuporte()">📱 REPORTAR ERRO</button></div><button class="gray" onclick="mostrarSecao('secHomeApp')">🏠 VOLTAR</button></div>
 
 <div id="secTermos" class="hidden"><div style="text-align:center"><div style="width:80px;height:80px;background:#e0e7ff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto">📄</div><h2>Termos de Uso</h2><p>RevendePro • Última atualização: 21/11/2026</p></div><div class="box" style="text-align:left"><b>1. O que é o RevendePro?</b><br><small>App para revendedoras de catálogo controlarem clientes, pedidos, fiado, datas de entrega e pagamento.</small><br><br><b>2. Teste Grátis</b><br><small>Você tem 7 dias grátis para testar. Depois, é preciso assinar o Mensal (R$ 19,90/mês), Anual (R$ 190/ano) ou Vitalício (R$ 450 único) para continuar usando.</small><br><br><b>3. Seus Dados</b><br><small>Seus dados e os das suas clientes ficam salvos de forma segura e só você tem acesso. Não vendemos seus dados.</small><br><br><b>4. Pagamento</b><br><small>Pagamento via PIX. Após enviar o comprovante no WhatsApp, liberamos seu acesso em até 2h úteis. Sem reembolso após liberação, exceto em caso de falha do app.</small><br><br><b>5. Cancelamento</b><br><small>Plano Mensal e Anual: você pode cancelar quando quiser, é só chamar no suporte. Plano Vitalício: acesso pra sempre.</small><br><br><b>6. Responsabilidade</b><br><small>O app é uma ferramenta de controle. A cobrança e o recebimento são de responsabilidade da revendedora.</small><br><br><b>7. Suporte</b><br><small>Dúvidas? WhatsApp (15) 99764-3116 • Seg a Sáb, 8h às 20h</small></div><div style="text-align:center"><small>Ao usar o RevendePro, você concorda com esses termos.</small></div><button class="gray" style="margin-top:10px" onclick="mostrarSecao('secHomeApp')">🏠 VOLTAR</button></div>
 
@@ -134,7 +157,7 @@ const PLANOS = {
 const firebaseConfig = { apiKey: "AIzaSyAjuWRLU_XXaRAd5WeZM1znTm1Oeelx2Vw", authDomain: "manicurepro-cddfd.firebaseapp.com", projectId: "manicurepro-cddfd", storageBucket: "manicurepro-cddfd.firebasestorage.app", messagingSenderId: "465878522406", appId: "1:465878522406:web:f241e26237afb34ffee4e7" };
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-let usuarioAtual=null, clientes=[], pedidos=[], planoPagamentoAtual='mensal', codigoAleatorioAtual='', codigoTipoAtual='MENSAL', filtroAdmin='todos', clienteDetalheId=null, editandoClienteId=null, emailRecuperacao='', emailBloquearAtual='', nomeBloquearAtual='', isAdminView=false, adminOriginal=null, revendedoraDetalheEmail='', revendedoraDetalhe=null;
+let usuarioAtual=null, clientes=[], pedidos=[], catalogos=[], planoPagamentoAtual='mensal', codigoAleatorioAtual='', codigoTipoAtual='MENSAL', filtroAdmin='todos', clienteDetalheId=null, editandoClienteId=null, emailRecuperacao='', emailBloquearAtual='', nomeBloquearAtual='', isAdminView=false, adminOriginal=null, revendedoraDetalheEmail='', revendedoraDetalhe=null;
 let EMAIL_ADM = "jefaotransportetatui@gmail.com";
 function emailToId(e){return e.toLowerCase().trim().replace(/[^a-z0-9]/g,'_')}
 function fmt(v){return 'R$ '+(parseFloat(v)||0).toFixed(2).replace('.',',')}
@@ -155,8 +178,8 @@ function estaBloqueado(u){ if(!u) return false; if(u.bloqueado) return true; if(
 function verificarBloqueio(){if(!usuarioAtual) return false; if(isAdminView) return false; if(estaBloqueado(usuarioAtual)){ if(planoVencido(usuarioAtual) && !usuarioAtual.bloqueado){ usuarioAtual.planoLiberado=false; setDoc(doc(db,"revende_users",emailToId(usuarioAtual.email)),{planoLiberado:false},{merge:true}); } document.getElementById('nomePlano').innerText=usuarioAtual.nome; mostrar('telaPlanos'); return true;} return false;}
 window.mostrar=function(id){['telaHome','telaLogin','telaCadastro','telaEsqueciSenha','telaPlanos','telaPagamentoPlano','telaApp','telaAdminLogin','telaAdminPainel','telaAdminDetalhe'].forEach(t=>document.getElementById(t).classList.add('hidden'));document.getElementById(id).classList.remove('hidden');fecharMenuFlutuante();window.scrollTo(0,0)}
 window.mostrarSecao=function(id){
-  if(isAdminView===false && usuarioAtual && estaBloqueado(usuarioAtual) && ['secClientes','secPedidos','secNovoPedido','secCaixa','secPendentes','secDetalheCliente','secHomeApp'].includes(id)){ document.getElementById('nomePlano').innerText=usuarioAtual.nome; mostrar('telaPlanos'); alert('🔒 Seu plano venceu! Renove para continuar. Você só tem acesso ao menu ☰'); return; }
-  ['secHomeApp','secClientes','secPedidos','secNovoPedido','secCaixa','secPendentes','secPerfil','secPlanoApp','secSuporte','secTermos','secDetalheCliente'].forEach(s=>document.getElementById(s).classList.add('hidden'));document.getElementById(id).classList.remove('hidden');fecharMenuFlutuante();let cab=document.getElementById('cabecalhoApp');if(cab){if(id==='secHomeApp'){cab.classList.remove('hidden');}else{cab.classList.add('hidden');}}if(id==='secPendentes') atualizarPendentes();if(id==='secPerfil') atualizarPerfil();if(id==='secPlanoApp') atualizarMeuPlano();window.scrollTo(0,0)}
+  if(isAdminView===false && usuarioAtual && estaBloqueado(usuarioAtual) && ['secClientes','secPedidos','secNovoPedido','secCaixa','secPendentes','secDetalheCliente','secCatalogos','secHomeApp'].includes(id)){ document.getElementById('nomePlano').innerText=usuarioAtual.nome; mostrar('telaPlanos'); alert('🔒 Seu plano venceu! Renove para continuar. Você só tem acesso ao menu ☰'); return; }
+  ['secHomeApp','secClientes','secPedidos','secNovoPedido','secCaixa','secPendentes','secPerfil','secPlanoApp','secSuporte','secTermos','secDetalheCliente','secCatalogos'].forEach(s=>document.getElementById(s).classList.add('hidden'));document.getElementById(id).classList.remove('hidden');fecharMenuFlutuante();let cab=document.getElementById('cabecalhoApp');if(cab){if(id==='secHomeApp'){cab.classList.remove('hidden');}else{cab.classList.add('hidden');}}if(id==='secPendentes') atualizarPendentes();if(id==='secPerfil') atualizarPerfil();if(id==='secPlanoApp') atualizarMeuPlano();if(id==='secCatalogos') listarCatalogos();window.scrollTo(0,0)}
 window.toggleOlho=function(id,el){let input=document.getElementById(id);if(input.type==='password'){input.type='text';el.innerText='🙈';}else{input.type='password';el.innerText='👁️';}}
 window.toggleMenuFlutuante=function(e){if(e) e.stopPropagation();let m=document.getElementById('menuDrop');let m2=document.getElementById('menuDropPlanos');if(m && !document.getElementById('telaApp').classList.contains('hidden')){m.classList.toggle('hidden');document.getElementById('fundoMenu').classList.toggle('hidden', m.classList.contains('hidden'));}else if(m2){m2.classList.toggle('hidden');document.getElementById('fundoMenu').classList.toggle('hidden', m2.classList.contains('hidden'));}}
 window.fecharMenuFlutuante=function(){let m=document.getElementById('menuDrop'); if(m) m.classList.add('hidden'); let m2=document.getElementById('menuDropPlanos'); if(m2) m2.classList.add('hidden'); document.getElementById('fundoMenu').classList.add('hidden');}
@@ -173,7 +196,6 @@ window.voltarListaAdmin=async function(){await listarClientesAdmin();mostrar('te
 window.abrirDetalheRevendedora=async function(email){
   let snap=await getDoc(doc(db,"revende_users",emailToId(email))); if(!snap.exists()){alert('Revendedora não encontrada');return;}
   let c=snap.data(); revendedoraDetalheEmail=email; revendedoraDetalhe=c;
-  // SO QUANTIDADE - NAO TRAZ NOME / DADOS DOS CLIENTES DELA
   let s1=await getDocs(collection(db,"revende_users",emailToId(email),"clientes"));
   let s2=await getDocs(collection(db,"revende_users",emailToId(email),"pedidos"));
   let qtdClientes=s1.size;
@@ -188,7 +210,6 @@ window.abrirDetalheRevendedora=async function(email){
   document.getElementById('detRevNome').innerText=c.nome;
   document.getElementById('detRevSub').innerText='Revendedora desde '+(c.inicio?new Date(c.inicio).toLocaleDateString('pt-BR'):'-');
   document.getElementById('detRevStatus').innerHTML=statusTxt;
-  // SEM SENHA - REMOVIDO
   document.getElementById('detRevInfo').innerHTML='<b>👤 Nome completo:</b> '+c.nome+'<br><b>📱 WhatsApp:</b> '+(c.whats||'-')+'<br><b>📧 E-mail:</b> '+c.email+'<br><b>🏷️ Marca:</b> '+(c.marca||'-')+'<br><b>📅 Criou conta em:</b> '+(c.inicio?new Date(c.inicio).toLocaleDateString('pt-BR')+' às '+new Date(c.inicio).toLocaleTimeString('pt-BR'):'-')+'<br><b>📦 Plano atual:</b> '+(c.planoTipo||'TESTE GRÁTIS')+'<br><b>📦 Plano escolhido:</b> '+(c.planoEscolhido||'-')+'<br><b>📅 Vence em:</b> '+(c.planoTipo==='VITALICIO'?'♾️ Pra sempre!':c.planoValidade?new Date(c.planoValidade).toLocaleDateString('pt-BR'):'-')+'<br><b>⏳ Dias restantes:</b> '+(c.planoLiberado&&c.planoTipo!=='VITALICIO'?Math.max(0,diasRestPlano)+' dias':c.planoLiberado&&c.planoTipo==='VITALICIO'?'♾️ Nunca vence':diasRestTeste+' dias de teste')+'<br><b>🔒 Bloqueada?</b> '+(c.bloqueado?'SIM - Só vê Planos':'NÃO');
   document.getElementById('detRevTotalClientes').innerText=qtdClientes;
   document.getElementById('detRevTotalPedidos').innerText=listaPedidos.length;
@@ -224,6 +245,121 @@ window.abrirPagamentoPlano=function(tipo){planoPagamentoAtual=tipo;let p=PLANOS[
 window.copiarPixPlano=function(){copiarTexto(document.getElementById('codigoPixPlano').innerText,'✅ Código PIX copiado! Agora cola no seu banco!');}
 window.jaPagueiPlano=async function(){let u=usuarioAtual;let p=PLANOS[planoPagamentoAtual];let planoTxt=p?p.nome:planoPagamentoAtual;let msg='💄 NOVO PAGAMENTO - RevendePro\n\n📦 Plano: '+planoTxt+'\n👤 Nome: '+u.nome+'\n📱 WhatsApp: '+u.whats+'\n📧 E-mail: '+u.email+'\n🏷️ Marca: '+(u.marca||'-')+'\n\n✅ Já fiz o PIX! Segue o comprovante:';window.open('https://wa.me/5515997643116?text='+encodeURIComponent(msg),'_blank');alert('✅ WhatsApp aberto! Anexa o comprovante e envia!')}
 window.liberarComCodigo=async function(){let cod=document.getElementById('codigoPlanoInput').value.trim().toUpperCase();if(!cod){document.getElementById('msgPlano').innerText='Digite o código';return}let snap=await getDocs(collection(db,"revende_codigos"));let ach=null;snap.forEach(d=>{if(d.data().codigo===cod) ach=d.data()});if(!ach){document.getElementById('msgPlano').innerText='Código errado';return}let dias=ach.tipo==='VITALICIO'?0:ach.tipo==='ANUAL'?365:30;usuarioAtual.planoLiberado=true;usuarioAtual.bloqueado=false;usuarioAtual.planoTipo=ach.tipo||'MENSAL';if(ach.tipo==='VITALICIO') usuarioAtual.planoValidade=null; else usuarioAtual.planoValidade=Date.now()+dias*24*60*60*1000;await setDoc(doc(db,"revende_users",emailToId(usuarioAtual.email)),usuarioAtual,{merge:true});alert('🔓 Liberado '+ach.tipo+'!');location.reload()}
+
+// ===== CATÁLOGOS - DIRETO P/ COMPARTILHAR, SEM ESCOLHER CLIENTE =====
+function catKey(){ return 'revende_catalogos_'+(usuarioAtual?emailToId(usuarioAtual.email):'geral'); }
+function catEnviosKey(){ return 'revende_envios_'+(usuarioAtual?emailToId(usuarioAtual.email):'geral'); }
+async function carregarCatalogos(){
+  try{
+    let s=await getDocs(collection(db,"revende_users",emailToId(usuarioAtual.email),"catalogos"));
+    catalogos=[]; s.forEach(d=>{let x=d.data(); x._id=d.id; catalogos.push(x);});
+  }catch(e){
+    catalogos = JSON.parse(localStorage.getItem(catKey())||'[]');
+  }
+  listarCatalogos();
+}
+window.salvarCatalogo=async function(){
+  let nome=document.getElementById('cat-nome').value.trim();
+  let marca=document.getElementById('cat-marca').value.trim()||'Geral';
+  let link=document.getElementById('cat-link').value.trim();
+  let arquivo=document.getElementById('cat-arquivo').files[0];
+  if(!nome){alert('Digite o nome do catálogo');return;}
+  if(!link && !arquivo){alert('Cole o link ou escolha um arquivo');return;}
+  const salvarFinal = async (finalLink, tipoArquivo)=>{
+    try{
+      await addDoc(collection(db,"revende_users",emailToId(usuarioAtual.email),"catalogos"),{nome,marca,link:finalLink,tipo:tipoArquivo||'link',nomeArquivo:arquivo?arquivo.name:'',data:new Date().toLocaleDateString('pt-BR'),criadoEm:Date.now()});
+    }catch(e){
+      catalogos.unshift({nome,marca,link:finalLink,tipo:tipoArquivo||'link',nomeArquivo:arquivo?arquivo.name:'',data:new Date().toLocaleDateString('pt-BR')});
+      localStorage.setItem(catKey(), JSON.stringify(catalogos));
+    }
+    document.getElementById('cat-nome').value='';document.getElementById('cat-marca').value='';document.getElementById('cat-link').value='';document.getElementById('cat-arquivo').value='';
+    await carregarCatalogos();
+    alert('Catálogo salvo! ✅');
+  };
+  if(arquivo){
+    let r=new FileReader(); r.onload=e=>salvarFinal(e.target.result,'arquivo'); r.readAsDataURL(arquivo);
+  } else salvarFinal(link,'link');
+}
+window.listarCatalogos=function(){
+  let busca=(document.getElementById('buscaCat')?.value||'').toLowerCase();
+  let div=document.getElementById('listaCatalogos'); if(!div) return;
+  let envios=parseInt(localStorage.getItem(catEnviosKey())||'0');
+  document.getElementById('totalCat').innerText=catalogos.length;
+  document.getElementById('totalEnviosCat').innerText=envios;
+  let filtrados=catalogos.filter(c=>(c.nome+' '+c.marca).toLowerCase().includes(busca));
+  if(filtrados.length===0){div.innerHTML='<div class="box" style="text-align:center"><div style="font-size:40px">📚</div><b>Nenhum catálogo ainda</b><br><small>Adicione o primeiro acima!<br>Ex: Natura Ciclo 12</small></div>';return;}
+  div.innerHTML=filtrados.map(c=>{
+    let emoji='💄'; if(c.marca.toLowerCase().includes('natura')) emoji='🌿'; if(c.marca.toLowerCase().includes('avon')) emoji='💋'; if(c.marca.toLowerCase().includes('botic')) emoji='🌸';
+    let tipoTxt = c.tipo==='arquivo' ? '📎 PDF - vai junto no Compartilhar' : '🔗 Link - vai direto no Compartilhar';
+    return '<div class="cat"><div class="cat-top"><div class="cat-icon">'+emoji+'</div><div style="flex:1"><b>'+c.nome+'</b><br><small style="color:#888">'+c.marca+' • '+c.data+'</small><br><small style="color:#16a34a;font-weight:bold">'+tipoTxt+'</small><br><span class="badge badge-green">✅ PRONTO PARA ENVIAR</span></div></div><div class="linha"><button class="small green" style="background:#25D366" onclick="enviarCatalogoWhats(\''+c._id+'\')">🟢 Enviar no WhatsApp</button><button class="small" style="background:#111" onclick="baixarCatalogo(\''+c._id+'\')">⬇ Baixar</button></div><div class="linha"><button class="small gray" onclick="copiarLinkCatalogo(\''+c._id+'\')">📋 Copiar Link</button><button class="small red" onclick="excluirCatalogo(\''+c._id+'\')">🗑️ Excluir</button></div></div>';
+  }).join('');
+}
+// *** NOVO - CLICOU EM ENVIAR -> VAI DIRETO P/ COMPARTILHAR, SEM LISTA DE CLIENTE ***
+window.enviarCatalogoWhats = async function(id){
+  let c = catalogos.find(x=>x._id===id);
+  if(!c) return;
+  let envios = parseInt(localStorage.getItem(catEnviosKey())||'0')+1;
+  localStorage.setItem(catEnviosKey(), envios);
+  listarCatalogos();
+
+  let texto = 'Oi! 💖 Olha o catálogo novo que chegou: *'+c.nome+'* - '+c.marca+'\n\nMe fala o que você gostou que eu já separo pra você! 😍';
+
+  // SE FOR LINK (Drive / Canva) -> COMPARTILHA O TEXTO COM LINK
+  if(c.tipo !== 'arquivo' && !(c.link||'').startsWith('data:')){
+    let msgFinal = 'Oi! 💖 Olha o catálogo novo que chegou: *'+c.nome+'* - '+c.marca+'\n\n👉 '+c.link+'\n\nMe fala o que você gostou que eu já separo pra você! 😍';
+    try{
+      if(navigator.share){
+        await navigator.share({ title: c.nome, text: msgFinal });
+        return;
+      }
+    }catch(e){}
+    // Se não tiver compartilhar, copia e abre WhatsApp
+    copiarTexto(msgFinal,'📋 Mensagem copiada! Agora escolhe a cliente no WhatsApp!');
+    window.open('https://wa.me/?text='+encodeURIComponent(msgFinal),'_blank');
+    return;
+  }
+
+  // SE FOR PDF QUE ELA SUBIU -> COMPARTILHA O PDF JUNTO!
+  try{
+    let res = await fetch(c.link);
+    let blob = await res.blob();
+    let nomeArq = c.nomeArquivo || (c.nome + '.pdf');
+    if(!nomeArq.toLowerCase().endsWith('.pdf') && !nomeArq.toLowerCase().endsWith('.jpg') && !nomeArq.toLowerCase().endsWith('.png') && !nomeArq.toLowerCase().endsWith('.jpeg')){
+      nomeArq = nomeArq + '.pdf';
+    }
+    let file = new File([blob], nomeArq, {type: blob.type || 'application/pdf'});
+    if(navigator.share && navigator.canShare && navigator.canShare({files:[file]})){
+      await navigator.share({ title: c.nome, text: texto, files: [file] });
+      return;
+    } else {
+      throw new Error('sem share');
+    }
+  }catch(e){
+    console.log('Share não suportado', e);
+    let a = document.createElement('a');
+    a.href = c.link;
+    a.download = c.nomeArquivo || (c.nome+'.pdf');
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    alert('📎 PDF baixado! Agora abre seu WhatsApp, escolhe a cliente e manda o PDF que baixou!');
+  }
+}
+window.baixarCatalogo=function(id){
+  let c=catalogos.find(x=>x._id===id); if(!c) return;
+  if(c.tipo==='arquivo' || (c.link||'').startsWith('data:')){
+    let a=document.createElement('a'); a.href=c.link; a.download=c.nomeArquivo|| (c.nome+'.pdf'); document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  } else {
+    window.open(c.link,'_blank');
+  }
+}
+window.copiarLinkCatalogo=function(id){let c=catalogos.find(x=>x._id===id); if(!c) return; if(c.tipo==='arquivo'){alert('Esse catálogo é um PDF que você subiu. Não tem link, usa o botão BAIXAR ou ENVIAR!');return;} copiarTexto(c.link,'📋 Link copiado!');}
+window.excluirCatalogo=async function(id){
+  if(!confirm('Excluir esse catálogo?')) return;
+  try{ await deleteDoc(doc(db,"revende_users",emailToId(usuarioAtual.email),"catalogos",id)); }catch(e){
+    catalogos=catalogos.filter(x=>x._id!==id); localStorage.setItem(catKey(), JSON.stringify(catalogos));
+  }
+  await carregarCatalogos();
+}
+
 window.toggleFormCliente=function(){let f=document.getElementById('formCliente');if(!f.classList.contains('hidden')){fecharFormCliente();return;}editandoClienteId=null;document.getElementById('tituloFormCliente').innerText='➕ Nova Cliente';f.classList.remove('hidden');}
 window.fecharFormCliente=function(){editandoClienteId=null;document.getElementById('nNome').value='';document.getElementById('nFone').value='';document.getElementById('nEnd').value='';document.getElementById('formCliente').classList.add('hidden');}
 window.adicionarCliente=async function(){let n=document.getElementById('nNome').value.trim(),f=document.getElementById('nFone').value.trim(),e=document.getElementById('nEnd').value.trim();if(!n||!f){alert('Nome e WhatsApp são obrigatórios');return}if(editandoClienteId){await updateDoc(doc(db,"revende_users",emailToId(usuarioAtual.email),"clientes",editandoClienteId),{nome:n,fone:f,end:e});alert('✅ Cliente atualizada!');}else{await addDoc(collection(db,"revende_users",emailToId(usuarioAtual.email),"clientes"),{nome:n,fone:f,end:e,criadoEm:Date.now()});alert('✅ Cliente salva!');}fecharFormCliente();await carregar();mostrarSecao('secClientes');}
@@ -232,7 +368,7 @@ window.whatsClienteDetalhe=function(){let c=clientes.find(x=>x._id===clienteDeta
 window.cobrarClienteDetalhe=function(){let c=clientes.find(x=>x._id===clienteDetalheId);if(!c) return;let dev=pedidos.filter(p=>p.clienteId===clienteDetalheId&&p.pag!=='pago').reduce((s,p)=>s+(parseFloat(p.valor)||0),0);if(dev<=0){alert('Ela não tá devendo nada! ✅');return;}cobrarCliente(c.fone,c.nome,dev,'seus pedidos');}
 window.editarClienteDetalhe=function(){let c=clientes.find(x=>x._id===clienteDetalheId);if(!c) return;editandoClienteId=c._id;document.getElementById('nNome').value=c.nome;document.getElementById('nFone').value=c.fone;document.getElementById('nEnd').value=c.end||'';document.getElementById('tituloFormCliente').innerText='✏️ Editando: '+c.nome;document.getElementById('formCliente').classList.remove('hidden');mostrarSecao('secClientes');}
 window.excluirClienteDetalhe=async function(){if(!confirm('Excluir essa cliente e todos os pedidos dela?')) return;await deleteDoc(doc(db,"revende_users",emailToId(usuarioAtual.email),"clientes",clienteDetalheId));let meus=pedidos.filter(p=>p.clienteId===clienteDetalheId);for(let p of meus){await deleteDoc(doc(db,"revende_users",emailToId(usuarioAtual.email),"pedidos",p._id));}clienteDetalheId=null;await carregar();mostrarSecao('secClientes');alert('Excluída!');}
-async function carregar(){if(!usuarioAtual) return;let s1=await getDocs(collection(db,"revende_users",emailToId(usuarioAtual.email),"clientes"));clientes=[];s1.forEach(d=>{let x=d.data();x._id=d.id;clientes.push(x)});let s2=await getDocs(collection(db,"revende_users",emailToId(usuarioAtual.email),"pedidos"));pedidos=[];s2.forEach(d=>{let x=d.data();x._id=d.id;pedidos.push(x)});listar()}
+async function carregar(){if(!usuarioAtual) return;let s1=await getDocs(collection(db,"revende_users",emailToId(usuarioAtual.email),"clientes"));clientes=[];s1.forEach(d=>{let x=d.data();x._id=d.id;clientes.push(x)});let s2=await getDocs(collection(db,"revende_users",emailToId(usuarioAtual.email),"pedidos"));pedidos=[];s2.forEach(d=>{let x=d.data();x._id=d.id;pedidos.push(x)});await carregarCatalogos();listar()}
 window.salvarPedido=async function(){let cli=document.getElementById('pedCliente').value,prod=document.getElementById('pedProduto').value.trim(),val=parseFloat(document.getElementById('pedValor').value)||0,pag=document.getElementById('pedPag').value,obs=document.getElementById('pedObs').value.trim(),dataEntrega=document.getElementById('pedDataEntrega').value,dataPagamento=document.getElementById('pedDataPagamento').value,parcelas=document.getElementById('pedParcelas').value;if(!cli||!prod||!val){alert('Escolhe cliente, produto e valor');return}let c=clientes.find(x=>x._id===cli);await addDoc(collection(db,"revende_users",emailToId(usuarioAtual.email),"pedidos"),{clienteId:cli,clienteNome:c?c.nome:'',clienteFone:c?c.fone:'',produto:prod,valor:val,pag:pag,obs:obs,dataEntrega:dataEntrega||'',dataPagamento:dataPagamento||'',parcelas:parcelas||'1x',criadoEm:Date.now()});document.getElementById('pedProduto').value='';document.getElementById('pedValor').value='';document.getElementById('pedDataEntrega').value='';document.getElementById('pedDataPagamento').value='';document.getElementById('pedParcelas').value='1x';await carregar();mostrarSecao('secPedidos');alert('✅ Pedido salvo!')}
 window.togglePagPedido=async function(id){let p=pedidos.find(x=>x._id===id);await updateDoc(doc(db,"revende_users",emailToId(usuarioAtual.email),"pedidos",id),{pag:p.pag==='pago'?'devendo':'pago'});await carregar()}
 window.excluirPedido=async function(id){if(!confirm('Excluir pedido?'))return;await deleteDoc(doc(db,"revende_users",emailToId(usuarioAtual.email),"pedidos",id));await carregar()}
@@ -246,4 +382,4 @@ document.getElementById('cadSenhaConfirm').addEventListener('input',function(){l
 (function(){try{let s=localStorage.getItem('revende_user');if(s){let d=JSON.parse(s);getDoc(doc(db,"revende_users",emailToId(d.email))).then(snap=>{if(snap.exists()){usuarioAtual=snap.data();abrirApp(usuarioAtual.nome,usuarioAtual.whats,usuarioAtual.marca)}})}}catch(e){}})();
 </script>
 </body>
-</html>
+  </html>
