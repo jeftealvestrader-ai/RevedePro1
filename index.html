@@ -382,4 +382,4 @@ document.getElementById('cadSenhaConfirm').addEventListener('input',function(){l
 (function(){try{let s=localStorage.getItem('revende_user');if(s){let d=JSON.parse(s);getDoc(doc(db,"revende_users",emailToId(d.email))).then(snap=>{if(snap.exists()){usuarioAtual=snap.data();abrirApp(usuarioAtual.nome,usuarioAtual.whats,usuarioAtual.marca)}})}}catch(e){}})();
 </script>
 </body>
-  </html>
+</html>
