@@ -5,9 +5,503 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RevendePro - Controle de Revendedora</title>
 <meta name="theme-color" content="#db2777">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;font-family:Arial,sans-serif}body{margin:0;background:#fdf2f8;padding:12px}.card{background:#fff;border-radius:18px;padding:20px;max-width:560px;margin:0 auto}h1{color:#db2777;text-align:center;margin:6px 0}h2{color:#1e293b}p{text-align:center;color:#555}input,select{width:100%;padding:13px;border:1px solid #ddd;border-radius:12px;margin:6px 0;font-size:15px}button{width:100%;padding:14px;border:0;border-radius:12px;background:#db2777;color:#fff;font-weight:bold;font-size:15px;cursor:pointer}button.outline{background:#fff;color:#db2777;border:2px solid #db2777}button.gray{background:#64748b}button.green{background:#16a34a}button.red{background:#ef4444}button.orange{background:#f97316}button.small{width:auto;padding:9px 11px;font-size:13px}.hidden{display:none!important}.cliente,.pedido{background:#f8fafc;border:1px solid #e2e8f0;padding:12px;border-radius:12px;margin:8px 0}.cliente b{font-size:17px}.linha{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}.box{background:#fdf2f8;border:1px solid #fbcfe8;padding:12px;border-radius:12px;margin:10px 0}.kpi{display:flex;gap:8px}.kpi div{flex:1;background:#fff;border:2px solid #fbcfe8;border-radius:12px;padding:10px;text-align:center}.kpi b{font-size:18px;display:block}.badge{padding:4px 10px;border-radius:20px;font-size:12px;font-weight:bold}.badge-green{background:#dcfce7;color:#166534}.badge-red{background:#fee2e2;color:#991b1b}.badge-orange{background:#ffedd5;color:#9a3412}.plano{border:2px solid #db2777;background:#fff;padding:14px;border-radius:12px;margin:10px 0}.plano.destaque{border-color:#16a34a;background:#f0fdf4}.pix-box{background:#e0f2fe;border:2px solid #0284c7;padding:14px;border-radius:12px;margin:10px 0;text-align:center}.pix-codigo{word-break:break-all;font-size:11px;background:#fff;padding:10px;border-radius:10px;border:1px dashed #0284c7;text-align:left}.menu{display:grid;grid-template-columns:1fr 1fr;gap:10px}.menu button{padding:16px 6px;background:#db2777!important}.topo-app{display:flex;justify-content:space-between;align-items:center;gap:8px}.btn-menu-topo{width:46px!important;height:46px!important;padding:0!important;font-size:24px!important;background:#db2777!important;border-radius:50%!important;flex-shrink:0}.menu-flutuante-wrap{position:relative}.menu-drop{position:absolute;right:0;top:52px;background:#fff;border:1px solid #e2e8f0;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.2);width:230px;z-index:99;overflow:hidden}.menu-drop button{width:100%;background:#fff!important;color:#1e293b!important;text-align:left;padding:14px 16px!important;border-radius:0!important;font-size:15px;border-bottom:1px solid #f1f5f9!important}.menu-drop button.sair{color:#ef4444!important}.fundo-menu{position:fixed;inset:0;background:rgba(0,0,0,.25);z-index:90}.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;display:flex;align-items:center;justify-content:center;padding:20px}.modal-box{background:#fff;border-radius:18px;padding:20px;max-width:420px;width:100%;text-align:center;max-height:85vh;overflow-y:auto}
-.cat{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:14px;margin:10px 0}.cat-icon{width:48px;height:48px;background:#FFF0F7;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px}.cat-top{display:flex;gap:12px;align-items:center}
+:root{
+  --bg:#faf7f9;
+  --surface:#ffffff;
+  --surface-soft:#fdf6fa;
+  --ink:#18181b;
+  --muted:#71717a;
+  --border:#ece6eb;
+  --primary:#db2777;
+  --primary-hover:#be185d;
+  --primary-soft:#fdf2f8;
+  --green:#16a34a;
+  --red:#dc2626;
+  --orange:#ea580c;
+  --sky:#0284c7;
+  --shadow:0 10px 30px -12px rgba(24,24,27,0.08);
+  --shadow-sm:0 2px 8px -2px rgba(24,24,27,0.05);
+}
+*{
+  box-sizing:border-box;
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  -webkit-tap-highlight-color:transparent;
+}
+body{
+  margin:0;
+  background:radial-gradient(circle at top,#fdf2f8 0%,var(--bg) 48%);
+  color:var(--ink);
+  padding:16px 12px 32px;
+  line-height:1.45;
+}
+.card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:24px 20px;
+  max-width:540px;
+  margin:0 auto;
+  box-shadow:var(--shadow);
+}
+h1{
+  color:var(--ink);
+  font-size:24px;
+  font-weight:800;
+  letter-spacing:-0.025em;
+  text-align:center;
+  margin:10px 0 4px;
+}
+h2{
+  color:var(--ink);
+  font-size:19px;
+  font-weight:700;
+  letter-spacing:-0.02em;
+  margin:12px 0 6px;
+}
+h3{
+  color:var(--ink);
+  font-size:16px;
+  font-weight:700;
+  margin:6px 0;
+}
+p{
+  text-align:center;
+  color:var(--muted);
+  font-size:14px;
+  margin:6px 0;
+}
+label{
+  display:block;
+  margin-top:8px;
+  color:var(--ink);
+}
+input,select,textarea{
+  width:100%;
+  padding:12px 14px;
+  border:1px solid #e4e4e7;
+  border-radius:12px;
+  margin:5px 0;
+  font-size:14px;
+  color:var(--ink);
+  background:#fff;
+  transition:border-color .15s ease,box-shadow .15s ease;
+}
+input[type="checkbox"]{
+  width:auto;
+  margin:0;
+  padding:0;
+  transform:scale(1.15);
+  accent-color:var(--primary);
+  cursor:pointer;
+}
+textarea{
+  min-height:105px;
+  resize:vertical;
+}
+input::placeholder,textarea::placeholder{
+  color:#a1a1aa;
+}
+input:focus,select:focus,textarea:focus{
+  outline:none;
+  border-color:var(--primary);
+  box-shadow:0 0 0 3px rgba(219,39,119,0.12);
+}
+button{
+  width:100%;
+  padding:13px 16px;
+  border:0;
+  border-radius:12px;
+  background:var(--primary);
+  color:#fff;
+  font-weight:600;
+  font-size:14px;
+  letter-spacing:-0.01em;
+  cursor:pointer;
+  transition:transform .12s ease,background .15s ease,box-shadow .15s ease,opacity .15s ease;
+  box-shadow:0 4px 12px -4px rgba(219,39,119,0.45);
+}
+button:hover{
+  background:var(--primary-hover);
+}
+button:active{
+  transform:scale(0.985);
+}
+button.outline{
+  background:#fff;
+  color:var(--primary);
+  border:1.5px solid #f5c2d9;
+  box-shadow:none;
+}
+button.outline:hover{
+  background:var(--primary-soft);
+  border-color:var(--primary);
+}
+button.gray{
+  background:#f4f4f5;
+  color:#3f3f46;
+  box-shadow:none;
+}
+button.gray:hover{
+  background:#e4e4e7;
+}
+button.green{
+  background:var(--green);
+  box-shadow:0 4px 12px -4px rgba(22,163,74,0.35);
+}
+button.green:hover{
+  background:#15803d;
+}
+button.red{
+  background:#fff1f2;
+  color:var(--red);
+  border:1px solid #fecdd3;
+  box-shadow:none;
+}
+button.red:hover{
+  background:#ffe4e6;
+}
+button.orange{
+  background:var(--orange);
+  box-shadow:0 4px 12px -4px rgba(234,88,12,0.35);
+}
+button.orange:hover{
+  background:#c2410c;
+}
+button.small{
+  width:auto;
+  padding:8px 12px;
+  font-size:12.5px;
+  border-radius:10px;
+  box-shadow:none;
+}
+.hidden{
+  display:none!important;
+}
+.cliente,.pedido{
+  background:#fff;
+  border:1px solid var(--border);
+  padding:14px;
+  border-radius:16px;
+  margin:10px 0;
+  box-shadow:var(--shadow-sm);
+  transition:border-color .15s ease,transform .15s ease;
+}
+.cliente:hover,.pedido:hover{
+  border-color:#fbcfe8;
+}
+.cliente b,.pedido b{
+  font-size:15px;
+  color:var(--ink);
+}
+.linha{
+  display:flex;
+  gap:8px;
+  margin-top:10px;
+  flex-wrap:wrap;
+}
+.box{
+  background:var(--surface-soft);
+  border:1px solid #f5d0e3;
+  padding:14px;
+  border-radius:16px;
+  margin:12px 0;
+  font-size:13.5px;
+  line-height:1.55;
+}
+.termos-box{
+  background:#fafafa;
+  border:1px solid #e4e4e7;
+  border-radius:14px;
+  padding:12px;
+  max-height:145px;
+  overflow-y:auto;
+  font-size:12.5px;
+  color:#3f3f46;
+  text-align:left;
+  margin:10px 0;
+}
+.aceite-row{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  background:#fdf2f8;
+  border:1px solid #fbcfe8;
+  padding:12px;
+  border-radius:12px;
+  margin:8px 0 12px;
+  font-size:13px;
+  text-align:left;
+}
+.kpi{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin:10px 0;
+}
+.kpi div{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:12px 8px;
+  text-align:center;
+  box-shadow:var(--shadow-sm);
+}
+.kpi small{
+  color:var(--muted);
+  font-size:11.5px;
+  font-weight:500;
+}
+.kpi b{
+  font-size:16px;
+  font-weight:800;
+  color:var(--ink);
+  display:block;
+  margin-top:3px;
+}
+.badge{
+  padding:3px 9px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:0.01em;
+  display:inline-block;
+}
+.badge-green{
+  background:#dcfce7;
+  color:#15803d;
+}
+.badge-red{
+  background:#fee2e2;
+  color:#b91c1c;
+}
+.badge-orange{
+  background:#ffedd5;
+  color:#c2410c;
+}
+.badge-gray{
+  background:#f4f4f5;
+  color:#3f3f46;
+}
+.plano{
+  border:1px solid var(--border);
+  background:#fff;
+  padding:18px 16px;
+  border-radius:18px;
+  margin:12px 0;
+  box-shadow:var(--shadow-sm);
+}
+.plano.gratis{
+  border:1.5px solid #e4e4e7;
+  background:linear-gradient(180deg,#fafafa 0%,#ffffff 100%);
+}
+.plano.destaque{
+  border:1.5px solid #86efac;
+  background:linear-gradient(180deg,#f0fdf4 0%,#ffffff 100%);
+}
+.plano-lista{
+  list-style:none;
+  padding:0;
+  margin:10px 0 14px;
+  font-size:13px;
+  color:#3f3f46;
+}
+.plano-lista li{
+  padding:5px 0;
+  border-bottom:1px dashed #f4f4f5;
+}
+.plano-lista li:last-child{
+  border-bottom:none;
+}
+.pix-box{
+  background:#f0f9ff;
+  border:1px solid #bae6fd;
+  padding:16px;
+  border-radius:16px;
+  margin:12px 0;
+  text-align:center;
+}
+.pix-codigo{
+  word-break:break-all;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+  font-size:11px;
+  background:#f8fafc;
+  padding:12px;
+  border-radius:12px;
+  border:1px dashed #7dd3fc;
+  text-align:left;
+  color:#0f172a;
+}
+.menu{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+}
+.menu button{
+  padding:14px 8px;
+  background:#fff!important;
+  color:var(--ink)!important;
+  border:1px solid var(--border)!important;
+  border-radius:14px;
+  font-size:12.5px;
+  font-weight:600;
+  box-shadow:var(--shadow-sm)!important;
+}
+.menu button:hover{
+  border-color:#f9a8d4!important;
+  background:var(--primary-soft)!important;
+  color:var(--primary)!important;
+}
+.topo-app{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+  padding-bottom:8px;
+  border-bottom:1px solid #f4f4f5;
+}
+.topo-app h1{
+  margin:0;
+  font-size:20px;
+  text-align:left;
+}
+.btn-menu-topo{
+  width:40px!important;
+  height:40px!important;
+  padding:0!important;
+  font-size:18px!important;
+  background:#f4f4f5!important;
+  color:var(--ink)!important;
+  border-radius:12px!important;
+  flex-shrink:0;
+  box-shadow:none!important;
+}
+.btn-menu-topo:hover{
+  background:#e4e4e7!important;
+}
+.menu-flutuante-wrap{
+  position:relative;
+}
+.menu-drop{
+  position:absolute;
+  right:0;
+  top:48px;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:16px;
+  box-shadow:0 16px 36px -10px rgba(24,24,27,0.18);
+  width:235px;
+  z-index:99;
+  overflow:hidden;
+  padding:4px 0;
+}
+.menu-drop button{
+  width:100%;
+  background:#fff!important;
+  color:var(--ink)!important;
+  text-align:left;
+  padding:11px 16px!important;
+  border-radius:0!important;
+  font-size:13.5px;
+  font-weight:500;
+  box-shadow:none!important;
+}
+.menu-drop button:hover{
+  background:#fdf2f8!important;
+  color:var(--primary)!important;
+}
+.menu-drop button.sair{
+  color:var(--red)!important;
+  border-top:1px solid #f4f4f5;
+  margin-top:4px;
+}
+.menu-drop button.sair:hover{
+  background:#fff1f2!important;
+  color:var(--red)!important;
+}
+.fundo-menu{
+  position:fixed;
+  inset:0;
+  background:rgba(24,24,27,0.22);
+  backdrop-filter:blur(2px);
+  z-index:90;
+}
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(24,24,27,0.5);
+  backdrop-filter:blur(3px);
+  z-index:200;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+.modal-box{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:24px 20px;
+  max-width:400px;
+  width:100%;
+  text-align:center;
+  max-height:85vh;
+  overflow-y:auto;
+  box-shadow:var(--shadow);
+}
+.cat{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:14px;
+  margin:10px 0;
+  box-shadow:var(--shadow-sm);
+}
+.cat-icon{
+  width:46px;
+  height:46px;
+  background:var(--primary-soft);
+  border:1px solid #fbcfe8;
+  border-radius:13px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  flex-shrink:0;
+}
+.cat-top{
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+.adm-plano-card{
+  background:#fff;
+  border:1px solid #e2e8f0;
+  border-radius:14px;
+  padding:12px;
+  margin-top:10px;
+  text-align:left;
+}
+.adm-plano-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:6px;
+}
+@media (max-width:400px){
+  .kpi{
+    grid-template-columns:1fr;
+  }
+  .menu{
+    grid-template-columns:repeat(2,1fr);
+  }
+  .adm-plano-grid{
+    grid-template-columns:1fr;
+  }
+}
 </style>
 </head>
 <body>
@@ -15,7 +509,7 @@
 
 <div id="modalBloquear" class="modal hidden">
 <div class="modal-box">
-<div style="font-size:50px">🔒</div>
+<div style="font-size:44px">🔒</div>
 <h2>Bloquear <span id="nomeBloquearTxt"></span>?</h2>
 <p>Escolha o que fazer com ela:</p>
 <button class="green" onclick="confirmarBloqueio('teste')">🎁 VOLTAR P/ 7 DIAS GRÁTIS<br><small style="font-weight:normal">Ela ganha 7 dias de teste de novo</small></button>
@@ -25,41 +519,78 @@
 </div>
 
 <div id="telaHome" class="card">
-<div style="width:120px;height:120px;background:#db2777;border-radius:22px;display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:70px">💄</div>
+<div style="width:84px;height:84px;background:linear-gradient(135deg,#db2777,#f472b6);border-radius:24px;display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:42px;box-shadow:0 12px 24px -8px rgba(219,39,119,0.5)">💄</div>
 <h1>RevendePro</h1><p>💄 Avon • Natura • Boticário • Eudora</p>
 <div class="box" style="text-align:center"><b>Para de perder dinheiro com fiado!</b><br>Controle clientes, pedidos e quem tá devendo em 1 lugar só.</div>
 <p>✅ Clientes<br>✅ Pedidos<br>✅ Cobrança automática no WhatsApp<br>✅ Total a receber<br>✅ Catálogos no WhatsApp</p>
 <button onclick="mostrar('telaLogin')">🔑 JÁ TENHO CONTA - ENTRAR</button>
 <button class="outline" style="margin-top:10px" onclick="mostrar('telaCadastro')">✨ SOU NOVA - CRIAR CONTA GRÁTIS</button>
-<p style="font-weight:bold;color:#16a34a">🎁 7 dias grátis • 💳 Sem cartão</p>
-<div style="text-align:center;margin-top:35px;opacity:0.03"><span style="font-size:18px;cursor:pointer" onclick="mostrar('telaAdminLogin')">🔒</span></div>
+<p style="font-weight:600;color:#16a34a;margin-top:12px">🎁 7 dias grátis • 💳 Sem cartão</p>
+<div style="text-align:center;margin-top:28px;opacity:0.04"><span style="font-size:16px;cursor:pointer" onclick="mostrar('telaAdminLogin')">🔒</span></div>
 </div>
 
-<div id="telaLogin" class="card hidden"><h1>🔑 Entrar</h1><input id="loginEmail" placeholder="📧 Seu e-mail"><div style="position:relative"><input id="loginSenha" type="password" placeholder="🔒 Sua senha" style="padding-right:48px"><span onclick="toggleOlho('loginSenha',this)" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:20px;cursor:pointer">👁️</span></div><button onclick="fazerLogin()">🔑 ENTRAR</button><p style="text-align:center;margin:10px 0"><span style="color:#db2777;text-decoration:underline;cursor:pointer;font-size:14px" onclick="mostrar('telaEsqueciSenha')">❓ Esqueci minha senha</span></p><button class="outline" style="margin-top:8px" onclick="mostrar('telaCadastro')">✨ NÃO TENHO CONTA</button><button class="gray" style="margin-top:8px" onclick="mostrar('telaHome')">🏠 VOLTAR</button><p id="msgLogin" style="color:red"></p></div>
+<div id="telaLogin" class="card hidden"><h1>🔑 Entrar</h1><input id="loginEmail" placeholder="📧 Seu e-mail"><div style="position:relative"><input id="loginSenha" type="password" placeholder="🔒 Sua senha" style="padding-right:48px"><span onclick="toggleOlho('loginSenha',this)" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:18px;cursor:pointer">👁️</span></div><button onclick="fazerLogin()">🔑 ENTRAR</button><p style="text-align:center;margin:12px 0"><span style="color:#db2777;text-decoration:underline;cursor:pointer;font-size:13.5px" onclick="mostrar('telaEsqueciSenha')">❓ Esqueci minha senha</span></p><button class="outline" style="margin-top:8px" onclick="mostrar('telaCadastro')">✨ NÃO TENHO CONTA</button><button class="gray" style="margin-top:8px" onclick="mostrar('telaHome')">🏠 VOLTAR</button><p id="msgLogin" style="color:red"></p></div>
 
-<div id="telaEsqueciSenha" class="card hidden"><h1>❓ Esqueci a Senha</h1><p>Vamos confirmar que é você!</p><div class="box" style="text-align:left"><b>🔐 Passo 1 - Confirma que é você</b><br><small>Digite seu e-mail e seu WhatsApp que você usou no cadastro. Tem que bater certinho!</small></div><input id="esqEmail" placeholder="📧 Seu e-mail do cadastro"><input id="esqWhats" placeholder="📱 Seu WhatsApp do cadastro"><button class="orange" onclick="verificarSouEu()">🔍 CONFIRMAR QUE SOU EU</button><p id="msgEsqVerificar" style="color:red"></p><div id="boxNovaSenha" class="hidden"><div class="box" style="background:#dcfce7;border-color:#86efac;text-align:left"><b>✅ É você mesmo, <span id="esqNomeConfirm"></span>!</b><br><small>Agora cria uma senha nova.</small></div><div style="position:relative"><input id="esqNovaSenha" type="password" placeholder="🔒 Nova senha *" style="padding-right:48px"><span onclick="toggleOlho('esqNovaSenha',this)" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:20px;cursor:pointer">👁️</span></div><div style="position:relative"><input id="esqNovaSenhaConfirm" type="password" placeholder="🔒 Confirme a nova senha *" style="padding-right:48px"><span onclick="toggleOlho('esqNovaSenhaConfirm',this)" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:20px;cursor:pointer">👁️</span></div><button class="green" onclick="salvarNovaSenha()">✅ SALVAR NOVA SENHA</button></div><button class="gray" style="margin-top:10px" onclick="mostrar('telaLogin')">⬅ VOLTAR P/ LOGIN</button><p id="msgEsqSenha" style="color:red"></p></div>
+<div id="telaEsqueciSenha" class="card hidden"><h1>❓ Esqueci a Senha</h1><p>Vamos confirmar que é você!</p><div class="box" style="text-align:left"><b>🔐 Passo 1 - Confirma que é você</b><br><small>Digite seu e-mail e seu WhatsApp que você usou no cadastro. Tem que bater certinho!</small></div><input id="esqEmail" placeholder="📧 Seu e-mail do cadastro"><input id="esqWhats" placeholder="📱 Seu WhatsApp do cadastro"><button class="orange" onclick="verificarSouEu()">🔍 CONFIRMAR QUE SOU EU</button><p id="msgEsqVerificar" style="color:red"></p><div id="boxNovaSenha" class="hidden"><div class="box" style="background:#dcfce7;border-color:#86efac;text-align:left"><b>✅ É você mesmo, <span id="esqNomeConfirm"></span>!</b><br><small>Agora cria uma senha nova.</small></div><div style="position:relative"><input id="esqNovaSenha" type="password" placeholder="🔒 Nova senha *" style="padding-right:48px"><span onclick="toggleOlho('esqNovaSenha',this)" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:18px;cursor:pointer">👁️</span></div><div style="position:relative"><input id="esqNovaSenhaConfirm" type="password" placeholder="🔒 Confirme a nova senha *" style="padding-right:48px"><span onclick="toggleOlho('esqNovaSenhaConfirm',this)" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:18px;cursor:pointer">👁️</span></div><button class="green" onclick="salvarNovaSenha()">✅ SALVAR NOVA SENHA</button></div><button class="gray" style="margin-top:10px" onclick="mostrar('telaLogin')">⬅ VOLTAR P/ LOGIN</button><p id="msgEsqSenha" style="color:red"></p></div>
 
-<div id="telaCadastro" class="card hidden"><h1>✨ Criar Conta</h1><p>🎁 7 dias grátis, libera na hora!</p><input id="cadNome" placeholder="👤 Seu nome *"><input id="cadWhats" placeholder="📱 Seu WhatsApp *"><input id="cadEmail" placeholder="📧 Seu e-mail *"><div style="position:relative"><input id="cadSenha" type="password" placeholder="🔒 Crie uma senha *" style="padding-right:48px"><span onclick="toggleOlho('cadSenha',this)" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:20px;cursor:pointer">👁️</span></div><div style="position:relative"><input id="cadSenhaConfirm" type="password" placeholder="🔒 Confirme sua senha *" style="padding-right:48px"><span onclick="toggleOlho('cadSenhaConfirm',this)" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:20px;cursor:pointer">👁️</span></div><p id="msgSenhaConfirm" style="font-size:13px;margin:2px 0"></p><select id="cadMarca"><option>💄 Avon</option><option>🌿 Natura</option><option>✨ O Boticário</option><option>💅 Eudora</option><option>🌸 Mary Kay</option><option>💄 Várias marcas</option></select><button onclick="criarConta()">✨ CRIAR CONTA GRÁTIS</button><button class="gray" style="margin-top:8px" onclick="mostrar('telaHome')">🏠 VOLTAR</button><p id="msgCad" style="color:red"></p></div>
+<div id="telaCadastro" class="card hidden">
+<h1>✨ Criar Conta</h1><p>🎁 7 dias grátis, libera na hora!</p>
+<input id="cadNome" placeholder="👤 Seu nome *">
+<input id="cadWhats" placeholder="📱 Seu WhatsApp *">
+<input id="cadEmail" placeholder="📧 Seu e-mail *">
+<div style="position:relative"><input id="cadSenha" type="password" placeholder="🔒 Crie uma senha *" style="padding-right:48px"><span onclick="toggleOlho('cadSenha',this)" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:18px;cursor:pointer">👁️</span></div>
+<div style="position:relative"><input id="cadSenhaConfirm" type="password" placeholder="🔒 Confirme sua senha *" style="padding-right:48px"><span onclick="toggleOlho('cadSenhaConfirm',this)" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:18px;cursor:pointer">👁️</span></div>
+<p id="msgSenhaConfirm" style="font-size:13px;margin:4px 0"></p>
+<select id="cadMarca"><option>💄 Avon</option><option>🌿 Natura</option><option>✨ O Boticário</option><option>💅 Eudora</option><option>🌸 Mary Kay</option><option>💄 Várias marcas</option></select>
 
-<div id="telaAdminLogin" class="card hidden"><h1>🔐 Área do Admin</h1><input id="adminEmail" placeholder="📧 Seu e-mail de ADM"><div style="position:relative"><input id="adminSenha" type="password" placeholder="🔒 Senha do admin" style="padding-right:48px"><span onclick="toggleOlho('adminSenha',this)" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:20px;cursor:pointer">👁️</span></div><button onclick="entrarAdmin()">🔐 ENTRAR COMO ADMIN</button><button class="gray" style="margin-top:8px" onclick="mostrar('telaHome')">🏠 VOLTAR</button><p id="msgAdmin" style="color:red"></p></div>
+<div class="termos-box">
+  <b>📄 Termos e Privacidade - RevendePro</b><br><br>
+  <b>1. Uso do App:</b> O RevendePro organiza clientes, pedidos, fiado, parcelas, cobranças no WhatsApp e catálogos da revendedora.<br>
+  <b>2. Planos e Limites:</b> Você conta com 7 dias grátis ou Plano Grátis com limites (até 15 clientes, 20 pedidos e 2 catálogos). Para uso ilimitado, há os planos Teste R$ 1,00, Mensal (R$ 19,90), Anual (R$ 190,00) e Vitalício (R$ 450,00).<br>
+  <b>3. Privacidade:</b> Seus dados e os de suas clientes ficam vinculados à sua conta e não são vendidos a terceiros.<br>
+  <b>4. Suporte:</b> Dúvidas pelo WhatsApp 15 93500-4144 ou e-mail contato@appnex.app.br.
+</div>
+
+<label class="aceite-row" for="aceiteTermos">
+  <input type="checkbox" id="aceiteTermos">
+  <span><b>Li e aceito os Termos e a Política de Privacidade</b> do RevendePro. *</span>
+</label>
+
+<button class="green" style="margin-bottom:8px" onclick="aceitarTermosECriarConta()">✅ ACEITAR TERMOS E CRIAR CONTA</button>
+<button class="gray" style="margin-top:4px" onclick="mostrar('telaHome')">🏠 VOLTAR</button>
+<p id="msgCad" style="color:red"></p>
+</div>
+
+<div id="telaAdminLogin" class="card hidden"><h1>🔐 Área do Admin</h1><input id="adminEmail" placeholder="📧 Seu e-mail de ADM"><div style="position:relative"><input id="adminSenha" type="password" placeholder="🔒 Senha do admin" style="padding-right:48px"><span onclick="toggleOlho('adminSenha',this)" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:18px;cursor:pointer">👁️</span></div><button onclick="entrarAdmin()">🔐 ENTRAR COMO ADMIN</button><button class="gray" style="margin-top:8px" onclick="mostrar('telaHome')">🏠 VOLTAR</button><p id="msgAdmin" style="color:red"></p></div>
 
 <div id="telaAdminPainel" class="card hidden">
-<h1>👑 Painel do Dono</h1><p>👤 Olá, <b>Jefte</b>! Aqui você manda em tudo.</p><p style="font-size:13px;color:#888">👆 Clique em qualquer revendedora para ver a página completa dela</p>
+<h1>👑 Painel do Dono</h1><p>👤 Olá, <b>Jefte</b>! Aqui você manda em tudo.</p><p style="font-size:12.5px;color:#71717a">👆 Clique em qualquer revendedora para ver a página completa dela</p>
 <div class="kpi"><div><small>👥 Revendedoras</small><b id="admTotalUsers">0</b></div><div><small>✅ Pagas</small><b id="admTotalPagas">0</b></div><div><small>🔒 Teste</small><b id="admTotalTeste">0</b></div></div>
-<div class="box" style="background:#dcfce7;border-color:#86efac;text-align:center;margin-top:10px"><b>💰 Faturamento estimado</b><br><span style="font-size:22px;font-weight:bold;color:#16a34a" id="admFaturamento">R$ 0</span><br><small id="admFaturamentoDet"></small></div>
-<div class="box" style="background:#fef9c3;border-color:#f59e0b;text-align:center"><b>🎲 Gerador de Código</b><br><small>Escolha o plano e gere o código pra liberar a cliente</small><br><select id="tipoCodigoGerador" style="margin-top:8px"><option value="MENSAL">📅 MENSAL - R$ 19,90 - 30 dias</option><option value="ANUAL">📅 ANUAL - R$ 190 - 365 dias</option><option value="VITALICIO">♾️ VITALICIO - R$ 450 - Pra sempre</option></select><input id="whatsCodigoGerador" placeholder="📱 WhatsApp da cliente pra mandar o código (ex: 15999887766)"><button style="background:#f97316;margin-top:8px" onclick="gerarCodigoAleatorio()">🎲 GERAR CÓDIGO</button><div id="boxCodigoAleatorio" style="display:none;margin-top:12px;background:#fff;padding:12px;border-radius:12px"><span>Seu código:</span><br><span id="codigoAleatorioTxt" style="font-size:28px;font-weight:bold;color:#db2777">-</span><br><br><button class="small green" onclick="copiarCodigoAleatorio()">📋 COPIAR</button> <button class="small" style="background:#25D366" onclick="mandarCodigoWhatsGerador()">📱 MANDA CÓDIGO PELO WHATSAPP</button></div></div>
-<div class="box"><b>🔍 Buscar Revendedora</b><input id="buscaAdmin" placeholder="🔍 Nome ou e-mail..." oninput="listarClientesAdmin()"><div style="display:flex;gap:6px;margin-top:6px"><button class="small gray" onclick="filtroAdmin='todos';listarClientesAdmin()">Todos</button><button class="small green" onclick="filtroAdmin='pagas';listarClientesAdmin()">✅ Pagas</button><button class="small orange" onclick="filtroAdmin='teste';listarClientesAdmin()">🔒 Teste</button></div></div>
+<div class="box" style="background:#f0fdf4;border-color:#bbf7d0;text-align:center;margin-top:10px"><b>💰 Faturamento estimado</b><br><span style="font-size:22px;font-weight:800;color:#16a34a" id="admFaturamento">R$ 0</span><br><small id="admFaturamentoDet"></small></div>
+
+<div class="box" style="background:#fdf2f8;border-color:#fbcfe8;text-align:left">
+  <b>🛠️ Editar e Mostrar/Ocultar Planos</b><br>
+  <small style="color:#831843">Escolha se cada plano aparece ou fica oculto para as usuárias e edite preço, nome e validade.</small>
+  <div id="editorPlanosAdmin"></div>
+  <button class="green" style="margin-top:10px" onclick="salvarConfigPlanosAdmin()">💾 SALVAR CONFIGURAÇÃO DOS PLANOS</button>
+  <p id="msgConfigPlanosAdmin" style="color:#15803d;font-weight:600;text-align:left;margin-top:6px"></p>
+</div>
+
+<div class="box" style="background:#f0f9ff;border-color:#bae6fd;text-align:left"><b>💳 Pagamentos / Status no Firestore</b><br><small style="color:#0369a1">Acompanhe cobranças pendentes e confirmadas via Make + Firestore</small><div id="listaPagamentosAdmin" style="margin-top:8px"></div></div>
+<div class="box" style="background:#fffbeb;border-color:#fde68a;text-align:center"><b>🎲 Gerador de Código</b><br><small>Escolha o plano e gere o código pra liberar a cliente</small><br><select id="tipoCodigoGerador" style="margin-top:8px"><option value="TESTE1REAL">🧪 TESTE R$ 1,00 - R$ 1,00 - 1 dia</option><option value="MENSAL">📅 MENSAL - R$ 19,90 - 30 dias</option><option value="ANUAL">📅 ANUAL - R$ 190 - 365 dias</option><option value="VITALICIO">♾️ VITALICIO - R$ 450 - Pra sempre</option></select><input id="whatsCodigoGerador" placeholder="📱 WhatsApp da cliente pra mandar o código (ex: 15935004144)"><button style="background:#f97316;margin-top:8px" onclick="gerarCodigoAleatorio()">🎲 GERAR CÓDIGO</button><div id="boxCodigoAleatorio" style="display:none;margin-top:12px;background:#fff;padding:14px;border-radius:14px;border:1px solid #fde68a"><span>Seu código:</span><br><span id="codigoAleatorioTxt" style="font-size:26px;font-weight:800;color:#db2777">-</span><br><br><button class="small green" onclick="copiarCodigoAleatorio()">📋 COPIAR</button> <button class="small" style="background:#25D366" onclick="mandarCodigoWhatsGerador()">📱 MANDA CÓDIGO PELO WHATSAPP</button></div></div>
+<div class="box"><b>🔍 Buscar Revendedora</b><input id="buscaAdmin" placeholder="🔍 Nome ou e-mail..." oninput="listarClientesAdmin()"><div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap"><button class="small gray" onclick="filtroAdmin='todos';listarClientesAdmin()">Todos</button><button class="small green" onclick="filtroAdmin='pagas';listarClientesAdmin()">✅ Pagas</button><button class="small orange" onclick="filtroAdmin='teste';listarClientesAdmin()">🔒 Teste</button></div></div>
 <div id="listaClientesAdmin"></div>
 <button class="gray" style="margin-top:10px" onclick="mostrar('telaHome')">🏠 VOLTAR</button>
 </div>
 
 <div id="telaAdminDetalhe" class="card hidden">
-<div style="text-align:center"><div style="width:90px;height:90px;border-radius:50%;background:#fbcfe8;display:flex;align-items:center;justify-content:center;font-size:48px;margin:0 auto">👤</div><h2 id="detRevNome" style="margin:6px 0">-</h2><p id="detRevSub" style="color:#888;font-size:13px"></p><span id="detRevStatus"></span></div>
+<div style="text-align:center"><div style="width:76px;height:76px;border-radius:999px;background:#fdf2f8;border:1px solid #fbcfe8;display:flex;align-items:center;justify-content:center;font-size:38px;margin:0 auto">👤</div><h2 id="detRevNome" style="margin:8px 0 4px">-</h2><p id="detRevSub" style="color:#71717a;font-size:12.5px"></p><span id="detRevStatus"></span></div>
 <div class="box" style="text-align:left" id="detRevInfo"></div>
-<div class="box" style="background:#f0fdf4;border-color:#86efac;text-align:left"><b>📊 RESUMO DELA NO APP - SÓ QUANTIDADE</b><br><b>👥 Total de clientes dela:</b> <span id="detRevTotalClientes"></span><br><b>📦 Total de pedidos dela:</b> <span id="detRevTotalPedidos"></span><br><b>💰 Total vendido por ela:</b> <span id="detRevTotalVendido"></span><br><b>✅ Ela já recebeu:</b> <span id="detRevTotalPago"></span><br><b>💸 Clientes devendo pra ela:</b> <span id="detRevTotalDevendo" style="color:red;font-weight:bold"></span></div>
+<div class="box" style="background:#f0fdf4;border-color:#bbf7d0;text-align:left"><b>📊 RESUMO DELA NO APP - SÓ QUANTIDADE</b><br><b>👥 Total de clientes dela:</b> <span id="detRevTotalClientes"></span><br><b>📦 Total de pedidos dela:</b> <span id="detRevTotalPedidos"></span><br><b>💰 Total vendido por ela:</b> <span id="detRevTotalVendido"></span><br><b>✅ Ela já recebeu:</b> <span id="detRevTotalPago"></span><br><b>💸 Clientes devendo pra ela:</b> <span id="detRevTotalDevendo" style="color:#dc2626;font-weight:700"></span></div>
 <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px">
 <button class="green" style="background:#25D366" onclick="whatsRevendedoraDetalhe()">📱 CHAMAR ELA NO WHATSAPP</button>
 <button class="orange" onclick="mandarCodigoRevendedoraDetalhe()">📱 MANDAR CÓDIGO PELO WHATSAPP</button>
+<button class="green" style="background:#0284c7" onclick="liberarRevendedoraDetalhe('TESTE1REAL')">🧪 LIBERAR TESTE R$ 1,00 - 1 DIA</button>
 <button class="green" onclick="liberarRevendedoraDetalhe('MENSAL')">✅ LIBERAR MENSAL - 30 DIAS</button>
 <button class="orange" onclick="liberarRevendedoraDetalhe('ANUAL')">📅 LIBERAR ANUAL - 365 DIAS</button>
 <button style="background:#db2777" onclick="liberarRevendedoraDetalhe('VITALICIO')">♾️ LIBERAR VITALÍCIO</button>
@@ -70,60 +601,75 @@
 </div>
 
 <div id="telaPlanos" class="card hidden">
-<div style="display:flex;justify-content:space-between;align-items:center"><span></span><div class="menu-flutuante-wrap"><button class="btn-menu-topo" onclick="toggleMenuFlutuante(event)">☰</button><div id="menuDropPlanos" class="menu-drop hidden"><button onclick="irMenuPlanos('secPerfil')">👤 Perfil</button><button onclick="irMenuPlanos('secPlanoApp')">💳 Plano</button><button onclick="irMenuPlanos('secSuporte')">💬 Suporte</button><button onclick="irMenuPlanos('secTermos')">📄 Termos</button><button class="sair" onclick="sair()">🚪 Sair</button></div></div></div>
-<div style="text-align:center;font-size:56px">🔒</div><h1>Seus 7 dias acabaram!</h1><p>Olá, <b id="nomePlano"></b>!</p><p>Escolha seu plano e continue vendendo!</p><p style="font-size:13px;color:#888">☰ Menu no canto superior direito: Perfil, Plano, Suporte, Termos</p>
-<div class="plano"><h2 style="text-align:center">📅 Mensal</h2><p style="font-size:28px;font-weight:bold;color:#db2777;text-align:center">R$ 19,90 / mês</p><p>✅ Clientes ilimitadas<br>✅ Pedidos ilimitados<br>✅ Cobrança no WhatsApp<br>✅ Catálogos no WhatsApp<br>⏳ Vale por 30 dias</p><button style="background:#009ee3" onclick="abrirPagamentoPlano('mensal')">💙 PAGAR MENSAL - PIX R$ 19,90</button></div>
-<div class="plano" style="border-color:#f97316"><h2 style="text-align:center">📅 Anual ⭐ ECONOMIA</h2><p style="font-size:28px;font-weight:bold;color:#f97316;text-align:center">R$ 190,00 / ano</p><p>✅ Tudo do mensal<br>✅ 2 meses grátis<br>⏳ Vale por 365 dias</p><button style="background:#009ee3" onclick="abrirPagamentoPlano('anual')">💙 PAGAR ANUAL - PIX R$ 190,00</button></div>
-<div class="plano destaque"><h2 style="text-align:center">♾️ Vitalício ⭐ MAIS VENDIDO</h2><p style="font-size:28px;font-weight:bold;color:#16a34a;text-align:center">R$ 450 - uma vez só</p><p>✅ Tudo do mensal<br>✅ Pra sempre, sem mensalidade<br>♾️ Nunca vence</p><button style="background:#009ee3" onclick="abrirPagamentoPlano('vitalicio')">💙 PAGAR VITALÍCIO - PIX R$ 450</button></div>
-<p>Já tem código?</p><input id="codigoPlanoInput" placeholder="🔢 Digite o código"><button style="background:#16a34a" onclick="liberarComCodigo()">🔓 LIBERAR</button><button class="gray" style="margin-top:8px" onclick="mostrar('telaHome')">🏠 VOLTAR</button><p id="msgPlano" style="color:red"></p>
+<div style="display:flex;justify-content:space-between;align-items:center"><span></span><div class="menu-flutuante-wrap"><button class="btn-menu-topo" onclick="toggleMenuFlutuante(event)">☰</button><div id="menuDropPlanos" class="menu-drop hidden"><button onclick="irMenuPlanos('secPerfil')">👤 Perfil</button><button onclick="irMenuPlanos('secPlanoApp')">💳 Plano e assinatura</button><button onclick="irMenuPlanos('secComoUsar')">📖 Como usar</button><button onclick="irMenuPlanos('secSuporte')">💬 Central de suporte</button><button onclick="irMenuPlanos('secFeedback')">⭐ Enviar feedback</button><button onclick="irMenuPlanos('secQuemSomos')">🌸 Quem somos</button><button onclick="irMenuPlanos('secTermos')">📄 Termos e privacidade</button><button class="sair" onclick="sair()">🚪 Sair da conta</button></div></div></div>
+<div style="text-align:center;font-size:44px">🔒</div>
+<h1>Planos e Assinatura</h1>
+<p>Olá, <b id="nomePlano"></b>! Escolha começar no plano grátis com limites ou assinar sem limites.</p>
+<div class="box" style="text-align:left">
+<b>✨ O que você encontra no RevendePro:</b><br>
+• Cadastro de clientes e acompanhamento de fiado/parcelas<br>
+• Registro de pedidos, datas de entrega e pagamento<br>
+• Cobrança no WhatsApp e envio de catálogos (PDF ou link)
+</div>
+
+<div id="listaPlanosTela"></div>
+
+<div class="box" style="text-align:left;margin-top:14px">
+<b>🔑 Já recebeu seu código de liberação?</b><br>
+<small style="color:#71717a">Digite o código enviado após a confirmação do PIX para ativar na hora.</small>
+<input id="codigoPlanoInput" placeholder="🔢 Digite o código (ex: MENSAL-1234AB)">
+<button style="background:#16a34a;margin-top:6px" onclick="liberarComCodigo()">🔓 ATIVAR COM CÓDIGO</button>
+<p id="msgPlano" style="color:red"></p>
+</div>
+<button class="gray" style="margin-top:8px" onclick="mostrar('telaHome')">🏠 VOLTAR AO INÍCIO</button>
 </div>
 
 <div id="telaPagamentoPlano" class="card hidden">
-<div style="text-align:center;font-size:56px">💙</div><h1 id="tituloPagamentoPlano">Pagamento PIX</h1><p id="subPagamentoPlano"></p>
-<div class="pix-box"><b>💰 PAGAR COM PIX - QUALQUER BANCO</b><br><div style="background:#fff;padding:10px;border-radius:10px;margin:10px 0;text-align:center"><b>👤 Recebedor:</b> JEFTE ALVES DA SILVA<br><b>💰 Valor:</b> <span id="valorPagamentoPlano" style="font-size:22px;font-weight:bold;color:#16a34a"></span><br><small id="validadePagamentoPlano" style="color:#666"></small><br><br><b>🔑 PIX COPIA E COLA:</b><div class="pix-codigo" id="codigoPixPlano"></div></div><button style="background:#0284c7" onclick="copiarPixPlano()">📋 COPIAR CÓDIGO PIX</button><p id="msgPixPlano" style="color:green;font-weight:bold"></p></div>
-<div class="box" style="text-align:left"><b>📋 Como pagar:</b><br>1️⃣ Clique em COPIAR CÓDIGO PIX<br>2️⃣ Abra seu banco e cole no PIX Copia e Cola<br>3️⃣ Pague e volte aqui<br>4️⃣ Clique em MANDA COMPROVANTE</div>
-<button class="green" style="background:#25D366" onclick="jaPagueiPlano()">📱 MANDA COMPROVANTE</button>
+<div style="text-align:center;font-size:44px">💙</div><h1 id="tituloPagamentoPlano">Pagamento PIX</h1><p id="subPagamentoPlano"></p>
+<div class="pix-box"><b>💰 PAGAR COM PIX - QUALQUER BANCO</b><br><div style="background:#fff;padding:12px;border-radius:12px;margin:10px 0;text-align:center;border:1px solid #e0f2fe"><b>👤 Recebedor:</b> JEFTE ALVES DA SILVA<br><b>💰 Valor:</b> <span id="valorPagamentoPlano" style="font-size:22px;font-weight:800;color:#16a34a"></span><br><small id="validadePagamentoPlano" style="color:#71717a"></small><br><small style="color:#0369a1;display:block;margin-top:4px">Ref.: <b id="refPagamentoPlano">-</b> • Status: <b id="statusPagamentoPlano">PENDENTE</b></small><br><br><b>🔑 PIX COPIA E COLA:</b><div class="pix-codigo" id="codigoPixPlano"></div></div><button style="background:#0284c7" onclick="copiarPixPlano()">📋 COPIAR CÓDIGO PIX</button><p id="msgPixPlano" style="color:#0284c7;font-weight:600"></p></div>
+<div class="box" style="text-align:left"><b>🔄 Confirmação via Mercado Pago + Make + Firestore:</b><br>1️⃣ Copie o código PIX e realize o pagamento no seu banco<br>2️⃣ O gateway notifica o <b>Make</b>, que atualiza seu plano no <b>Firestore</b><br>3️⃣ Clique em <b>CONSULTAR STATUS DO PLANO</b> para verificar e liberar automaticamente</div>
+<button class="green" onclick="verificarStatusPagamentoNoFirestore()">🔄 CONSULTAR STATUS DO PLANO</button>
+<button class="green" style="background:#25D366;margin-top:8px" onclick="jaPagueiPlano()">📱 MANDA COMPROVANTE NO WHATSAPP</button>
 <button class="gray" style="margin-top:8px" onclick="mostrar('telaPlanos')">⬅ VOLTAR P/ PLANOS</button>
 </div>
 
 <div id="telaApp" class="card hidden">
-<div id="barraAdmin" class="hidden" style="background:#db2777;color:#fff;padding:12px;border-radius:12px;margin-bottom:10px;text-align:center"><b>👑 Você está vendo como a cliente</b><br><button style="background:#fff;color:#db2777;margin-top:8px" onclick="voltarParaAdmin()">⬅ VOLTAR P/ PÁGINA ADM</button></div>
-<div class="topo-app"><h1>💄 RevendePro</h1><div class="menu-flutuante-wrap"><button class="btn-menu-topo" onclick="toggleMenuFlutuante(event)">☰</button><div id="menuDrop" class="menu-drop hidden"><button onclick="irMenu('secPerfil')">👤 Perfil</button><button onclick="irMenu('secPlanoApp')">💳 Plano</button><button onclick="irMenu('secSuporte')">💬 Suporte</button><button onclick="irMenu('secTermos')">📄 Termos</button><button class="sair" onclick="sair()">🚪 Sair</button></div></div></div>
+<div id="barraAdmin" class="hidden" style="background:#fdf2f8;color:#be185d;border:1px solid #fbcfe8;padding:12px;border-radius:14px;margin-bottom:12px;text-align:center"><b>👑 Você está vendo como a cliente</b><br><button class="outline" style="margin-top:8px" onclick="voltarParaAdmin()">⬅ VOLTAR P/ PÁGINA ADM</button></div>
+<div class="topo-app"><h1>💄 RevendePro</h1><div class="menu-flutuante-wrap"><button class="btn-menu-topo" onclick="toggleMenuFlutuante(event)">☰</button><div id="menuDrop" class="menu-drop hidden"><button onclick="irMenu('secPerfil')">👤 Perfil</button><button onclick="irMenu('secPlanoApp')">💳 Plano e assinatura</button><button onclick="irMenu('secComoUsar')">📖 Como usar</button><button onclick="irMenu('secSuporte')">💬 Central de suporte</button><button onclick="irMenu('secFeedback')">⭐ Enviar feedback</button><button onclick="irMenu('secQuemSomos')">🌸 Quem somos</button><button onclick="irMenu('secTermos')">📄 Termos e privacidade</button><button class="sair" onclick="sair()">🚪 Sair da conta</button></div></div></div>
 
 <div id="cabecalhoApp">
-<p>👤 Olá, <b id="nomeUser"></b> | <b id="marcaUser"></b> | 📱 <b id="whatsUser"></b></p>
-<div class="kpi"><div><small>💰 A Receber</small><b id="kDevendo">R$ 0</b></div><div><small>✅ Recebido</small><b id="kPago">R$ 0</b></div><div><small>👥 Clientes</small><b id="kClientes">0</b></div></div>
-<div class="menu" style="margin-top:12px"><button onclick="mostrarSecao('secClientes')">👥<br>Clientes</button><button onclick="mostrarSecao('secPedidos')">📦<br>Pedidos</button><button onclick="mostrarSecao('secNovoPedido')">➕<br>Novo Pedido</button><button onclick="mostrarSecao('secCaixa')">💰<br>Caixa</button><button onclick="mostrarSecao('secPendentes')">⏳<br>Pendentes</button><button onclick="mostrarSecao('secCatalogos')">📚<br>Catálogos</button></div>
+<p style="margin-top:10px">👤 Olá, <b id="nomeUser"></b> • <b id="marcaUser"></b> • 📱 <b id="whatsUser"></b></p>
+<div class="menu" style="margin-top:10px"><button onclick="mostrarSecao('secClientes')">👥<br>Clientes</button><button onclick="mostrarSecao('secPedidos')">📦<br>Pedidos</button><button onclick="mostrarSecao('secNovoPedido')">➕<br>Novo Pedido</button><button onclick="mostrarSecao('secCaixa')">💰<br>Caixa</button><button onclick="mostrarSecao('secPendentes')">⏳<br>Pendentes</button><button onclick="mostrarSecao('secCatalogos')">📚<br>Catálogos</button></div>
 </div>
 
 <div id="secHomeApp"><h2>📦 Últimos Pedidos</h2><div id="listaHome"></div></div>
 
-<div id="secClientes" class="hidden"><h2>👥 Minhas Clientes</h2><button style="background:#16a34a" onclick="toggleFormCliente()">➕ NOVA CLIENTE</button><input id="buscaCliente" placeholder="🔍 Pesquisar cliente..." oninput="listar()" style="margin-top:10px"><div id="formCliente" class="hidden" style="background:#f8fafc;border:2px solid #db2777;padding:14px;border-radius:12px;margin:10px 0"><h3 id="tituloFormCliente">➕ Nova Cliente</h3><input id="nNome" placeholder="👤 Nome da cliente *"><input id="nFone" placeholder="📱 WhatsApp *"><input id="nEnd" placeholder="📍 Endereço / Bairro"><button class="green" onclick="adicionarCliente()">✅ SALVAR CLIENTE</button><button class="gray" style="margin-top:6px" onclick="fecharFormCliente()">❌ FECHAR</button></div><div id="listaClientes"></div><button class="gray" onclick="mostrarSecao('secHomeApp')">🏠 VOLTAR</button></div>
+<div id="secClientes" class="hidden"><h2>👥 Minhas Clientes</h2><button style="background:#16a34a" onclick="toggleFormCliente()">➕ NOVA CLIENTE</button><input id="buscaCliente" placeholder="🔍 Pesquisar cliente..." oninput="listar()" style="margin-top:10px"><div id="formCliente" class="hidden" style="background:#fafafa;border:1px solid #fbcfe8;padding:16px;border-radius:16px;margin:12px 0"><h3 id="tituloFormCliente">➕ Nova Cliente</h3><input id="nNome" placeholder="👤 Nome da cliente *"><input id="nFone" placeholder="📱 WhatsApp *"><input id="nEnd" placeholder="📍 Endereço / Bairro"><button class="green" onclick="adicionarCliente()">✅ SALVAR CLIENTE</button><button class="gray" style="margin-top:6px" onclick="fecharFormCliente()">❌ FECHAR</button></div><div id="listaClientes"></div><button class="gray" onclick="mostrarSecao('secHomeApp')">🏠 VOLTAR</button></div>
 
 <div id="secPedidos" class="hidden"><h2>📦 Todos os Pedidos</h2><div id="listaPedidos"></div><button class="gray" onclick="mostrarSecao('secHomeApp')">🏠 VOLTAR</button></div>
 
-<div id="secNovoPedido" class="hidden"><h2>➕ Novo Pedido</h2><label>👥 Cliente:</label><select id="pedCliente"></select><input id="pedProduto" placeholder="💄 O que ela pediu? Ex: Base Natura Una, Perfume Lily"><input id="pedValor" type="number" placeholder="💰 Valor R$ Ex: 89.90"><label style="font-size:13px;font-weight:bold">📅 Data de entrega:</label><input id="pedDataEntrega" type="date"><label style="font-size:13px;font-weight:bold">💰 Dia do pagamento:</label><input id="pedDataPagamento" type="date"><label style="font-size:13px;font-weight:bold">🔢 Em quantas vezes?</label><select id="pedParcelas"><option value="1x">1x - À vista</option><option value="2x">2x</option><option value="3x">3x</option><option value="4x">4x</option><option value="5x">5x</option><option value="6x">6x</option></select><select id="pedPag"><option value="devendo">💸 Pagamento: DEVENDO / FIADO</option><option value="pago">✅ Pagamento: PAGO</option></select><input id="pedObs" placeholder="📝 Obs: entrega dia 10..."><button class="green" onclick="salvarPedido()">✅ SALVAR PEDIDO</button><button class="gray" style="margin-top:8px" onclick="mostrarSecao('secHomeApp')">🏠 VOLTAR</button></div>
+<div id="secNovoPedido" class="hidden"><h2>➕ Novo Pedido</h2><label>👥 Cliente:</label><select id="pedCliente"></select><input id="pedProduto" placeholder="💄 O que ela pediu? Ex: Base Natura Una, Perfume Lily"><input id="pedValor" type="number" placeholder="💰 Valor R$ Ex: 89.90"><label style="font-size:13px;font-weight:600">📅 Data de entrega:</label><input id="pedDataEntrega" type="date"><label style="font-size:13px;font-weight:600">💰 Dia do pagamento:</label><input id="pedDataPagamento" type="date"><label style="font-size:13px;font-weight:600">🔢 Em quantas vezes?</label><select id="pedParcelas"><option value="1x">1x - À vista</option><option value="2x">2x</option><option value="3x">3x</option><option value="4x">4x</option><option value="5x">5x</option><option value="6x">6x</option></select><select id="pedPag"><option value="devendo">💸 Pagamento: DEVENDO / FIADO</option><option value="pago">✅ Pagamento: PAGO</option></select><input id="pedObs" placeholder="📝 Obs: entrega dia 10..."><button class="green" onclick="salvarPedido()">✅ SALVAR PEDIDO</button><button class="gray" style="margin-top:8px" onclick="mostrarSecao('secHomeApp')">🏠 VOLTAR</button></div>
 
 <div id="secCaixa" class="hidden"><h2>💰 Caixa</h2><div class="box"><b>💰 Total vendido:</b> <span id="cxTotal"></span><br><b>✅ Já recebido:</b> <span id="cxPago"></span><br><b>💸 Falta receber:</b> <span id="cxDevendo"></span></div><div id="listaCaixa"></div><button class="gray" onclick="mostrarSecao('secHomeApp')">🏠 VOLTAR</button></div>
 
-<div id="secPendentes" class="hidden"><div style="text-align:center"><div style="width:80px;height:80px;background:#ffedd5;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto">⏳</div><h2>⏳ Pagamentos Pendentes</h2><p style="color:#9a3412">Quem ainda não te pagou</p></div><div class="box" style="background:#fff7ed;border-color:#fdba74;text-align:center"><b style="font-size:22px;color:#ea580c" id="pendenteTotalTxt">R$ 0,00</b><br><small>💸 Total a receber de clientes</small><br><small>👥 <span id="pendenteQtdTxt">0</span> clientes devendo</small></div><button class="orange" onclick="cobrarTodosPendentes()">💰 COBRAR TODO MUNDO DE UMA VEZ</button><div id="listaPendentes" style="margin-top:12px"></div><button class="gray" style="margin-top:10px" onclick="mostrarSecao('secHomeApp')">🏠 VOLTAR</button></div>
+<div id="secPendentes" class="hidden"><div style="text-align:center"><div style="width:68px;height:68px;background:#ffedd5;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto">⏳</div><h2>⏳ Pagamentos Pendentes</h2><p style="color:#c2410c">Quem ainda não te pagou</p></div><div class="box" style="background:#fff7ed;border-color:#fed7aa;text-align:center"><b style="font-size:22px;color:#ea580c" id="pendenteTotalTxt">R$ 0,00</b><br><small>💸 Total a receber de clientes</small><br><small>👥 <span id="pendenteQtdTxt">0</span> clientes devendo</small></div><button class="orange" onclick="cobrarTodosPendentes()">💰 COBRAR TODO MUNDO DE UMA VEZ</button><div id="listaPendentes" style="margin-top:12px"></div><button class="gray" style="margin-top:10px" onclick="mostrarSecao('secHomeApp')">🏠 VOLTAR</button></div>
 
 <div id="secCatalogos" class="hidden">
 <h2>📚 Meus Catálogos</h2>
-<p style="text-align:left;color:#666;font-size:14px">Suba seu catálogo e envie para suas clientes no WhatsApp em 1 clique.</p>
+<p style="text-align:left;color:#71717a;font-size:13.5px">Suba seu catálogo e envie para suas clientes no WhatsApp em 1 clique.</p>
 <div class="kpi" style="margin:10px 0"><div><small>📚 Catálogos</small><b id="totalCat">0</b></div><div><small>📤 Envios</small><b id="totalEnviosCat">0</b></div></div>
-<div class="box" style="background:#FFF0F7;text-align:left">
+<div class="box" style="background:#fdf2f8;text-align:left">
 <b>➕ Adicionar Novo Catálogo</b><br>
-<label style="font-size:12px;font-weight:bold">NOME DO CATÁLOGO</label>
+<label style="font-size:11.5px;font-weight:700;letter-spacing:0.03em">NOME DO CATÁLOGO</label>
 <input id="cat-nome" placeholder="Ex: Natura Ciclo 12, Avon Moda, Boticário Natal">
-<label style="font-size:12px;font-weight:bold">MARCA / CATEGORIA</label>
+<label style="font-size:11.5px;font-weight:700;letter-spacing:0.03em">MARCA / CATEGORIA</label>
 <input id="cat-marca" placeholder="Ex: Natura, Avon, Boticário, Eudora">
-<label style="font-size:12px;font-weight:bold">LINK DO CATÁLOGO (PDF / Drive / Canva)</label>
+<label style="font-size:11.5px;font-weight:700;letter-spacing:0.03em">LINK DO CATÁLOGO (PDF / Drive / Canva)</label>
 <input id="cat-link" placeholder="Cole aqui o link do seu PDF">
-<small style="color:#888;font-size:12px">Dica: Sobe no Google Drive > Compartilhar > Qualquer pessoa com link > Cola aqui.</small>
-<label style="font-size:12px;font-weight:bold">OU SUBIR ARQUIVO (PDF / FOTO)</label>
+<small style="color:#71717a;font-size:12px;display:block;margin-bottom:6px">Dica: Sobe no Google Drive > Compartilhar > Qualquer pessoa com link > Cola aqui.</small>
+<label style="font-size:11.5px;font-weight:700;letter-spacing:0.03em">OU SUBIR ARQUIVO (PDF / FOTO)</label>
 <input type="file" id="cat-arquivo" accept=".pdf,image/*">
-<button onclick="salvarCatalogo()">SALVAR CATÁLOGO →</button>
+<button style="margin-top:8px" onclick="salvarCatalogo()">SALVAR CATÁLOGO →</button>
 </div>
 <input id="buscaCat" placeholder="🔍 Buscar catálogo... Ex: Natura" oninput="listarCatalogos()">
 <div id="listaCatalogos"></div>
@@ -131,38 +677,432 @@
 <button class="gray" onclick="mostrarSecao('secHomeApp')">🏠 VOLTAR</button>
 </div>
 
-<div id="secDetalheCliente" class="hidden"><h2>👤 Detalhes da Cliente</h2><div style="text-align:center"><div style="width:90px;height:90px;border-radius:50%;background:#fbcfe8;display:flex;align-items:center;justify-content:center;font-size:48px;margin:0 auto">👤</div><h2 id="detNomeCliente" style="margin:6px 0">-</h2><p id="detSubCliente" style="color:#888;font-size:13px"></p></div><div class="box" id="detInfoCliente" style="text-align:left"></div><div class="box" style="background:#f0fdf4;border-color:#86efac;text-align:left"><b>💰 RESUMO DELA</b><br><b>🛍️ Total comprado:</b> <span id="detTotalCliente"></span><br><b>✅ Já pagou:</b> <span id="detPagoCliente"></span><br><b>💸 Tá devendo:</b> <span id="detDevendoCliente" style="color:red;font-weight:bold"></span><br><b>📦 Qtd pedidos:</b> <span id="detQtdPedidos"></span></div><h3>📦 Pedidos dela</h3><div id="detPedidosCliente"></div><div style="display:flex;flex-direction:column;gap:8px;margin-top:10px"><button class="green" style="background:#25D366" onclick="whatsClienteDetalhe()">📱 CHAMAR NO WHATSAPP</button><button class="orange" onclick="cobrarClienteDetalhe()">💰 COBRAR TUDO QUE DEVE</button><button class="orange" onclick="editarClienteDetalhe()">✏️ EDITAR CLIENTE</button><button class="red" onclick="excluirClienteDetalhe()">🗑️ EXCLUIR CLIENTE</button></div><button class="gray" style="margin-top:10px" onclick="mostrarSecao('secClientes')">⬅ VOLTAR P/ CLIENTES</button></div>
+<div id="secDetalheCliente" class="hidden"><h2>👤 Detalhes da Cliente</h2><div style="text-align:center"><div style="width:76px;height:76px;border-radius:999px;background:#fdf2f8;border:1px solid #fbcfe8;display:flex;align-items:center;justify-content:center;font-size:38px;margin:0 auto">👤</div><h2 id="detNomeCliente" style="margin:8px 0 4px">-</h2><p id="detSubCliente" style="color:#71717a;font-size:12.5px"></p></div><div class="box" id="detInfoCliente" style="text-align:left"></div><div class="box" style="background:#f0fdf4;border-color:#bbf7d0;text-align:left"><b>💰 RESUMO DELA</b><br><b>🛍️ Total comprado:</b> <span id="detTotalCliente"></span><br><b>✅ Já pagou:</b> <span id="detPagoCliente"></span><br><b>💸 Tá devendo:</b> <span id="detDevendoCliente" style="color:#dc2626;font-weight:700"></span><br><b>📦 Qtd pedidos:</b> <span id="detQtdPedidos"></span></div><h3>📦 Pedidos dela</h3><div id="detPedidosCliente"></div><div style="display:flex;flex-direction:column;gap:8px;margin-top:10px"><button class="green" style="background:#25D366" onclick="whatsClienteDetalhe()">📱 CHAMAR NO WHATSAPP</button><button class="orange" onclick="cobrarClienteDetalhe()">💰 COBRAR TUDO QUE DEVE</button><button class="orange" onclick="editarClienteDetalhe()">✏️ EDITAR CLIENTE</button><button class="red" onclick="excluirClienteDetalhe()">🗑️ EXCLUIR CLIENTE</button></div><button class="gray" style="margin-top:10px" onclick="mostrarSecao('secClientes')">⬅ VOLTAR P/ CLIENTES</button></div>
 
-<div id="secPerfil" class="hidden"><h2>👤 Meu Perfil</h2><div style="width:90px;height:90px;border-radius:50%;background:#fbcfe8;display:flex;align-items:center;justify-content:center;font-size:48px;margin:0 auto">👤</div><p style="text-align:center"><b id="perfilNomeTxt"></b></p><div class="box"><b>👤 Nome:</b> <span id="perfilNome"></span><br><b>📱 WhatsApp:</b> <span id="perfilWhats"></span><br><b>📧 E-mail:</b> <span id="perfilEmail"></span><br><b>🏷️ Marca:</b> <span id="perfilMarca"></span><br><b>📦 Plano:</b> <span id="perfilPlano"></span><br><b>👥 Total de clientes:</b> <span id="perfilTotal"></span></div><button class="orange" onclick="toggleEditarPerfil()">✏️ EDITAR PERFIL</button><div id="formPerfil" class="hidden" style="background:#f8fafc;border:2px solid #f97316;padding:14px;border-radius:12px;margin:10px 0"><label>👤 Seu nome</label><input id="editNome"><label>📱 Seu WhatsApp</label><input id="editWhats"><label>🏷️ Marca</label><select id="editMarca"><option>💄 Avon</option><option>🌿 Natura</option><option>✨ O Boticário</option><option>💅 Eudora</option><option>🌸 Mary Kay</option><option>💄 Várias marcas</option></select><button class="green" onclick="salvarPerfil()">✅ SALVAR</button><button class="gray" style="margin-top:6px" onclick="toggleEditarPerfil()">❌ CANCELAR</button></div><button class="gray" style="margin-top:10px" onclick="mostrarSecao('secHomeApp')">🏠 VOLTAR</button></div>
+<div id="secPerfil" class="hidden"><h2>👤 Meu Perfil</h2><div style="width:76px;height:76px;border-radius:999px;background:#fdf2f8;border:1px solid #fbcfe8;display:flex;align-items:center;justify-content:center;font-size:38px;margin:0 auto">👤</div><p style="text-align:center"><b id="perfilNomeTxt"></b></p><div class="box"><b>👤 Nome:</b> <span id="perfilNome"></span><br><b>📱 WhatsApp:</b> <span id="perfilWhats"></span><br><b>📧 E-mail:</b> <span id="perfilEmail"></span><br><b>🏷️ Marca:</b> <span id="perfilMarca"></span><br><b>📦 Plano:</b> <span id="perfilPlano"></span><br><b>👥 Total de clientes:</b> <span id="perfilTotal"></span></div><button class="orange" onclick="toggleEditarPerfil()">✏️ EDITAR PERFIL</button><div id="formPerfil" class="hidden" style="background:#fafafa;border:1px solid #fed7aa;padding:16px;border-radius:16px;margin:12px 0"><label>👤 Seu nome</label><input id="editNome"><label>📱 Seu WhatsApp</label><input id="editWhats"><label>🏷️ Marca</label><select id="editMarca"><option>💄 Avon</option><option>🌿 Natura</option><option>✨ O Boticário</option><option>💅 Eudora</option><option>🌸 Mary Kay</option><option>💄 Várias marcas</option></select><button class="green" onclick="salvarPerfil()">✅ SALVAR</button><button class="gray" style="margin-top:6px" onclick="toggleEditarPerfil()">❌ CANCELAR</button></div><button class="gray" style="margin-top:10px" onclick="mostrarSecao('secHomeApp')">🏠 VOLTAR</button></div>
 
-<div id="secPlanoApp" class="hidden"><div style="text-align:center"><div style="width:80px;height:80px;background:#fdf2f8;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto">💳</div><h2>Meu Plano</h2><p>Gerencie sua assinatura</p></div><div class="box" style="background:linear-gradient(135deg,#db2777,#f472b6);color:#fff;border:none"><b style="color:#fff">👤 <span id="planoNomeCliente"></span></b><br><span style="font-size:13px">📦 Plano atual: <b id="planoAtualTxt"></b></span><br><span style="font-size:13px">⏳ Status: <b id="planoDiasTxt"></b></span><br><span style="font-size:13px">📅 Vence em: <b id="planoVenceTxt"></b></span></div><div class="plano"><div style="display:flex;justify-content:space-between;align-items:center"><h2>📅 Mensal</h2><span class="badge badge-orange">FLEXÍVEL</span></div><p style="font-size:28px;font-weight:bold;color:#db2777;text-align:center">R$ 19,90 <span style="font-size:14px;color:#64748b">/ mês</span></p><p>✅ Clientes ilimitadas<br>✅ Pedidos ilimitados<br>✅ Cobrança no WhatsApp<br>✅ Catálogos no WhatsApp<br>✅ Controle de fiado e parcelas<br>✅ Suporte direto</p><button style="background:#009ee3" onclick="abrirPagamentoPlano('mensal')">💙 QUERO O MENSAL - PIX R$ 19,90</button></div><div class="plano"><div style="display:flex;justify-content:space-between;align-items:center"><h2>📅 Anual</h2><span class="badge badge-orange">ECONOMIA</span></div><p style="font-size:28px;font-weight:bold;color:#f97316;text-align:center">R$ 190 <span style="font-size:14px;color:#64748b">/ ano</span></p><p>✅ Tudo do Mensal<br>✅ 2 meses grátis<br>✅ Vale 365 dias</p><button style="background:#009ee3" onclick="abrirPagamentoPlano('anual')">💙 QUERO O ANUAL - PIX R$ 190</button></div><div class="plano destaque"><div style="display:flex;justify-content:space-between;align-items:center"><h2>♾️ Vitalício</h2><span class="badge badge-green">⭐ MAIS VENDIDO</span></div><p style="font-size:28px;font-weight:bold;color:#16a34a;text-align:center">R$ 450 <span style="font-size:14px;color:#64748b">uma vez só</span></p><p>✅ Tudo do Mensal<br>✅ <b>Paga uma vez, usa pra sempre</b><br>✅ Sem mensalidade nunca mais<br>✅ Todas as atualizações futuras<br>✅ Suporte prioritário</p><button style="background:#009ee3" onclick="abrirPagamentoPlano('vitalicio')">💙 QUERO O VITALÍCIO - PIX R$ 450</button></div><div class="box" style="text-align:center"><b>🔒 Pagamento seguro via PIX</b><br><small>Após o pagamento, manda o comprovante que liberamos na hora!</small></div><button class="gray" onclick="mostrarSecao('secHomeApp')">🏠 VOLTAR</button></div>
+<div id="secPlanoApp" class="hidden">
+<div style="text-align:center"><div style="width:68px;height:68px;background:#fdf2f8;border:1px solid #fbcfe8;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto">💳</div><h2>Plano e Assinatura</h2><p>Acompanhe seu status e escolha ou renove seu plano</p></div>
+<div class="box" style="background:linear-gradient(135deg,#db2777,#ec4899);color:#fff;border:none"><b style="color:#fff">👤 <span id="planoNomeCliente"></span></b><br><span style="font-size:13px">📦 Plano atual: <b id="planoAtualTxt"></b></span><br><span style="font-size:13px">⏳ Status: <b id="planoDiasTxt"></b></span><br><span style="font-size:13px">📅 Vence em: <b id="planoVenceTxt"></b></span></div>
 
-<div id="secSuporte" class="hidden"><div style="text-align:center"><div style="width:80px;height:80px;background:#dcfce7;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto">💬</div><h2>Central de Ajuda</h2><p>Estamos aqui pra te ajudar!</p></div><div class="box" style="background:#f0fdf4;border-color:#86efac;text-align:center"><div style="font-size:40px">💄</div><b>RevendePro Suporte</b><br><small>⏰ Seg a Sáb • 8h às 20h<br>⚡ Resposta em até 2h</small><br><br><button class="green" style="background:#25D366" onclick="abrirWhatsSuporte()">📱 CHAMAR NO WHATSAPP AGORA</button><p style="margin-top:8px">📞 (15) 99764-3116</p></div><div class="box"><h3 style="margin-top:0">❓ Perguntas Frequentes</h3><b>1. Como cobrar uma cliente?</b><br><small>Vá em Clientes > clique na cliente > COBRAR. A mensagem já vai pronta!</small><br><br><b>2. Esqueci minha senha, e agora?</b><br><small>Chama no WhatsApp que a gente reseta pra você.</small><br><br><b>3. Perdi meus dados se trocar de celular?</b><br><small>Não! É só entrar com seu e-mail e senha em qualquer celular.</small><br><br><b>4. Como funciona o Vitalício?</b><br><small>Você paga R$ 450 uma vez só e usa pra sempre, sem mensalidade.</small><br><br><b>5. Como enviar catálogo?</b><br><small>Vá em Catálogos > Enviar no WhatsApp > Escolha WhatsApp no Compartilhar > Escolha a cliente.</small></div><div class="box"><h3 style="margin-top:0">🐛 Encontrou um erro?</h3><small>Print a tela e manda no WhatsApp que a gente arruma.</small><br><button class="orange" style="margin-top:8px" onclick="abrirWhatsSuporte()">📱 REPORTAR ERRO</button></div><button class="gray" onclick="mostrarSecao('secHomeApp')">🏠 VOLTAR</button></div>
+<div id="listaPlanosAppSecao"></div>
 
-<div id="secTermos" class="hidden"><div style="text-align:center"><div style="width:80px;height:80px;background:#e0e7ff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto">📄</div><h2>Termos de Uso</h2><p>RevendePro • Última atualização: 21/11/2026</p></div><div class="box" style="text-align:left"><b>1. O que é o RevendePro?</b><br><small>App para revendedoras de catálogo controlarem clientes, pedidos, fiado, datas de entrega e pagamento.</small><br><br><b>2. Teste Grátis</b><br><small>Você tem 7 dias grátis para testar. Depois, é preciso assinar o Mensal (R$ 19,90/mês), Anual (R$ 190/ano) ou Vitalício (R$ 450 único) para continuar usando.</small><br><br><b>3. Seus Dados</b><br><small>Seus dados e os das suas clientes ficam salvos de forma segura e só você tem acesso. Não vendemos seus dados.</small><br><br><b>4. Pagamento</b><br><small>Pagamento via PIX. Após enviar o comprovante no WhatsApp, liberamos seu acesso em até 2h úteis. Sem reembolso após liberação, exceto em caso de falha do app.</small><br><br><b>5. Cancelamento</b><br><small>Plano Mensal e Anual: você pode cancelar quando quiser, é só chamar no suporte. Plano Vitalício: acesso pra sempre.</small><br><br><b>6. Responsabilidade</b><br><small>O app é uma ferramenta de controle. A cobrança e o recebimento são de responsabilidade da revendedora.</small><br><br><b>7. Suporte</b><br><small>Dúvidas? WhatsApp (15) 99764-3116 • Seg a Sáb, 8h às 20h</small></div><div style="text-align:center"><small>Ao usar o RevendePro, você concorda com esses termos.</small></div><button class="gray" style="margin-top:10px" onclick="mostrarSecao('secHomeApp')">🏠 VOLTAR</button></div>
+<div class="box" style="text-align:center"><b>🔄 Pagamento verificado via Make + Firestore</b><br><small>O plano só é liberado quando o Make atualiza seu status no Firestore.</small></div>
+<button class="gray" onclick="mostrarSecao('secHomeApp')">🏠 VOLTAR</button>
+</div>
+
+<div id="secComoUsar" class="hidden">
+<div style="text-align:center"><div style="width:68px;height:68px;background:#fdf2f8;border:1px solid #fbcfe8;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto">📖</div><h2>Como Usar o RevendePro</h2><p>Passo a passo rápido para organizar suas vendas no celular</p></div>
+<div class="box" style="text-align:left">
+  <b>1️⃣ Cadastre suas clientes</b><br>
+  <small>Toque em <b>Clientes → + Nova Cliente</b> e salve nome, WhatsApp e endereço/bairro. Na ficha de cada cliente você acompanha o histórico e o saldo em aberto.</small><br><br>
+  <b>2️⃣ Lance os pedidos e parcelas</b><br>
+  <small>Vá em <b>Novo Pedido</b>, escolha a cliente, informe produto, valor, data de entrega, dia do pagamento, parcelas (1x a 6x) e se está pago ou devendo.</small><br><br>
+  <b>3️⃣ Acompanhe o Caixa e os Pendentes</b><br>
+  <small>Em <b>Caixa</b> você vê o resumo financeiro geral; em <b>Pendentes</b> você visualiza quem ainda deve e pode cobrar no WhatsApp.</small><br><br>
+  <b>4️⃣ Envie catálogos em 1 clique</b><br>
+  <small>Em <b>Catálogos</b>, adicione o link (Drive/Canva) ou arquivo (PDF/imagem) e use <b>Enviar no WhatsApp</b> para compartilhar rapidamente com suas clientes.</small>
+</div>
+<button class="gray" onclick="mostrarSecao('secHomeApp')">🏠 VOLTAR</button>
+</div>
+
+<div id="secSuporte" class="hidden"><div style="text-align:center"><div style="width:68px;height:68px;background:#dcfce7;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto">💬</div><h2>Central de Suporte</h2><p>Estamos aqui pra te ajudar!</p></div><div class="box" style="background:#f0fdf4;border-color:#bbf7d0;text-align:center"><div style="font-size:34px">💄</div><b>RevendePro Suporte</b><br><small>⏰ Seg a Sáb • 8h às 20h<br>⚡ Resposta em até 2h<br>📧 contato@appnex.app.br</small><br><br><button class="green" style="background:#25D366" onclick="abrirWhatsSuporte()">📱 CHAMAR NO WHATSAPP AGORA</button><p style="margin-top:8px">📞 15 93500-4144</p></div><div class="box"><h3 style="margin-top:0">❓ Perguntas Frequentes</h3><b>1. Como cobrar uma cliente?</b><br><small>Vá em Clientes > clique na cliente > COBRAR ou use Pendentes. A mensagem já vai pronta!</small><br><br><b>2. Esqueci minha senha, e agora?</b><br><small>Na tela de login, toque em "Esqueci minha senha" e confirme seu e-mail e WhatsApp cadastrados.</small><br><br><b>3. Perdi meus dados se trocar de celular?</b><br><small>Não! É só entrar com seu e-mail e senha em qualquer celular.</small><br><br><b>4. Como funciona o Vitalício?</b><br><small>Você paga R$ 450 uma vez só e usa pra sempre, sem mensalidade.</small><br><br><b>5. Como enviar catálogo?</b><br><small>Vá em Catálogos > Enviar no WhatsApp > Escolha WhatsApp no Compartilhar.</small></div><div class="box"><h3 style="margin-top:0">🐛 Encontrou um erro?</h3><small>Print a tela e manda no WhatsApp que a gente arruma.</small><br><button class="orange" style="margin-top:8px" onclick="abrirWhatsSuporte()">📱 REPORTAR ERRO</button></div><button class="gray" onclick="mostrarSecao('secHomeApp')">🏠 VOLTAR</button></div>
+
+<div id="secFeedback" class="hidden">
+<div style="text-align:center"><div style="width:68px;height:68px;background:#fffbeb;border:1px solid #fde68a;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto">⭐</div><h2>Enviar Feedback</h2><p>Sua opinião ajuda a deixar o RevendePro cada vez melhor</p></div>
+<div class="box" style="text-align:left">
+  <label style="font-size:12.5px;font-weight:700">Como você avalia o app hoje?</label>
+  <select id="fbNota">
+    <option value="⭐⭐⭐⭐⭐ (5/5 - Excelente)">⭐⭐⭐⭐⭐ (5/5 - Excelente)</option>
+    <option value="⭐⭐⭐⭐ (4/5 - Muito bom)">⭐⭐⭐⭐ (4/5 - Muito bom)</option>
+    <option value="⭐⭐⭐ (3/5 - Bom, pode melhorar)">⭐⭐⭐ (3/5 - Bom, pode melhorar)</option>
+    <option value="⭐⭐ (2/5 - Precisa de melhorias)">⭐⭐ (2/5 - Precisa de melhorias)</option>
+  </select>
+  <label style="font-size:12.5px;font-weight:700">Sugestão, elogio ou melhoria</label>
+  <textarea id="fbMensagem" placeholder="Escreva aqui o que você achou ou o que gostaria de ver no RevendePro..."></textarea>
+  <button class="green" style="background:#25D366;margin-top:8px" onclick="enviarFeedbackWhats()">📱 ENVIAR FEEDBACK NO WHATSAPP</button>
+  <p id="msgFeedback" style="color:#16a34a;font-weight:600;margin-top:8px"></p>
+</div>
+<button class="gray" onclick="mostrarSecao('secHomeApp')">🏠 VOLTAR</button>
+</div>
+
+<div id="secQuemSomos" class="hidden">
+<div style="text-align:center"><div style="width:68px;height:68px;background:#fdf2f8;border:1px solid #fbcfe8;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto">🌸</div><h2>Quem Somos</h2><p>Desenvolvido pela <b>AppNex</b> para facilitar a rotina de quem vende</p></div>
+<div class="box" style="text-align:left">
+  <b>💄 Por que o RevendePro existe?</b><br>
+  <small>Quem trabalha com vendas por catálogo (Avon, Natura, O Boticário, Eudora, Mary Kay e outras marcas) lida todos os dias com anotações soltas, datas de acerto e cobranças no fiado. O RevendePro reúne clientes, pedidos, parcelas, caixa e catálogos em um só lugar, simples de usar no celular.</small><br><br>
+  <b>🛠️ AppNex</b><br>
+  <small>Criamos ferramentas práticas e acessíveis para empreendedores e autônomos do dia a dia.<br>
+  📧 <b>contato@appnex.app.br</b> • 📱 <b>15 93500-4144</b></small>
+</div>
+<button class="gray" onclick="mostrarSecao('secHomeApp')">🏠 VOLTAR</button>
+</div>
+
+<div id="secTermos" class="hidden"><div style="text-align:center"><div style="width:68px;height:68px;background:#eff6ff;border:1px solid #dbeafe;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto">📄</div><h2>Termos e Privacidade</h2><p>RevendePro • Última atualização: 28/11/2026</p></div><div class="box" style="text-align:left"><b>1. O que é o RevendePro?</b><br><small>App para revendedoras de catálogo controlarem clientes, pedidos, fiado, datas de entrega e pagamento.</small><br><br><b>2. Plano Grátis e Teste Grátis</b><br><small>Você conta com 7 dias grátis para experimentar e também pode utilizar o Plano Grátis com limites (até 15 clientes, 20 pedidos e 2 catálogos). Para uso ilimitado, há opções como Teste R$ 1,00, Mensal (R$ 19,90/mês), Anual (R$ 190/ano) ou Vitalício (R$ 450 único).</small><br><br><b>3. Seus Dados e Privacidade</b><br><small>Seus dados e os das suas clientes ficam salvos na sua conta e só você tem acesso. Não vendemos nem compartilhamos seus dados comerciais com terceiros.</small><br><br><b>4. Pagamento</b><br><small>Pagamento via PIX com confirmação via Make + Firestore ou envio de comprovante pelo WhatsApp 15 93500-4144. Sem reembolso após liberação, exceto em caso de falha do app.</small><br><br><b>5. Cancelamento</b><br><small>Planos por período: você pode cancelar quando quiser, é só chamar no suporte. Plano Vitalício: acesso pra sempre.</small><br><br><b>6. Responsabilidade</b><br><small>O app é uma ferramenta de controle. A cobrança e o recebimento são de responsabilidade da revendedora.</small><br><br><b>7. Suporte</b><br><small>Dúvidas? WhatsApp 15 93500-4144 • contato@appnex.app.br • Seg a Sáb, 8h às 20h</small></div><div style="text-align:center"><small>Ao usar o RevendePro, você concorda com estes termos e políticas de privacidade.</small></div><button class="gray" style="margin-top:10px" onclick="mostrarSecao('secHomeApp')">🏠 VOLTAR</button></div>
 
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getFirestore, doc, setDoc, getDoc, getDocs, collection, addDoc, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+const FONE_SUPORTE_EXIBICAO = "15 93500-4144";
+const FONE_SUPORTE_WA = "5515935004144";
+const MAKE_CRIAR_PIX_URL = "https://hook.eu1.make.com/joui6o556wq..."; // Cole aqui a URL completa do Webhook 'Criar pix' do Make
+const PIX_TESTE_1_REAL = "00020126580014br.gov.bcb.pix0136e72ca7cb-2825-4134-bed9-bfc9090b549052040000530398654041.005802BR5920JEFTE ALVES DA SILVA6009Sao Paulo62230519daqr17274583454551163041A2B";
 const PIX_MENSAL = "00020126580014br.gov.bcb.pix0136e72ca7cb-2825-4134-bed9-bfc9090b5490520400005303986540519.905802BR5920JEFTE ALVES DA SILVA6009Sao Paulo62230519daqr17274583454551163048F4A";
 const PIX_ANUAL = "00020126580014br.gov.bcb.pix0136e72ca7cb-2825-4134-bed9-bfc9090b54905204000053039865406190.005802BR5920JEFTE ALVES DA SILVA6009Sao Paulo62230519daqr1727458345905476304BDC7";
 const PIX_VITALICIO = "00020126580014br.gov.bcb.pix0136e72ca7cb-2825-4134-bed9-bfc9090b54905204000053039865406450.005802BR5920JEFTE ALVES DA SILVA6009Sao Paulo62230519daqr172745834640621630410CE";
-const PLANOS = {
-  mensal: {nome:"📅 MENSAL - R$ 19,90", valor:"R$ 19,90", pix:PIX_MENSAL, dias:30, validadeTxt:"⏳ Vale por 30 dias"},
-  anual: {nome:"📅 ANUAL - R$ 190,00", valor:"R$ 190,00", pix:PIX_ANUAL, dias:365, validadeTxt:"⏳ Vale por 365 dias (1 ano)"},
-  vitalicio: {nome:"♾️ VITALÍCIO - R$ 450,00", valor:"R$ 450,00", pix:PIX_VITALICIO, dias:0, validadeTxt:"♾️ Pra sempre, nunca vence"}
+
+const PLANOS_PADRAO = {
+  teste1real: {
+    key: "teste1real",
+    nome: "🧪 TESTE R$ 1,00",
+    tituloCurto: "🧪 Teste R$ 1,00",
+    tipo: "TESTE1REAL",
+    valorNum: 1.00,
+    periodoTxt: "/ teste",
+    badgeTxt: "TESTE • 1 DIA",
+    badgeClass: "badge-gray",
+    corValor: "#0284c7",
+    subtitulo: "Ótimo para testar o fluxo completo de PIX + Make + Firestore por R$ 1,00.",
+    beneficios: [
+      "✅ Clientes, pedidos e catálogos liberados durante o teste",
+      "✅ Testa cobrança no WhatsApp e confirmação automática",
+      "⏳ Válido por 1 dia corrido"
+    ],
+    pix: PIX_TESTE_1_REAL,
+    dias: 1,
+    validadeTxt: "⏳ Vale por 1 dia",
+    visivel: true,
+    destaque: false
+  },
+  mensal: {
+    key: "mensal",
+    nome: "📅 MENSAL - R$ 19,90",
+    tituloCurto: "📅 Mensal",
+    tipo: "MENSAL",
+    valorNum: 19.90,
+    periodoTxt: "/ mês",
+    badgeTxt: "FLEXÍVEL • 30 DIAS",
+    badgeClass: "badge-orange",
+    corValor: "#db2777",
+    subtitulo: "Ideal para testar e acompanhar ciclo a ciclo sem compromisso longo.",
+    beneficios: [
+      "✅ Clientes e pedidos ilimitados",
+      "✅ Cobrança individual e em lote no WhatsApp",
+      "✅ Catálogos (PDF ou link) ilimitados",
+      "⏳ Renovação a cada 30 dias via PIX"
+    ],
+    pix: PIX_MENSAL,
+    dias: 30,
+    validadeTxt: "⏳ Vale por 30 dias",
+    visivel: true,
+    destaque: false
+  },
+  anual: {
+    key: "anual",
+    nome: "📅 ANUAL - R$ 190,00",
+    tituloCurto: "📅 Anual",
+    tipo: "ANUAL",
+    valorNum: 190.00,
+    periodoTxt: "/ ano",
+    badgeTxt: "ECONOMIA • 365 DIAS",
+    badgeClass: "badge-orange",
+    corValor: "#ea580c",
+    subtitulo: "Equivalente a ~R$ 15,83/mês com 2 meses de economia frente ao mensal.",
+    beneficios: [
+      "✅ Tudo do plano Mensal completo",
+      "✅ 365 dias de acesso contínuo sem se preocupar todo mês",
+      "✅ Suporte direto via WhatsApp em horário comercial"
+    ],
+    pix: PIX_ANUAL,
+    dias: 365,
+    validadeTxt: "⏳ Vale por 365 dias (1 ano)",
+    visivel: true,
+    destaque: false
+  },
+  vitalicio: {
+    key: "vitalicio",
+    nome: "♾️ VITALÍCIO - R$ 450,00",
+    tituloCurto: "♾️ Vitalício",
+    tipo: "VITALICIO",
+    valorNum: 450.00,
+    periodoTxt: "pagamento único",
+    badgeTxt: "⭐ MAIS VANTAJOSO",
+    badgeClass: "badge-green",
+    corValor: "#16a34a",
+    subtitulo: "Pague uma única vez e use para sempre, sem mensalidades futuras.",
+    beneficios: [
+      "✅ Tudo do plano Mensal e Anual",
+      "♾️ Sem vencimento e sem cobranças recorrentes",
+      "✅ Atualizações contínuas do sistema e suporte prioritário"
+    ],
+    pix: PIX_VITALICIO,
+    dias: 0,
+    validadeTxt: "♾️ Pra sempre, nunca vence",
+    visivel: true,
+    destaque: true
+  }
 };
+
+function clonarPlanosPadrao(){
+  let copia = {};
+  Object.keys(PLANOS_PADRAO).forEach(k=>{
+    copia[k] = Object.assign({}, PLANOS_PADRAO[k], { beneficios: [...PLANOS_PADRAO[k].beneficios] });
+  });
+  return copia;
+}
+
+let PLANOS = clonarPlanosPadrao();
+let VISIBILIDADE_GRATIS = {
+  telaPlanos: true,
+  secPlanoApp: true
+};
+
+const LIMITES_GRATIS = { clientes: 15, pedidos: 20, catalogos: 2 };
 const firebaseConfig = { apiKey: "AIzaSyAjuWRLU_XXaRAd5WeZM1znTm1Oeelx2Vw", authDomain: "manicurepro-cddfd.firebaseapp.com", projectId: "manicurepro-cddfd", storageBucket: "manicurepro-cddfd.firebasestorage.app", messagingSenderId: "465878522406", appId: "1:465878522406:web:f241e26237afb34ffee4e7" };
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-let usuarioAtual=null, clientes=[], pedidos=[], catalogos=[], planoPagamentoAtual='mensal', codigoAleatorioAtual='', codigoTipoAtual='MENSAL', filtroAdmin='todos', clienteDetalheId=null, editandoClienteId=null, emailRecuperacao='', emailBloquearAtual='', nomeBloquearAtual='', isAdminView=false, adminOriginal=null, revendedoraDetalheEmail='', revendedoraDetalhe=null;
+let usuarioAtual=null, clientes=[], pedidos=[], catalogos=[], planoPagamentoAtual='mensal', pagamentoIdAtual='', codigoAleatorioAtual='', codigoTipoAtual='MENSAL', filtroAdmin='todos', clienteDetalheId=null, editandoClienteId=null, emailRecuperacao='', emailBloquearAtual='', nomeBloquearAtual='', isAdminView=false, adminOriginal=null, revendedoraDetalheEmail='', revendedoraDetalhe=null;
 let EMAIL_ADM = "jefaotransportetatui@gmail.com";
+
 function emailToId(e){return e.toLowerCase().trim().replace(/[^a-z0-9]/g,'_')}
 function fmt(v){return 'R$ '+(parseFloat(v)||0).toFixed(2).replace('.',',')}
+function extrairPixResposta(data){
+  if(!data || typeof data !== 'object') return '';
+  return (
+    data.qr_code ||
+    data.pixCopiaECola ||
+    data.codigoPix ||
+    data.qrCode ||
+    (data.data && (data.data.qr_code || data.data.pixCopiaECola || (data.data.point_of_interaction && data.data.point_of_interaction.transaction_data && data.data.point_of_interaction.transaction_data.qr_code))) ||
+    (data.point_of_interaction && data.point_of_interaction.transaction_data && data.point_of_interaction.transaction_data.qr_code) ||
+    ''
+  );
+}
+function normalizarPlanoObj(key, base, custom){
+  let p = Object.assign({}, base, custom || {});
+  p.key = key;
+  p.valorNum = parseFloat(p.valorNum);
+  if (isNaN(p.valorNum) || p.valorNum < 0) p.valorNum = base.valorNum;
+  p.valor = fmt(p.valorNum);
+  p.dias = parseInt(p.dias, 10);
+  if (isNaN(p.dias) || p.dias < 0) p.dias = base.dias;
+  p.visivel = p.visivel !== false;
+  if(!p.tituloCurto) p.tituloCurto = p.nome;
+  if(!p.beneficios || !Array.isArray(p.beneficios)) p.beneficios = [...base.beneficios];
+  return p;
+}
+function aplicarConfigPlanos(dados){
+  let base = clonarPlanosPadrao();
+  let next = {};
+  Object.keys(base).forEach(k=>{
+    let custom = dados && dados.planos ? dados.planos[k] : null;
+    next[k] = normalizarPlanoObj(k, base[k], custom);
+  });
+  PLANOS = next;
+  if(dados && dados.gratisVisibilidade){
+    VISIBILIDADE_GRATIS.telaPlanos = dados.gratisVisibilidade.telaPlanos !== false;
+    VISIBILIDADE_GRATIS.secPlanoApp = dados.gratisVisibilidade.secPlanoApp !== false;
+  }
+  try{
+    localStorage.setItem('revende_config_planos', JSON.stringify({ planos: PLANOS, gratisVisibilidade: VISIBILIDADE_GRATIS }));
+  }catch(e){}
+  renderizarPlanosNasTelas();
+  renderizarEditorPlanosAdmin();
+}
+async function carregarConfigPlanos(){
+  try{
+    let local = JSON.parse(localStorage.getItem('revende_config_planos') || 'null');
+    if(local) aplicarConfigPlanos(local);
+  }catch(e){}
+  try{
+    let snap = await getDoc(doc(db, "revende_config", "planos"));
+    if(snap.exists()){
+      aplicarConfigPlanos(snap.data());
+      return;
+    }
+  }catch(e){}
+  renderizarPlanosNasTelas();
+  renderizarEditorPlanosAdmin();
+}
+function renderizarPlanosNasTelas(){
+  let elTela = document.getElementById('listaPlanosTela');
+  let elSec = document.getElementById('listaPlanosAppSecao');
+  let keys = Object.keys(PLANOS);
+
+  let htmlTela = '';
+  if(VISIBILIDADE_GRATIS.telaPlanos){
+    htmlTela += `
+    <div class="plano gratis">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <h2 style="margin:0">🆓 Grátis</h2>
+        <span class="badge badge-gray">COM LIMITAÇÕES</span>
+      </div>
+      <p style="font-size:26px;font-weight:800;color:#3f3f46;text-align:left;margin:8px 0 4px">R$ 0,00 <span style="font-size:13px;color:#71717a;font-weight:500">/ para começar</span></p>
+      <small style="color:#71717a;display:block">Bom para começar a organizar suas vendas com limites essenciais.</small>
+      <ul class="plano-lista">
+        <li>⚠️ Limite de até <b>15 clientes</b> cadastradas</li>
+        <li>⚠️ Limite de até <b>20 pedidos</b> registrados</li>
+        <li>⚠️ Limite de até <b>2 catálogos</b> salvos</li>
+        <li>✅ Cobrança individual no WhatsApp (cobrança em lote bloqueada)</li>
+      </ul>
+      <button class="outline" onclick="ativarPlanoGratis()">🆓 USAR PLANO GRÁTIS</button>
+    </div>`;
+  }
+
+  keys.forEach(k=>{
+    let p = PLANOS[k];
+    if(!p.visivel) return;
+    let extraClass = p.destaque ? 'plano destaque' : 'plano';
+    let extraStyle = (!p.destaque && k==='anual') ? 'border-color:#fed7aa' : '';
+    let lis = (p.beneficios || []).map(b=>'<li>'+b+'</li>').join('');
+    htmlTela += `
+    <div class="${extraClass}" style="${extraStyle}">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:6px">
+        <h2 style="margin:0">${p.tituloCurto || p.nome}</h2>
+        <span class="badge ${p.badgeClass || 'badge-orange'}">${p.badgeTxt || ''}</span>
+      </div>
+      <p style="font-size:26px;font-weight:800;color:${p.corValor || '#db2777'};text-align:left;margin:8px 0 4px">${fmt(p.valorNum)} <span style="font-size:13px;color:#71717a;font-weight:500">${p.periodoTxt || ''}</span></p>
+      <small style="color:${p.destaque?'#15803d':'#71717a'};${p.destaque?'font-weight:600;':''}display:block">${p.subtitulo || ''}</small>
+      <ul class="plano-lista">${lis}</ul>
+      <button style="background:#0284c7" onclick="abrirPagamentoPlano('${p.key}')">💙 ASSINAR ${p.tituloCurto || p.nome} - PIX ${fmt(p.valorNum)}</button>
+    </div>`;
+  });
+  if(elTela) elTela.innerHTML = htmlTela || '<div class="box" style="text-align:center">Nenhum plano visível no momento.</div>';
+
+  let htmlSec = '';
+  if(VISIBILIDADE_GRATIS.secPlanoApp){
+    htmlSec += `
+    <div class="plano gratis">
+      <div style="display:flex;justify-content:space-between;align-items:center"><h2>🆓 Grátis</h2><span class="badge badge-gray">COM LIMITAÇÕES</span></div>
+      <p style="font-size:26px;font-weight:800;color:#3f3f46;text-align:left;margin:6px 0">R$ 0,00 <span style="font-size:13px;color:#71717a;font-weight:500">/ com limites</span></p>
+      <ul class="plano-lista">
+        <li>⚠️ Até <b>15 clientes</b> e <b>20 pedidos</b></li>
+        <li>⚠️ Até <b>2 catálogos</b> salvos</li>
+        <li>⚠️ Sem cobrança em lote (cobra 1 por vez no WhatsApp)</li>
+      </ul>
+      <button class="outline" onclick="ativarPlanoGratis()">🆓 ATIVAR PLANO GRÁTIS</button>
+    </div>`;
+  }
+
+  keys.forEach(k=>{
+    let p = PLANOS[k];
+    if(!p.visivel) return;
+    let extraClass = p.destaque ? 'plano destaque' : 'plano';
+    let extraStyle = (!p.destaque && k==='anual') ? 'border-color:#fed7aa' : '';
+    let lis = (p.beneficios || []).map(b=>'<li>'+b+'</li>').join('');
+    htmlSec += `
+    <div class="${extraClass}" style="${extraStyle}">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:6px"><h2>${p.tituloCurto || p.nome}</h2><span class="badge ${p.badgeClass || 'badge-orange'}">${p.badgeTxt || ''}</span></div>
+      <p style="font-size:26px;font-weight:800;color:${p.corValor || '#db2777'};text-align:left;margin:6px 0">${fmt(p.valorNum)} <span style="font-size:13px;color:#71717a;font-weight:500">${p.periodoTxt || ''}</span></p>
+      <ul class="plano-lista">${lis}</ul>
+      <button style="background:#0284c7" onclick="abrirPagamentoPlano('${p.key}')">💙 QUERO O ${p.tituloCurto || p.nome} - PIX ${fmt(p.valorNum)}</button>
+    </div>`;
+  });
+  if(elSec) elSec.innerHTML = htmlSec || '<div class="box" style="text-align:center">Nenhum plano disponível no momento.</div>';
+}
+function renderizarEditorPlanosAdmin(){
+  let el = document.getElementById('editorPlanosAdmin');
+  if(!el) return;
+  let gratisCard = `
+    <div class="adm-plano-card">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <b>🆓 Plano Grátis (R$ 0,00)</b>
+        <span class="badge ${(VISIBILIDADE_GRATIS.telaPlanos || VISIBILIDADE_GRATIS.secPlanoApp) ? 'badge-green' : 'badge-red'}">${(VISIBILIDADE_GRATIS.telaPlanos || VISIBILIDADE_GRATIS.secPlanoApp) ? 'VISÍVEL' : 'OCULTO'}</span>
+      </div>
+      <div class="adm-plano-grid">
+        <label style="font-size:12px;display:flex;align-items:center;gap:6px"><input type="checkbox" id="admGratisTelaPlanos" ${VISIBILIDADE_GRATIS.telaPlanos?'checked':''}> Mostrar na tela inicial de Planos</label>
+        <label style="font-size:12px;display:flex;align-items:center;gap:6px"><input type="checkbox" id="admGratisSecPlano" ${VISIBILIDADE_GRATIS.secPlanoApp?'checked':''}> Mostrar dentro do App</label>
+      </div>
+    </div>`;
+
+  let planosCards = Object.keys(PLANOS).map(k=>{
+    let p = PLANOS[k];
+    return `
+    <div class="adm-plano-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:6px">
+        <b>${p.tipo} (${k})</b>
+        <span class="badge ${p.visivel ? 'badge-green' : 'badge-red'}">${p.visivel ? '👁️ VISÍVEL' : '🙈 INVISÍVEL'}</span>
+      </div>
+      <label style="font-size:12px;display:flex;align-items:center;gap:6px;margin-top:6px">
+        <input type="checkbox" id="admPlanoVisivel_${k}" ${p.visivel ? 'checked' : ''}>
+        <b>Deixar plano visível para as usuárias</b>
+      </label>
+      <div class="adm-plano-grid">
+        <div>
+          <label style="font-size:11px;font-weight:700">NOME DO PLANO</label>
+          <input id="admPlanoNome_${k}" value="${(p.tituloCurto || p.nome).replace(/"/g,'&quot;')}">
+        </div>
+        <div>
+          <label style="font-size:11px;font-weight:700">VALOR (R$)</label>
+          <input id="admPlanoValor_${k}" type="number" step="0.01" min="0" value="${p.valorNum}">
+        </div>
+      </div>
+      <div class="adm-plano-grid">
+        <div>
+          <label style="font-size:11px;font-weight:700">DIAS DE VALIDADE (0 = VITALÍCIO)</label>
+          <input id="admPlanoDias_${k}" type="number" min="0" value="${p.dias}">
+        </div>
+        <div>
+          <label style="font-size:11px;font-weight:700">TEXTO DO PERÍODO</label>
+          <input id="admPlanoPeriodo_${k}" value="${(p.periodoTxt || '').replace(/"/g,'&quot;')}">
+        </div>
+      </div>
+      <label style="font-size:11px;font-weight:700">CÓDIGO PIX COPIA E COLA</label>
+      <input id="admPlanoPix_${k}" value="${(p.pix || '').replace(/"/g,'&quot;')}">
+    </div>`;
+  }).join('');
+
+  el.innerHTML = gratisCard + planosCards;
+}
+window.salvarConfigPlanosAdmin = async function(){
+  let novaConfigPlanos = {};
+  Object.keys(PLANOS).forEach(k=>{
+    let base = PLANOS[k];
+    let vis = document.getElementById('admPlanoVisivel_'+k)?.checked ?? true;
+    let nomeEditado = (document.getElementById('admPlanoNome_'+k)?.value || base.tituloCurto || base.nome).trim();
+    let valEditado = parseFloat(document.getElementById('admPlanoValor_'+k)?.value);
+    if(isNaN(valEditado) || valEditado < 0) valEditado = base.valorNum;
+    let diasEditado = parseInt(document.getElementById('admPlanoDias_'+k)?.value, 10);
+    if(isNaN(diasEditado) || diasEditado < 0) diasEditado = base.dias;
+    let periodoEditado = (document.getElementById('admPlanoPeriodo_'+k)?.value || '').trim();
+    let pixEditado = (document.getElementById('admPlanoPix_'+k)?.value || base.pix).trim();
+
+    novaConfigPlanos[k] = Object.assign({}, base, {
+      visivel: vis,
+      tituloCurto: nomeEditado,
+      nome: nomeEditado + ' - ' + fmt(valEditado),
+      valorNum: valEditado,
+      valor: fmt(valEditado),
+      dias: diasEditado,
+      periodoTxt: periodoEditado,
+      pix: pixEditado,
+      validadeTxt: base.tipo === 'VITALICIO' || diasEditado === 0 ? '♾️ Pra sempre, nunca vence' : '⏳ Vale por ' + diasEditado + (diasEditado === 1 ? ' dia' : ' dias')
+    });
+  });
+
+  let novaGratis = {
+    telaPlanos: document.getElementById('admGratisTelaPlanos')?.checked ?? true,
+    secPlanoApp: document.getElementById('admGratisSecPlano')?.checked ?? true
+  };
+
+  let payload = { planos: novaConfigPlanos, gratisVisibilidade: novaGratis, atualizadoEm: Date.now() };
+  aplicarConfigPlanos(payload);
+  try{
+    await setDoc(doc(db, "revende_config", "planos"), payload, { merge: true });
+    document.getElementById('msgConfigPlanosAdmin').innerText = '✅ Planos e visibilidade salvos no Firestore!';
+  }catch(e){
+    document.getElementById('msgConfigPlanosAdmin').innerText = '✅ Planos salvos localmente (verifique regras do Firestore em revende_config/planos).';
+  }
+}
+
 function diasDesde(i){return Math.floor((Date.now()-parseInt(i))/(1000*60*60*24))}
 function fmtDataBR(d){if(!d) return '-';let x=d.split('-');return x[2]+'/'+x[1]+'/'+x[0];}
+function temPlanoPagoAtivo(u){if(!u) return false; if(u.bloqueado) return false; if(!u.planoLiberado) return false; if(u.planoTipo==='VITALICIO') return true; if(!u.planoValidade) return true; return Date.now() <= u.planoValidade;}
+function emPlanoGratis(u){if(!u || isAdminView) return false; if(u.bloqueado) return false; if(temPlanoPagoAtivo(u)) return false; if(u.planoTipo==='GRATIS') return true; return diasDesde(u.inicio||Date.now()) < 7;}
+function gerarCodigoPlano(tipo){let n=Math.floor(1000+Math.random()*9000);let L='ABCDEFGHJKMNPQRSTUVWXYZ';let l1=L[Math.floor(Math.random()*L.length)];let l2=L[Math.floor(Math.random()*L.length)];return tipo+'-'+n+l1+l2;}
+function gerarPagamentoId(tipo){return 'PAY_'+tipo+'_'+Date.now()+'_'+Math.floor(100+Math.random()*900);}
 async function copiarTexto(texto, msgOk){
   try{
     if(navigator.clipboard && navigator.clipboard.writeText){ await navigator.clipboard.writeText(texto); alert(msgOk||'✅ Copiado!'); return; }
@@ -174,23 +1114,43 @@ async function copiarTexto(texto, msgOk){
   }
 }
 function planoVencido(u){if(!u) return false; if(u.bloqueado) return true; if(!u.planoLiberado) return false; if(u.planoTipo==='VITALICIO') return false; if(!u.planoValidade) return false; return Date.now() > u.planoValidade;}
-function estaBloqueado(u){ if(!u) return false; if(u.bloqueado) return true; if(planoVencido(u)) return true; if(!u.planoLiberado && diasDesde(u.inicio||Date.now())>=7) return true; return false; }
-function verificarBloqueio(){if(!usuarioAtual) return false; if(isAdminView) return false; if(estaBloqueado(usuarioAtual)){ if(planoVencido(usuarioAtual) && !usuarioAtual.bloqueado){ usuarioAtual.planoLiberado=false; setDoc(doc(db,"revende_users",emailToId(usuarioAtual.email)),{planoLiberado:false},{merge:true}); } document.getElementById('nomePlano').innerText=usuarioAtual.nome; mostrar('telaPlanos'); return true;} return false;}
-window.mostrar=function(id){['telaHome','telaLogin','telaCadastro','telaEsqueciSenha','telaPlanos','telaPagamentoPlano','telaApp','telaAdminLogin','telaAdminPainel','telaAdminDetalhe'].forEach(t=>document.getElementById(t).classList.add('hidden'));document.getElementById(id).classList.remove('hidden');fecharMenuFlutuante();window.scrollTo(0,0)}
+function estaBloqueado(u){
+  if(!u) return false;
+  if(u.bloqueado) return true;
+  if(planoVencido(u)) return true;
+  if(!u.planoLiberado && u.planoTipo!=='GRATIS' && diasDesde(u.inicio||Date.now())>=7) return true;
+  return false;
+}
+function verificarBloqueio(){if(!usuarioAtual) return false; if(isAdminView) return false; if(estaBloqueado(usuarioAtual)){ if(planoVencido(usuarioAtual) && !usuarioAtual.bloqueado){ usuarioAtual.planoLiberado=false; setDoc(doc(db,"revende_users",emailToId(usuarioAtual.email)),{planoLiberado:false},{merge:true}); } document.getElementById('nomePlano').innerText=usuarioAtual.nome; renderizarPlanosNasTelas(); mostrar('telaPlanos'); return true;} return false;}
+window.ativarPlanoGratis=async function(){
+  if(!usuarioAtual){mostrar('telaCadastro');return;}
+  usuarioAtual.planoLiberado=false;
+  usuarioAtual.bloqueado=false;
+  usuarioAtual.planoTipo='GRATIS';
+  usuarioAtual.planoEscolhido='🆓 GRÁTIS (Com limitações)';
+  usuarioAtual.planoValidade=null;
+  try{
+    await setDoc(doc(db,"revende_users",emailToId(usuarioAtual.email)),usuarioAtual,{merge:true});
+  }catch(e){}
+  alert('🆓 Plano Grátis ativado! Limites: até '+LIMITES_GRATIS.clientes+' clientes, '+LIMITES_GRATIS.pedidos+' pedidos e '+LIMITES_GRATIS.catalogos+' catálogos.');
+  abrirApp(usuarioAtual.nome,usuarioAtual.whats,usuarioAtual.marca);
+}
+window.mostrar=function(id){if(id==='telaPlanos') renderizarPlanosNasTelas();['telaHome','telaLogin','telaCadastro','telaEsqueciSenha','telaPlanos','telaPagamentoPlano','telaApp','telaAdminLogin','telaAdminPainel','telaAdminDetalhe'].forEach(t=>document.getElementById(t).classList.add('hidden'));document.getElementById(id).classList.remove('hidden');fecharMenuFlutuante();window.scrollTo(0,0)}
 window.mostrarSecao=function(id){
-  if(isAdminView===false && usuarioAtual && estaBloqueado(usuarioAtual) && ['secClientes','secPedidos','secNovoPedido','secCaixa','secPendentes','secDetalheCliente','secCatalogos','secHomeApp'].includes(id)){ document.getElementById('nomePlano').innerText=usuarioAtual.nome; mostrar('telaPlanos'); alert('🔒 Seu plano venceu! Renove para continuar. Você só tem acesso ao menu ☰'); return; }
-  ['secHomeApp','secClientes','secPedidos','secNovoPedido','secCaixa','secPendentes','secPerfil','secPlanoApp','secSuporte','secTermos','secDetalheCliente','secCatalogos'].forEach(s=>document.getElementById(s).classList.add('hidden'));document.getElementById(id).classList.remove('hidden');fecharMenuFlutuante();let cab=document.getElementById('cabecalhoApp');if(cab){if(id==='secHomeApp'){cab.classList.remove('hidden');}else{cab.classList.add('hidden');}}if(id==='secPendentes') atualizarPendentes();if(id==='secPerfil') atualizarPerfil();if(id==='secPlanoApp') atualizarMeuPlano();if(id==='secCatalogos') listarCatalogos();window.scrollTo(0,0)}
+  if(isAdminView===false && usuarioAtual && estaBloqueado(usuarioAtual) && ['secClientes','secPedidos','secNovoPedido','secCaixa','secPendentes','secDetalheCliente','secCatalogos','secHomeApp'].includes(id)){ document.getElementById('nomePlano').innerText=usuarioAtual.nome; renderizarPlanosNasTelas(); mostrar('telaPlanos'); alert('🔒 Seu plano venceu! Renove para continuar. Você só tem acesso ao menu ☰'); return; }
+  ['secHomeApp','secClientes','secPedidos','secNovoPedido','secCaixa','secPendentes','secPerfil','secPlanoApp','secComoUsar','secSuporte','secFeedback','secQuemSomos','secTermos','secDetalheCliente','secCatalogos'].forEach(s=>document.getElementById(s).classList.add('hidden'));document.getElementById(id).classList.remove('hidden');fecharMenuFlutuante();let cab=document.getElementById('cabecalhoApp');if(cab){if(id==='secHomeApp'){cab.classList.remove('hidden');}else{cab.classList.add('hidden');}}if(id==='secPendentes') atualizarPendentes();if(id==='secPerfil') atualizarPerfil();if(id==='secPlanoApp'){renderizarPlanosNasTelas();atualizarMeuPlano();}if(id==='secCatalogos') listarCatalogos();window.scrollTo(0,0)}
 window.toggleOlho=function(id,el){let input=document.getElementById(id);if(input.type==='password'){input.type='text';el.innerText='🙈';}else{input.type='password';el.innerText='👁️';}}
 window.toggleMenuFlutuante=function(e){if(e) e.stopPropagation();let m=document.getElementById('menuDrop');let m2=document.getElementById('menuDropPlanos');if(m && !document.getElementById('telaApp').classList.contains('hidden')){m.classList.toggle('hidden');document.getElementById('fundoMenu').classList.toggle('hidden', m.classList.contains('hidden'));}else if(m2){m2.classList.toggle('hidden');document.getElementById('fundoMenu').classList.toggle('hidden', m2.classList.contains('hidden'));}}
 window.fecharMenuFlutuante=function(){let m=document.getElementById('menuDrop'); if(m) m.classList.add('hidden'); let m2=document.getElementById('menuDropPlanos'); if(m2) m2.classList.add('hidden'); document.getElementById('fundoMenu').classList.add('hidden');}
 window.irMenu=function(s){fecharMenuFlutuante(); if(document.getElementById('telaPlanos') && !document.getElementById('telaPlanos').classList.contains('hidden')){mostrar('telaApp');} mostrarSecao(s);}
 window.irMenuPlanos=function(s){fecharMenuFlutuante(); if(!usuarioAtual){mostrar('telaHome');return;} mostrar('telaApp'); mostrarSecao(s);}
-window.abrirWhatsSuporte=function(){window.open('https://wa.me/5515997643116?text='+encodeURIComponent('Olá! Preciso de ajuda com RevendePro!'),'_blank');}
-window.atualizarMeuPlano=function(){let u=usuarioAtual;if(!u) return;document.getElementById('planoNomeCliente').innerText=u.nome;let tipoTxt = u.planoTipo==='MENSAL'?'📅 Mensal':u.planoTipo==='ANUAL'?'📅 Anual':u.planoTipo==='VITALICIO'?'♾️ Vitalício':(u.planoEscolhido||'Teste grátis');document.getElementById('planoAtualTxt').innerText=u.bloqueado?'🔒 Bloqueado':u.planoLiberado?tipoTxt:(u.planoEscolhido||'Teste grátis');document.getElementById('planoVenceTxt').innerText=u.planoTipo==='VITALICIO'?'♾️ Pra sempre!':(u.planoValidade?new Date(u.planoValidade).toLocaleDateString('pt-BR'):'-');let dias=diasDesde(u.inicio||Date.now());let rest=7-dias;let diasRestPlano = u.planoValidade?Math.ceil((u.planoValidade-Date.now())/(1000*60*60*24)):0;document.getElementById('planoDiasTxt').innerText=u.bloqueado?'🔒 BLOQUEADO - Renove':u.planoLiberado&&u.planoTipo==='VITALICIO'?'♾️ Vitalício':u.planoLiberado?'📅 Faltam '+Math.max(0,diasRestPlano)+' dias':(rest>0?'🎁 Faltam '+rest+' dias':'🔒 BLOQUEADO');}
-window.atualizarPerfil=function(){let u=usuarioAtual;if(!u) return;document.getElementById('perfilNomeTxt').innerText=u.nome;document.getElementById('perfilNome').innerText=u.nome;document.getElementById('perfilWhats').innerText=u.whats||'-';document.getElementById('perfilEmail').innerText=u.email;document.getElementById('perfilMarca').innerText=u.marca||'-';document.getElementById('perfilPlano').innerText=u.bloqueado?'🔒 Bloqueado':u.planoLiberado?(u.planoTipo||u.planoEscolhido||'Liberado'):'Teste grátis';document.getElementById('perfilTotal').innerText=clientes.length;document.getElementById('editNome').value=u.nome;document.getElementById('editWhats').value=u.whats||'';document.getElementById('editMarca').value=u.marca||'💄 Avon';}
+window.abrirWhatsSuporte=function(){window.open('https://wa.me/'+FONE_SUPORTE_WA+'?text='+encodeURIComponent('Olá! Preciso de ajuda com RevendePro!'),'_blank');}
+window.enviarFeedbackWhats=function(){let nota=document.getElementById('fbNota').value;let txt=document.getElementById('fbMensagem').value.trim();if(!txt){alert('Escreva sua mensagem de feedback antes de enviar!');return;}let quem=usuarioAtual?(usuarioAtual.nome+' ('+usuarioAtual.email+')'):'Visitante';let msg='⭐ FEEDBACK - RevendePro\n\n👤 De: '+quem+'\n📊 Avaliação: '+nota+'\n💬 Mensagem:\n'+txt;document.getElementById('msgFeedback').innerText='✅ Abrindo WhatsApp para enviar seu feedback...';window.open('https://wa.me/'+FONE_SUPORTE_WA+'?text='+encodeURIComponent(msg),'_blank');document.getElementById('fbMensagem').value='';}
+window.atualizarMeuPlano=function(){let u=usuarioAtual;if(!u) return;document.getElementById('planoNomeCliente').innerText=u.nome;let tipoTxt = u.planoTipo==='TESTE1REAL'?(PLANOS.teste1real?.tituloCurto||'🧪 Teste R$ 1,00'):u.planoTipo==='MENSAL'?(PLANOS.mensal?.tituloCurto||'📅 Mensal'):u.planoTipo==='ANUAL'?(PLANOS.anual?.tituloCurto||'📅 Anual'):u.planoTipo==='VITALICIO'?(PLANOS.vitalicio?.tituloCurto||'♾️ Vitalício'):u.planoTipo==='GRATIS'?'🆓 Grátis (Com limitações)':(u.planoEscolhido||'Teste grátis');document.getElementById('planoAtualTxt').innerText=u.bloqueado?'🔒 Bloqueado':u.planoLiberado?tipoTxt:tipoTxt;document.getElementById('planoVenceTxt').innerText=u.planoTipo==='VITALICIO'?'♾️ Pra sempre!':u.planoTipo==='GRATIS'?'♾️ Sem vencimento (com limites)':(u.planoValidade?new Date(u.planoValidade).toLocaleDateString('pt-BR'):'-');let dias=diasDesde(u.inicio||Date.now());let rest=7-dias;let diasRestPlano = u.planoValidade?Math.ceil((u.planoValidade-Date.now())/(1000*60*60*24)):0;document.getElementById('planoDiasTxt').innerText=u.bloqueado?'🔒 BLOQUEADO - Renove':u.planoLiberado&&u.planoTipo==='VITALICIO'?'♾️ Vitalício':u.planoLiberado?'📅 Faltam '+Math.max(0,diasRestPlano)+' dias':u.planoTipo==='GRATIS'?'🆓 Grátis (até '+LIMITES_GRATIS.clientes+' clientes / '+LIMITES_GRATIS.pedidos+' pedidos)':(rest>0?'🎁 Faltam '+rest+' dias':'🔒 BLOQUEADO');}
+window.atualizarPerfil=function(){let u=usuarioAtual;if(!u) return;document.getElementById('perfilNomeTxt').innerText=u.nome;document.getElementById('perfilNome').innerText=u.nome;document.getElementById('perfilWhats').innerText=u.whats||'-';document.getElementById('perfilEmail').innerText=u.email;document.getElementById('perfilMarca').innerText=u.marca||'-';document.getElementById('perfilPlano').innerText=u.bloqueado?'🔒 Bloqueado':u.planoLiberado?(u.planoTipo||u.planoEscolhido||'Liberado'):(u.planoTipo==='GRATIS'?'🆓 Grátis':'Teste grátis');document.getElementById('perfilTotal').innerText=clientes.length;document.getElementById('editNome').value=u.nome;document.getElementById('editWhats').value=u.whats||'';document.getElementById('editMarca').value=u.marca||'💄 Avon';}
 window.toggleEditarPerfil=function(){document.getElementById('formPerfil').classList.toggle('hidden');}
 window.salvarPerfil=async function(){let n=document.getElementById('editNome').value.trim();let w=document.getElementById('editWhats').value.trim();let m=document.getElementById('editMarca').value;if(!n||!w){alert('Preencha nome e Whats!');return;}usuarioAtual.nome=n;usuarioAtual.whats=w;usuarioAtual.marca=m;await setDoc(doc(db,"revende_users",emailToId(usuarioAtual.email)),usuarioAtual,{merge:true});document.getElementById('nomeUser').innerText=n;document.getElementById('whatsUser').innerText=w;document.getElementById('marcaUser').innerText=m;document.getElementById('formPerfil').classList.add('hidden');atualizarPerfil();alert('✅ Perfil atualizado!');}
-window.entrarAdmin=async function(){let em=document.getElementById('adminEmail').value.trim().toLowerCase();let se=document.getElementById('adminSenha').value;let snap=await getDoc(doc(db,"revende_users",emailToId(em)));if(!snap.exists()||snap.data().senha!==se){document.getElementById('msgAdmin').innerText='E-mail ou senha errados.';return;}if(em!==EMAIL_ADM){document.getElementById('msgAdmin').innerText='Não é ADM.';return;}adminOriginal=snap.data();isAdminView=false;await listarClientesAdmin();mostrar('telaAdminPainel');}
+window.entrarAdmin=async function(){let em=document.getElementById('adminEmail').value.trim().toLowerCase();let se=document.getElementById('adminSenha').value;let snap=await getDoc(doc(db,"revende_users",emailToId(em)));if(!snap.exists()||snap.data().senha!==se){document.getElementById('msgAdmin').innerText='E-mail ou senha errados.';return;}if(em!==EMAIL_ADM){document.getElementById('msgAdmin').innerText='Não é ADM.';return;}adminOriginal=snap.data();isAdminView=false;await carregarConfigPlanos();await listarClientesAdmin();mostrar('telaAdminPainel');}
 window.voltarParaAdmin=async function(){isAdminView=false;document.getElementById('barraAdmin').classList.add('hidden');if(adminOriginal){usuarioAtual=adminOriginal;}await listarClientesAdmin();mostrar('telaAdminPainel');}
 window.voltarListaAdmin=async function(){await listarClientesAdmin();mostrar('telaAdminPainel');}
 window.abrirDetalheRevendedora=async function(email){
@@ -206,11 +1166,11 @@ window.abrirDetalheRevendedora=async function(email){
   let vencido=planoVencido(c);
   let diasRestTeste=Math.max(0,7-diasDesde(c.inicio||Date.now()));
   let diasRestPlano=c.planoValidade?Math.ceil((c.planoValidade-Date.now())/(1000*60*60*24)):0;
-  let statusTxt=c.bloqueado?'<span class="badge badge-red">🔒 BLOQUEADO</span>':c.planoLiberado&&!vencido?'<span class="badge badge-green">✅ PAGA - '+(c.planoTipo||'')+'</span>':vencido?'<span class="badge badge-red">⏳ VENCIDO</span>':'<span class="badge badge-orange">🎁 TESTE GRÁTIS</span>';
+  let statusTxt=c.bloqueado?'<span class="badge badge-red">🔒 BLOQUEADO</span>':c.planoLiberado&&!vencido?'<span class="badge badge-green">✅ PAGA - '+(c.planoTipo||'')+'</span>':vencido?'<span class="badge badge-red">⏳ VENCIDO</span>':c.planoTipo==='GRATIS'?'<span class="badge badge-gray">🆓 GRÁTIS</span>':'<span class="badge badge-orange">🎁 TESTE GRÁTIS</span>';
   document.getElementById('detRevNome').innerText=c.nome;
   document.getElementById('detRevSub').innerText='Revendedora desde '+(c.inicio?new Date(c.inicio).toLocaleDateString('pt-BR'):'-');
   document.getElementById('detRevStatus').innerHTML=statusTxt;
-  document.getElementById('detRevInfo').innerHTML='<b>👤 Nome completo:</b> '+c.nome+'<br><b>📱 WhatsApp:</b> '+(c.whats||'-')+'<br><b>📧 E-mail:</b> '+c.email+'<br><b>🏷️ Marca:</b> '+(c.marca||'-')+'<br><b>📅 Criou conta em:</b> '+(c.inicio?new Date(c.inicio).toLocaleDateString('pt-BR')+' às '+new Date(c.inicio).toLocaleTimeString('pt-BR'):'-')+'<br><b>📦 Plano atual:</b> '+(c.planoTipo||'TESTE GRÁTIS')+'<br><b>📦 Plano escolhido:</b> '+(c.planoEscolhido||'-')+'<br><b>📅 Vence em:</b> '+(c.planoTipo==='VITALICIO'?'♾️ Pra sempre!':c.planoValidade?new Date(c.planoValidade).toLocaleDateString('pt-BR'):'-')+'<br><b>⏳ Dias restantes:</b> '+(c.planoLiberado&&c.planoTipo!=='VITALICIO'?Math.max(0,diasRestPlano)+' dias':c.planoLiberado&&c.planoTipo==='VITALICIO'?'♾️ Nunca vence':diasRestTeste+' dias de teste')+'<br><b>🔒 Bloqueada?</b> '+(c.bloqueado?'SIM - Só vê Planos':'NÃO');
+  document.getElementById('detRevInfo').innerHTML='<b>👤 Nome completo:</b> '+c.nome+'<br><b>📱 WhatsApp:</b> '+(c.whats||'-')+'<br><b>📧 E-mail:</b> '+c.email+'<br><b>🏷️ Marca:</b> '+(c.marca||'-')+'<br><b>📄 Termos aceitos:</b> '+(c.termosAceitos?'✅ Sim':'Não')+'<br><b>📅 Criou conta em:</b> '+(c.inicio?new Date(c.inicio).toLocaleDateString('pt-BR')+' às '+new Date(c.inicio).toLocaleTimeString('pt-BR'):'-')+'<br><b>📦 Plano atual:</b> '+(c.planoTipo||'TESTE GRÁTIS')+'<br><b>📦 Plano escolhido:</b> '+(c.planoEscolhido||'-')+'<br><b>📅 Vence em:</b> '+(c.planoTipo==='VITALICIO'?'♾️ Pra sempre!':c.planoValidade?new Date(c.planoValidade).toLocaleDateString('pt-BR'):'-')+'<br><b>⏳ Dias restantes:</b> '+(c.planoLiberado&&c.planoTipo!=='VITALICIO'?Math.max(0,diasRestPlano)+' dias':c.planoLiberado&&c.planoTipo==='VITALICIO'?'♾️ Nunca vence':c.planoTipo==='GRATIS'?'🆓 Plano Grátis':diasRestTeste+' dias de teste')+'<br><b>🔒 Bloqueada?</b> '+(c.bloqueado?'SIM - Só vê Planos':'NÃO');
   document.getElementById('detRevTotalClientes').innerText=qtdClientes;
   document.getElementById('detRevTotalPedidos').innerText=listaPedidos.length;
   document.getElementById('detRevTotalVendido').innerText=fmt(total);
@@ -223,30 +1183,154 @@ window.mandarCodigoRevendedoraDetalhe=function(){if(!revendedoraDetalhe) return;
 window.liberarRevendedoraDetalhe=async function(tipo){await liberarClienteAdmin(revendedoraDetalheEmail, tipo); await abrirDetalheRevendedora(revendedoraDetalheEmail);}
 window.bloquearRevendedoraDetalhe=function(){if(!revendedoraDetalhe) return; abrirModalBloquear(revendedoraDetalheEmail, revendedoraDetalhe.nome);}
 window.verComoRevendedoraDetalhe=function(){if(!revendedoraDetalheEmail) return; verComoRevendedora(revendedoraDetalheEmail);}
-window.listarClientesAdmin=async function(){let s=await getDocs(collection(db,"revende_users"));let lista=[];s.forEach(d=>lista.push(d.data()));lista=lista.filter(c=>!c.isAdmin);let pagas=lista.filter(c=>c.planoLiberado && !planoVencido(c) && !c.bloqueado).length;let teste=lista.length-pagas;document.getElementById('admTotalUsers').innerText=lista.length;document.getElementById('admTotalPagas').innerText=pagas;document.getElementById('admTotalTeste').innerText=teste;document.getElementById('admFaturamento').innerText=fmt(lista.filter(c=>c.planoLiberado).reduce((sum,c)=>sum+(c.planoTipo==='VITALICIO'?450:c.planoTipo==='ANUAL'?190:c.planoTipo==='MENSAL'?19.90:0),0));document.getElementById('admFaturamentoDet').innerText='Soma dos planos liberados';let busca=(document.getElementById('buscaAdmin').value||'').toLowerCase();let html='';lista.forEach(c=>{let vencido=planoVencido(c);if(filtroAdmin==='pagas'&&(!c.planoLiberado||vencido||c.bloqueado)) return;if(filtroAdmin==='teste'&&(c.planoLiberado&&!vencido&&!c.bloqueado)) return;if(busca&&c.nome.toLowerCase().indexOf(busca)===-1&&c.email.toLowerCase().indexOf(busca)===-1) return;let dias=7-diasDesde(c.inicio||Date.now());let diasPlano=c.planoValidade?Math.ceil((c.planoValidade-Date.now())/(1000*60*60*24)):0;let statusTxt=c.bloqueado?'<span class="badge-red">🔒 BLOQUEADO</span>':c.planoLiberado&&!vencido?'<span class="badge-green">✅ PAGA - '+(c.planoTipo||'')+' - faltam '+Math.max(0,diasPlano)+' dias</span>':vencido?'<span class="badge-red">⏳ VENCIDO - '+(c.planoTipo||'')+'</span>':'<span class="badge-red">🔒 TESTE - faltam '+Math.max(0,dias)+' dias</span>';html+='<div class="cliente" style="cursor:pointer" onclick="abrirDetalheRevendedora(\''+c.email+'\')"><b>👤 '+c.nome+'</b> '+statusTxt+' <span style="float:right">👁️ Ver tudo ›</span><br><small>📱 '+(c.whats||'-')+'</small><br><small>📧 '+c.email+'</small><br><small>🏷️ '+(c.marca||'')+' | 📦 '+(c.planoTipo||'TESTE')+' | 📅 Vence: '+(c.planoValidade?new Date(c.planoValidade).toLocaleDateString('pt-BR'):'-')+'</small><br><div class="linha"><button class="small green" onclick="event.stopPropagation();liberarClienteAdmin(\''+c.email+'\',\'MENSAL\')">✅ Mensal 30d</button><button class="small orange" onclick="event.stopPropagation();liberarClienteAdmin(\''+c.email+'\',\'ANUAL\')">📅 Anual 365d</button><button class="small" style="background:#db2777" onclick="event.stopPropagation();liberarClienteAdmin(\''+c.email+'\',\'VITALICIO\')">♾️ Vitalício</button></div><div class="linha"><button class="small" style="background:#25D366" onclick="event.stopPropagation();gerarEMandarCodigo(\''+c.email+'\',\''+(c.whats||'')+'\',\''+c.nome.replace(/\'/g,'')+'\')">📱 Mandar Código</button><button class="small red" onclick="event.stopPropagation();abrirModalBloquear(\''+c.email+'\',\''+c.nome.replace(/\'/g,'')+'\')">🔒 Bloquear</button><button class="small gray" onclick="event.stopPropagation();verComoRevendedora(\''+c.email+'\')">👁️ Ver como ela</button></div></div>';});document.getElementById('listaClientesAdmin').innerHTML=html||'<p>Nenhuma revendedora.</p>';}
-window.liberarClienteAdmin=async function(email,tipo){tipo=tipo||'MENSAL';let ref=doc(db,"revende_users",emailToId(email));let dias=tipo==='VITALICIO'?0:tipo==='ANUAL'?365:30;let dados={planoLiberado:true,bloqueado:false,planoTipo:tipo,planoValidade:tipo==='VITALICIO'?null:Date.now()+dias*24*60*60*1000};await setDoc(ref,dados,{merge:true});await listarClientesAdmin();alert('Liberado '+tipo+'!');}
+async function listarPagamentosAdmin(){
+  let el=document.getElementById('listaPagamentosAdmin'); if(!el) return;
+  try{
+    let s=await getDocs(collection(db,"revende_pagamentos"));
+    let arr=[]; s.forEach(d=>arr.push(d.data()));
+    arr.sort((a,b)=>(b.criadoEm||0)-(a.criadoEm||0));
+    arr=arr.slice(0,8);
+    if(arr.length===0){el.innerHTML='<small style="color:#64748b">Nenhum pagamento registrado ainda.</small>';return;}
+    el.innerHTML=arr.map(p=>{
+      let isPago = p.status==='PAGO';
+      return '<div style="background:#fff;border:1px solid #e0f2fe;border-radius:10px;padding:8px 10px;margin-top:6px;font-size:12px"><b>'+(p.nome||p.email)+'</b> • '+(p.planoTipo||'')+' • <b>'+(p.valor||'')+'</b> <span class="badge '+(isPago?'badge-green':'badge-orange')+'">'+(p.status||'PENDENTE')+'</span><br><small style="color:#64748b">Ref: '+(p.pagamentoId||'-')+' • '+(p.criadoEm?new Date(p.criadoEm).toLocaleDateString('pt-BR'):'')+'</small></div>';
+    }).join('');
+  }catch(e){
+    el.innerHTML='<small style="color:#64748b">Sem pagamentos carregados.</small>';
+  }
+}
+function valorEstimadoPlano(tipo){
+  if(tipo==='VITALICIO') return PLANOS.vitalicio?.valorNum ?? 450;
+  if(tipo==='ANUAL') return PLANOS.anual?.valorNum ?? 190;
+  if(tipo==='MENSAL') return PLANOS.mensal?.valorNum ?? 19.90;
+  if(tipo==='TESTE1REAL') return PLANOS.teste1real?.valorNum ?? 1.00;
+  return 0;
+}
+window.listarClientesAdmin=async function(){
+  renderizarEditorPlanosAdmin();
+  let s=await getDocs(collection(db,"revende_users"));let lista=[];s.forEach(d=>lista.push(d.data()));lista=lista.filter(c=>!c.isAdmin);let pagas=lista.filter(c=>c.planoLiberado && !planoVencido(c) && !c.bloqueado).length;let teste=lista.length-pagas;document.getElementById('admTotalUsers').innerText=lista.length;document.getElementById('admTotalPagas').innerText=pagas;document.getElementById('admTotalTeste').innerText=teste;document.getElementById('admFaturamento').innerText=fmt(lista.filter(c=>c.planoLiberado).reduce((sum,c)=>sum+valorEstimadoPlano(c.planoTipo),0));document.getElementById('admFaturamentoDet').innerText='Soma dos planos liberados';await listarPagamentosAdmin();let busca=(document.getElementById('buscaAdmin').value||'').toLowerCase();let html='';lista.forEach(c=>{let vencido=planoVencido(c);if(filtroAdmin==='pagas'&&(!c.planoLiberado||vencido||c.bloqueado)) return;if(filtroAdmin==='teste'&&(c.planoLiberado&&!vencido&&!c.bloqueado)) return;if(busca&&c.nome.toLowerCase().indexOf(busca)===-1&&c.email.toLowerCase().indexOf(busca)===-1) return;let dias=7-diasDesde(c.inicio||Date.now());let diasPlano=c.planoValidade?Math.ceil((c.planoValidade-Date.now())/(1000*60*60*24)):0;let statusTxt=c.bloqueado?'<span class="badge-red">🔒 BLOQUEADO</span>':c.planoLiberado&&!vencido?'<span class="badge-green">✅ PAGA - '+(c.planoTipo||'')+' - faltam '+Math.max(0,diasPlano)+' dias</span>':vencido?'<span class="badge-red">⏳ VENCIDO - '+(c.planoTipo||'')+'</span>':c.planoTipo==='GRATIS'?'<span class="badge-orange">🆓 GRÁTIS</span>':'<span class="badge-red">🔒 TESTE - faltam '+Math.max(0,dias)+' dias</span>';html+='<div class="cliente" style="cursor:pointer" onclick="abrirDetalheRevendedora(\''+c.email+'\')"><b>👤 '+c.nome+'</b> '+statusTxt+' <span style="float:right">👁️ Ver tudo ›</span><br><small>📱 '+(c.whats||'-')+'</small><br><small>📧 '+c.email+'</small><br><small>🏷️ '+(c.marca||'')+' | 📦 '+(c.planoTipo||'TESTE')+' | 📅 Vence: '+(c.planoValidade?new Date(c.planoValidade).toLocaleDateString('pt-BR'):'-')+'</small><br><div class="linha"><button class="small" style="background:#0284c7" onclick="event.stopPropagation();liberarClienteAdmin(\''+c.email+'\',\'TESTE1REAL\')">🧪 Teste R$ 1</button><button class="small green" onclick="event.stopPropagation();liberarClienteAdmin(\''+c.email+'\',\'MENSAL\')">✅ Mensal 30d</button><button class="small orange" onclick="event.stopPropagation();liberarClienteAdmin(\''+c.email+'\',\'ANUAL\')">📅 Anual 365d</button><button class="small" style="background:#db2777" onclick="event.stopPropagation();liberarClienteAdmin(\''+c.email+'\',\'VITALICIO\')">♾️ Vitalício</button></div><div class="linha"><button class="small" style="background:#25D366" onclick="event.stopPropagation();gerarEMandarCodigo(\''+c.email+'\',\''+(c.whats||'')+'\',\''+c.nome.replace(/\'/g,'')+'\')">📱 Mandar Código</button><button class="small red" onclick="event.stopPropagation();abrirModalBloquear(\''+c.email+'\',\''+c.nome.replace(/\'/g,'')+'\')">🔒 Bloquear</button><button class="small gray" onclick="event.stopPropagation();verComoRevendedora(\''+c.email+'\')">👁️ Ver como ela</button></div></div>';});document.getElementById('listaClientesAdmin').innerHTML=html||'<p>Nenhuma revendedora.</p>';}
+window.liberarClienteAdmin=async function(email,tipo){tipo=tipo||'MENSAL';let ref=doc(db,"revende_users",emailToId(email));let planoCfg = Object.values(PLANOS).find(x=>x.tipo===tipo);let dias = tipo==='VITALICIO'?0:(planoCfg ? planoCfg.dias : (tipo==='ANUAL'?365:tipo==='TESTE1REAL'?1:30));let dados={planoLiberado:true,bloqueado:false,planoTipo:tipo,planoValidade:tipo==='VITALICIO'?null:Date.now()+dias*24*60*60*1000};await setDoc(ref,dados,{merge:true});await listarClientesAdmin();alert('Liberado '+tipo+'!');}
 window.liberarVitalicioAdmin=async function(email){await window.liberarClienteAdmin(email,'VITALICIO');}
 window.abrirModalBloquear=function(email,nome){emailBloquearAtual=email;nomeBloquearAtual=nome;document.getElementById('nomeBloquearTxt').innerText=nome;document.getElementById('modalBloquear').classList.remove('hidden');}
 window.fecharModalBloquear=function(){document.getElementById('modalBloquear').classList.add('hidden');emailBloquearAtual='';}
 window.confirmarBloqueio=async function(tipo){let ref=doc(db,"revende_users",emailToId(emailBloquearAtual));if(tipo==='teste'){await setDoc(ref,{planoLiberado:false,bloqueado:false,planoTipo:'',planoValidade:null,inicio:Date.now()},{merge:true});alert('🎁 '+nomeBloquearAtual+' voltou para 7 dias grátis!');}else{await setDoc(ref,{planoLiberado:false,bloqueado:true,planoTipo:'',planoValidade:null},{merge:true});alert('🔒 '+nomeBloquearAtual+' bloqueada! App dela fica só na página de Planos.');}fecharModalBloquear();await listarClientesAdmin(); if(revendedoraDetalheEmail===emailBloquearAtual){ await abrirDetalheRevendedora(emailBloquearAtual); }}
 window.bloquearClienteAdmin=async function(email){let snap=await getDoc(doc(db,"revende_users",emailToId(email)));let nome=snap.exists()?snap.data().nome:email;abrirModalBloquear(email,nome);}
 window.verComoRevendedora=async function(email){let snap=await getDoc(doc(db,"revende_users",emailToId(email)));if(!snap.exists()) return;if(!adminOriginal){let a=await getDoc(doc(db,"revende_users",emailToId(EMAIL_ADM))); if(a.exists()) adminOriginal=a.data();}isAdminView=true;usuarioAtual=snap.data();document.getElementById('barraAdmin').classList.remove('hidden');abrirApp(usuarioAtual.nome,usuarioAtual.whats,usuarioAtual.marca);}
-window.gerarCodigoAleatorio=async function(){let t=document.getElementById('tipoCodigoGerador').value;let n=Math.floor(1000+Math.random()*9000);let L='ABCDEFGHJKMNPQRSTUVWXYZ';let l1=L[Math.floor(Math.random()*L.length)];let l2=L[Math.floor(Math.random()*L.length)];codigoAleatorioAtual=t+'-'+n+l1+l2;codigoTipoAtual=t;document.getElementById('codigoAleatorioTxt').innerText=codigoAleatorioAtual;document.getElementById('boxCodigoAleatorio').style.display='block';await setDoc(doc(db,"revende_codigos",codigoAleatorioAtual),{codigo:codigoAleatorioAtual,tipo:t,criadoEm:Date.now()});}
+window.gerarCodigoAleatorio=async function(){let t=document.getElementById('tipoCodigoGerador').value;codigoAleatorioAtual=gerarCodigoPlano(t);codigoTipoAtual=t;document.getElementById('codigoAleatorioTxt').innerText=codigoAleatorioAtual;document.getElementById('boxCodigoAleatorio').style.display='block';await setDoc(doc(db,"revende_codigos",codigoAleatorioAtual),{codigo:codigoAleatorioAtual,tipo:t,criadoEm:Date.now()});}
 window.copiarCodigoAleatorio=function(){copiarTexto(codigoAleatorioAtual,'✅ Código copiado: '+codigoAleatorioAtual);}
-window.mandarCodigoWhatsGerador=function(){let whats=document.getElementById('whatsCodigoGerador').value.trim();if(!codigoAleatorioAtual){alert('Gere o código primeiro!');return;}if(!whats){alert('Digite o WhatsApp da cliente lá em cima!');document.getElementById('whatsCodigoGerador').focus();return;}let valor=codigoTipoAtual==='VITALICIO'?'R$ 450':codigoTipoAtual==='ANUAL'?'R$ 190':'R$ 19,90';let msg='Oi! 💄 Tudo bem? Aqui é o RevendePro!\n\n🔓 Seu código de liberação:\n⭐ '+codigoAleatorioAtual+'\n📦 Plano: '+codigoTipoAtual+' - '+valor+'\n\n👉 Abra o app > Planos > Digite o código > LIBERAR\n\nQualquer dúvida chama aqui! 💖';window.open('https://wa.me/55'+whats.replace(/\D/g,'')+'?text='+encodeURIComponent(msg),'_blank');}
-window.gerarEMandarCodigo=async function(email,whats,nome){let t=document.getElementById('tipoCodigoGerador')?document.getElementById('tipoCodigoGerador').value:'MENSAL';let n=Math.floor(1000+Math.random()*9000);let L='ABCDEFGHJKMNPQRSTUVWXYZ';let l1=L[Math.floor(Math.random()*L.length)];let l2=L[Math.floor(Math.random()*L.length)];let cod=t+'-'+n+l1+l2;codigoAleatorioAtual=cod;codigoTipoAtual=t;document.getElementById('codigoAleatorioTxt').innerText=cod;document.getElementById('boxCodigoAleatorio').style.display='block';await setDoc(doc(db,"revende_codigos",cod),{codigo:cod,tipo:t,criadoEm:Date.now()});if(!whats){alert('Código gerado: '+cod+' - Mas essa cliente não tem WhatsApp cadastrado!');return;}let valor=t==='VITALICIO'?'R$ 450':t==='ANUAL'?'R$ 190':'R$ 19,90';let msg='Oi '+nome+'! 💄 Tudo bem? Aqui é o RevendePro!\n\n🔓 Seu código de liberação:\n⭐ '+cod+'\n📦 Plano: '+t+' - '+valor+'\n\n👉 Abra o app > Planos > Digite o código > LIBERAR\n\nQualquer dúvida chama aqui! 💖';window.open('https://wa.me/55'+whats.replace(/\D/g,'')+'?text='+encodeURIComponent(msg),'_blank');}
+window.mandarCodigoWhatsGerador=function(){let whats=document.getElementById('whatsCodigoGerador').value.trim();if(!codigoAleatorioAtual){alert('Gere o código primeiro!');return;}if(!whats){alert('Digite o WhatsApp da cliente lá em cima!');document.getElementById('whatsCodigoGerador').focus();return;}let valor=fmt(valorEstimadoPlano(codigoTipoAtual));let msg='Oi! 💄 Tudo bem? Aqui é o RevendePro!\n\n🔓 Seu código de liberação:\n⭐ '+codigoAleatorioAtual+'\n📦 Plano: '+codigoTipoAtual+' - '+valor+'\n\n👉 Abra o app > Planos > Digite o código > LIBERAR\n\nQualquer dúvida chama aqui! 💖';window.open('https://wa.me/55'+whats.replace(/\D/g,'')+'?text='+encodeURIComponent(msg),'_blank');}
+window.gerarEMandarCodigo=async function(email,whats,nome){let t=document.getElementById('tipoCodigoGerador')?document.getElementById('tipoCodigoGerador').value:'MENSAL';let cod=gerarCodigoPlano(t);codigoAleatorioAtual=cod;codigoTipoAtual=t;document.getElementById('codigoAleatorioTxt').innerText=cod;document.getElementById('boxCodigoAleatorio').style.display='block';await setDoc(doc(db,"revende_codigos",cod),{codigo:cod,tipo:t,criadoEm:Date.now()});if(!whats){alert('Código gerado: '+cod+' - Mas essa cliente não tem WhatsApp cadastrado!');return;}let valor=fmt(valorEstimadoPlano(t));let msg='Oi '+nome+'! 💄 Tudo bem? Aqui é o RevendePro!\n\n🔓 Seu código de liberação:\n⭐ '+cod+'\n📦 Plano: '+t+' - '+valor+'\n\n👉 Abra o app > Planos > Digite o código > LIBERAR\n\nQualquer dúvida chama aqui! 💖';window.open('https://wa.me/55'+whats.replace(/\D/g,'')+'?text='+encodeURIComponent(msg),'_blank');}
 window.verificarSouEu=async function(){let e=document.getElementById('esqEmail').value.trim().toLowerCase();let w=document.getElementById('esqWhats').value.trim();if(!e||!w){document.getElementById('msgEsqVerificar').innerText='Digite e-mail e WhatsApp';return;}let snap=await getDoc(doc(db,"revende_users",emailToId(e)));if(!snap.exists()){document.getElementById('msgEsqVerificar').innerText='❌ E-mail não encontrado. Confere o e-mail do cadastro.';return;}let dados=snap.data();let whatsBanco=(dados.whats||'').replace(/\D/g,'');let whatsDigitado=w.replace(/\D/g,'');if(whatsBanco!==whatsDigitado){document.getElementById('msgEsqVerificar').innerText='❌ WhatsApp não bate com o do cadastro. Tenta de novo!';return;}emailRecuperacao=e;document.getElementById('msgEsqVerificar').innerText='';document.getElementById('esqNomeConfirm').innerText=dados.nome;document.getElementById('boxNovaSenha').classList.remove('hidden');alert('✅ É você mesmo, '+dados.nome+'! Agora cria sua senha nova.');}
 window.salvarNovaSenha=async function(){let s=document.getElementById('esqNovaSenha').value;let sc=document.getElementById('esqNovaSenhaConfirm').value;if(!s||!sc){document.getElementById('msgEsqSenha').innerText='Preencha as 2 senhas';return;}if(s!==sc){document.getElementById('msgEsqSenha').innerText='❌ As senhas não são iguais!';return;}if(s.length<4){document.getElementById('msgEsqSenha').innerText='❌ Senha mínimo 4 caracteres';return;}if(!emailRecuperacao){document.getElementById('msgEsqSenha').innerText='Confirma primeiro que é você lá em cima';return;}await setDoc(doc(db,"revende_users",emailToId(emailRecuperacao)),{senha:s},{merge:true});alert('✅ Senha trocada! Agora entra com a senha nova.');document.getElementById('esqEmail').value='';document.getElementById('esqWhats').value='';document.getElementById('esqNovaSenha').value='';document.getElementById('esqNovaSenhaConfirm').value='';document.getElementById('boxNovaSenha').classList.add('hidden');emailRecuperacao='';mostrar('telaLogin');}
-window.criarConta=async function(){let n=document.getElementById('cadNome').value.trim(),w=document.getElementById('cadWhats').value.trim(),e=document.getElementById('cadEmail').value.trim().toLowerCase(),s=document.getElementById('cadSenha').value,sc=document.getElementById('cadSenhaConfirm').value,m=document.getElementById('cadMarca').value;if(!n||!w||!e||!s||!sc){document.getElementById('msgCad').innerText='Preencha tudo, incluindo confirmar senha';return}if(s!==sc){document.getElementById('msgCad').innerText='❌ As senhas não são iguais!';document.getElementById('msgSenhaConfirm').innerText='❌ Senhas diferentes';document.getElementById('msgSenhaConfirm').style.color='red';document.getElementById('cadSenhaConfirm').style.border='2px solid red';return}if(s.length<4){document.getElementById('msgCad').innerText='❌ Senha muito curta! Mínimo 4 caracteres.';return}document.getElementById('msgCad').innerText='';document.getElementById('msgSenhaConfirm').innerText='✅ Senhas iguais!';document.getElementById('msgSenhaConfirm').style.color='green';let novo={nome:n,whats:w,email:e,senha:s,marca:m,inicio:Date.now(),planoLiberado:false,bloqueado:false,planoEscolhido:'',planoTipo:'',planoValidade:null};await setDoc(doc(db,"revende_users",emailToId(e)),novo,{merge:true});usuarioAtual=novo;localStorage.setItem('revende_user',JSON.stringify({email:e}));document.getElementById('cadSenhaConfirm').value='';alert('✅ Conta criada! 7 dias grátis!');abrirApp(n,w,m)}
-window.fazerLogin=async function(){let e=document.getElementById('loginEmail').value.trim().toLowerCase(),s=document.getElementById('loginSenha').value;let snap=await getDoc(doc(db,"revende_users",emailToId(e)));if(!snap.exists()||snap.data().senha!==s){document.getElementById('msgLogin').innerText='E-mail ou senha errados';return}usuarioAtual=snap.data();isAdminView=false;document.getElementById('barraAdmin').classList.add('hidden');if(estaBloqueado(usuarioAtual)){if(planoVencido(usuarioAtual) && !usuarioAtual.bloqueado){await setDoc(doc(db,"revende_users",emailToId(e)),{planoLiberado:false},{merge:true});}document.getElementById('nomePlano').innerText=usuarioAtual.nome;mostrar('telaPlanos');alert(usuarioAtual.bloqueado?'🔒 Sua conta está bloqueada! Renove seu plano.':'⏳ Seu plano / teste venceu! Renove para continuar.');return;}localStorage.setItem('revende_user',JSON.stringify({email:e}));abrirApp(usuarioAtual.nome,usuarioAtual.whats,usuarioAtual.marca)}
+window.aceitarTermosECriarConta=async function(){
+  let aceitou=document.getElementById('aceiteTermos').checked;
+  if(!aceitou){
+    document.getElementById('msgCad').innerText='❌ Marque o aceite dos Termos e Privacidade para criar sua conta.';
+    return;
+  }
+  await window.criarConta();
+}
+window.criarConta=async function(){let n=document.getElementById('cadNome').value.trim(),w=document.getElementById('cadWhats').value.trim(),e=document.getElementById('cadEmail').value.trim().toLowerCase(),s=document.getElementById('cadSenha').value,sc=document.getElementById('cadSenhaConfirm').value,m=document.getElementById('cadMarca').value,aceitou=document.getElementById('aceiteTermos').checked;if(!n||!w||!e||!s||!sc){document.getElementById('msgCad').innerText='Preencha tudo, incluindo confirmar senha';return}if(!aceitou){document.getElementById('msgCad').innerText='❌ Aceite os Termos e Privacidade para continuar';return}if(s!==sc){document.getElementById('msgCad').innerText='❌ As senhas não são iguais!';document.getElementById('msgSenhaConfirm').innerText='❌ Senhas diferentes';document.getElementById('msgSenhaConfirm').style.color='red';document.getElementById('cadSenhaConfirm').style.border='2px solid red';return}if(s.length<4){document.getElementById('msgCad').innerText='❌ Senha muito curta! Mínimo 4 caracteres.';return}document.getElementById('msgCad').innerText='';document.getElementById('msgSenhaConfirm').innerText='✅ Senhas iguais!';document.getElementById('msgSenhaConfirm').style.color='green';let novo={nome:n,whats:w,email:e,senha:s,marca:m,termosAceitos:true,dataAceiteTermos:Date.now(),inicio:Date.now(),planoLiberado:false,bloqueado:false,planoEscolhido:'',planoTipo:'',planoValidade:null};await setDoc(doc(db,"revende_users",emailToId(e)),novo,{merge:true});usuarioAtual=novo;localStorage.setItem('revende_user',JSON.stringify({email:e}));document.getElementById('cadSenhaConfirm').value='';document.getElementById('aceiteTermos').checked=false;alert('✅ Termos aceitos e conta criada! 7 dias grátis!');abrirApp(n,w,m)}
+window.fazerLogin=async function(){let e=document.getElementById('loginEmail').value.trim().toLowerCase(),s=document.getElementById('loginSenha').value;let snap=await getDoc(doc(db,"revende_users",emailToId(e)));if(!snap.exists()||snap.data().senha!==s){document.getElementById('msgLogin').innerText='E-mail ou senha errados';return}usuarioAtual=snap.data();isAdminView=false;document.getElementById('barraAdmin').classList.add('hidden');if(estaBloqueado(usuarioAtual)){if(planoVencido(usuarioAtual) && !usuarioAtual.bloqueado){await setDoc(doc(db,"revende_users",emailToId(e)),{planoLiberado:false},{merge:true});}document.getElementById('nomePlano').innerText=usuarioAtual.nome;renderizarPlanosNasTelas();mostrar('telaPlanos');alert(usuarioAtual.bloqueado?'🔒 Sua conta está bloqueada! Renove seu plano.':'⏳ Seu plano / teste venceu! Renove para continuar.');return;}localStorage.setItem('revende_user',JSON.stringify({email:e}));abrirApp(usuarioAtual.nome,usuarioAtual.whats,usuarioAtual.marca)}
 window.sair=function(){localStorage.removeItem('revende_user');usuarioAtual=null;isAdminView=false;adminOriginal=null;document.getElementById('barraAdmin').classList.add('hidden');mostrar('telaHome')}
-window.abrirPlanosApp=function(){document.getElementById('nomePlano').innerText=usuarioAtual.nome;mostrar('telaPlanos')}
-window.abrirPagamentoPlano=function(tipo){planoPagamentoAtual=tipo;let p=PLANOS[tipo];if(!p) return;if(usuarioAtual){usuarioAtual.planoEscolhido=p.nome}document.getElementById('tituloPagamentoPlano').innerText='Pagamento - '+p.nome;document.getElementById('subPagamentoPlano').innerText='Você escolheu: '+p.nome;document.getElementById('valorPagamentoPlano').innerText=p.valor;document.getElementById('validadePagamentoPlano').innerText=p.validadeTxt;document.getElementById('codigoPixPlano').innerText=p.pix;document.getElementById('msgPixPlano').innerText='';mostrar('telaPagamentoPlano')}
+window.abrirPlanosApp=function(){document.getElementById('nomePlano').innerText=usuarioAtual.nome;renderizarPlanosNasTelas();mostrar('telaPlanos')}
+window.abrirPagamentoPlano=async function(tipo){
+  planoPagamentoAtual=tipo;
+  let p=PLANOS[tipo]; if(!p) return;
+  pagamentoIdAtual = gerarPagamentoId(p.tipo);
+  document.getElementById('tituloPagamentoPlano').innerText='Pagamento - '+p.nome;
+  document.getElementById('subPagamentoPlano').innerText='Você escolheu: '+p.nome;
+  document.getElementById('valorPagamentoPlano').innerText=p.valor;
+  document.getElementById('validadePagamentoPlano').innerText=p.validadeTxt;
+  document.getElementById('refPagamentoPlano').innerText=pagamentoIdAtual;
+  document.getElementById('statusPagamentoPlano').innerText='PENDENTE';
+  document.getElementById('codigoPixPlano').innerText=p.pix;
+  document.getElementById('msgPixPlano').innerText='Gerando cobrança PIX via Mercado Pago + Make + Firestore...';
+  mostrar('telaPagamentoPlano');
+  if(usuarioAtual){
+    let userDocId = emailToId(usuarioAtual.email);
+    usuarioAtual.planoEscolhido=p.nome;
+    try{
+      await setDoc(doc(db,"revende_users",userDocId),{planoEscolhido:p.nome,ultimoPagamentoId:pagamentoIdAtual},{merge:true});
+      await setDoc(doc(db,"revende_pagamentos",pagamentoIdAtual),{
+        pagamentoId:pagamentoIdAtual,
+        userDocId:userDocId,
+        email:usuarioAtual.email,
+        nome:usuarioAtual.nome,
+        whats:usuarioAtual.whats||'',
+        planoTipo:p.tipo,
+        planoNome:p.nome,
+        valor:p.valor,
+        valorNum:p.valorNum,
+        dias:p.dias,
+        status:'PENDENTE',
+        criadoEm:Date.now()
+      },{merge:true});
+    }catch(e){}
+    if(MAKE_CRIAR_PIX_URL && !MAKE_CRIAR_PIX_URL.includes('...')){
+      try{
+        let resp=await fetch(MAKE_CRIAR_PIX_URL,{
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({
+            evento:'GERAR_PIX_MERCADO_PAGO',
+            pagamentoId:pagamentoIdAtual,
+            userDocId:userDocId,
+            email:usuarioAtual.email,
+            nome:usuarioAtual.nome,
+            whats:usuarioAtual.whats||'',
+            planoTipo:p.tipo,
+            planoNome:p.nome,
+            valor:p.valor,
+            valorNum:p.valorNum,
+            dias:p.dias,
+            criadoEm:Date.now()
+          })
+        });
+        let data=await resp.json().catch(()=>({}));
+        let pixGerado=extrairPixResposta(data);
+        if(pixGerado){
+          document.getElementById('codigoPixPlano').innerText=pixGerado;
+          document.getElementById('msgPixPlano').innerText='✅ PIX gerado no Mercado Pago. Pague e clique em CONSULTAR STATUS DO PLANO.';
+          return;
+        }
+      }catch(e){}
+    }
+    document.getElementById('msgPixPlano').innerText='Aguardando confirmação do PIX via Mercado Pago + Make + Firestore.';
+  }
+}
 window.copiarPixPlano=function(){copiarTexto(document.getElementById('codigoPixPlano').innerText,'✅ Código PIX copiado! Agora cola no seu banco!');}
-window.jaPagueiPlano=async function(){let u=usuarioAtual;let p=PLANOS[planoPagamentoAtual];let planoTxt=p?p.nome:planoPagamentoAtual;let msg='💄 NOVO PAGAMENTO - RevendePro\n\n📦 Plano: '+planoTxt+'\n👤 Nome: '+u.nome+'\n📱 WhatsApp: '+u.whats+'\n📧 E-mail: '+u.email+'\n🏷️ Marca: '+(u.marca||'-')+'\n\n✅ Já fiz o PIX! Segue o comprovante:';window.open('https://wa.me/5515997643116?text='+encodeURIComponent(msg),'_blank');alert('✅ WhatsApp aberto! Anexa o comprovante e envia!')}
-window.liberarComCodigo=async function(){let cod=document.getElementById('codigoPlanoInput').value.trim().toUpperCase();if(!cod){document.getElementById('msgPlano').innerText='Digite o código';return}let snap=await getDocs(collection(db,"revende_codigos"));let ach=null;snap.forEach(d=>{if(d.data().codigo===cod) ach=d.data()});if(!ach){document.getElementById('msgPlano').innerText='Código errado';return}let dias=ach.tipo==='VITALICIO'?0:ach.tipo==='ANUAL'?365:30;usuarioAtual.planoLiberado=true;usuarioAtual.bloqueado=false;usuarioAtual.planoTipo=ach.tipo||'MENSAL';if(ach.tipo==='VITALICIO') usuarioAtual.planoValidade=null; else usuarioAtual.planoValidade=Date.now()+dias*24*60*60*1000;await setDoc(doc(db,"revende_users",emailToId(usuarioAtual.email)),usuarioAtual,{merge:true});alert('🔓 Liberado '+ach.tipo+'!');location.reload()}
+window.verificarStatusPagamentoNoFirestore=async function(){
+  if(!usuarioAtual){mostrar('telaLogin');return;}
+  let msgEl=document.getElementById('msgPixPlano');
+  msgEl.innerText='🔄 Consultando status no Firestore...';
+  try{
+    let userSnap=await getDoc(doc(db,"revende_users",emailToId(usuarioAtual.email)));
+    let paySnap=pagamentoIdAtual ? await getDoc(doc(db,"revende_pagamentos",pagamentoIdAtual)) : null;
+    let payData = paySnap && paySnap.exists() ? paySnap.data() : null;
+    if(userSnap.exists()){
+      let dadosUser=userSnap.data();
+      let planoAtivoNoBanco = temPlanoPagoAtivo(dadosUser);
+      if(planoAtivoNoBanco || (payData && payData.status==='PAGO')){
+        usuarioAtual=dadosUser;
+        document.getElementById('statusPagamentoPlano').innerText='PAGO';
+        msgEl.innerText='✅ Pagamento confirmado no Firestore! Liberando seu plano...';
+        alert('✅ Pagamento confirmado! Seu plano '+(dadosUser.planoTipo||'')+' foi liberado.');
+        abrirApp(usuarioAtual.nome,usuarioAtual.whats,usuarioAtual.marca);
+        return;
+      }
+    }
+    let stTxt = payData && payData.status ? payData.status : 'PENDENTE';
+    document.getElementById('statusPagamentoPlano').innerText=stTxt;
+    msgEl.innerText='⏳ Ainda não consta como PAGO no Firestore (status atual: '+stTxt+'). Após o PIX cair e o Make atualizar o banco, clique novamente ou envie o comprovante no WhatsApp.';
+    alert('⏳ Status atual no Firestore: '+stTxt+'. Assim que o Make confirmar o pagamento no banco, seu acesso será liberado.');
+  }catch(e){
+    msgEl.innerText='❌ Erro ao consultar o Firestore. Tente novamente em instantes.';
+  }
+}
+window.jaPagueiPlano=async function(){let u=usuarioAtual;let p=PLANOS[planoPagamentoAtual];let planoTxt=p?p.nome:planoPagamentoAtual;let msg='💄 NOVO PAGAMENTO - RevendePro\n\n📦 Plano: '+planoTxt+'\n🆔 Ref: '+(pagamentoIdAtual||'-')+'\n👤 Nome: '+u.nome+'\n📱 WhatsApp: '+u.whats+'\n📧 E-mail: '+u.email+'\n🏷️ Marca: '+(u.marca||'-')+'\n\n✅ Já fiz o PIX! Segue o comprovante:';window.open('https://wa.me/'+FONE_SUPORTE_WA+'?text='+encodeURIComponent(msg),'_blank');alert('✅ WhatsApp ('+FONE_SUPORTE_EXIBICAO+') aberto! Anexa o comprovante e envia!')}
+window.liberarComCodigo=async function(){let cod=document.getElementById('codigoPlanoInput').value.trim().toUpperCase();if(!cod){document.getElementById('msgPlano').innerText='Digite o código';return}let snap=await getDocs(collection(db,"revende_codigos"));let ach=null;snap.forEach(d=>{if(d.data().codigo===cod) ach=d.data()});if(!ach){document.getElementById('msgPlano').innerText='Código errado';return}let planoCfg = Object.values(PLANOS).find(x=>x.tipo===ach.tipo);let dias = ach.tipo==='VITALICIO'?0:(planoCfg ? planoCfg.dias : (ach.tipo==='ANUAL'?365:ach.tipo==='TESTE1REAL'?1:30));usuarioAtual.planoLiberado=true;usuarioAtual.bloqueado=false;usuarioAtual.planoTipo=ach.tipo||'MENSAL';if(ach.tipo==='VITALICIO') usuarioAtual.planoValidade=null; else usuarioAtual.planoValidade=Date.now()+dias*24*60*60*1000;await setDoc(doc(db,"revende_users",emailToId(usuarioAtual.email)),usuarioAtual,{merge:true});alert('🔓 Liberado '+ach.tipo+'!');location.reload()}
 
-// ===== CATÁLOGOS - DIRETO P/ COMPARTILHAR, SEM ESCOLHER CLIENTE =====
 function catKey(){ return 'revende_catalogos_'+(usuarioAtual?emailToId(usuarioAtual.email):'geral'); }
 function catEnviosKey(){ return 'revende_envios_'+(usuarioAtual?emailToId(usuarioAtual.email):'geral'); }
 async function carregarCatalogos(){
@@ -259,6 +1343,11 @@ async function carregarCatalogos(){
   listarCatalogos();
 }
 window.salvarCatalogo=async function(){
+  if(emPlanoGratis(usuarioAtual) && catalogos.length>=LIMITES_GRATIS.catalogos){
+    alert('🆓 No Plano Grátis o limite é de '+LIMITES_GRATIS.catalogos+' catálogos. Assine um plano para adicionar mais!');
+    mostrarSecao('secPlanoApp');
+    return;
+  }
   let nome=document.getElementById('cat-nome').value.trim();
   let marca=document.getElementById('cat-marca').value.trim()||'Geral';
   let link=document.getElementById('cat-link').value.trim();
@@ -287,14 +1376,13 @@ window.listarCatalogos=function(){
   document.getElementById('totalCat').innerText=catalogos.length;
   document.getElementById('totalEnviosCat').innerText=envios;
   let filtrados=catalogos.filter(c=>(c.nome+' '+c.marca).toLowerCase().includes(busca));
-  if(filtrados.length===0){div.innerHTML='<div class="box" style="text-align:center"><div style="font-size:40px">📚</div><b>Nenhum catálogo ainda</b><br><small>Adicione o primeiro acima!<br>Ex: Natura Ciclo 12</small></div>';return;}
+  if(filtrados.length===0){div.innerHTML='<div class="box" style="text-align:center"><div style="font-size:36px">📚</div><b>Nenhum catálogo ainda</b><br><small>Adicione o primeiro acima!<br>Ex: Natura Ciclo 12</small></div>';return;}
   div.innerHTML=filtrados.map(c=>{
     let emoji='💄'; if(c.marca.toLowerCase().includes('natura')) emoji='🌿'; if(c.marca.toLowerCase().includes('avon')) emoji='💋'; if(c.marca.toLowerCase().includes('botic')) emoji='🌸';
     let tipoTxt = c.tipo==='arquivo' ? '📎 PDF - vai junto no Compartilhar' : '🔗 Link - vai direto no Compartilhar';
-    return '<div class="cat"><div class="cat-top"><div class="cat-icon">'+emoji+'</div><div style="flex:1"><b>'+c.nome+'</b><br><small style="color:#888">'+c.marca+' • '+c.data+'</small><br><small style="color:#16a34a;font-weight:bold">'+tipoTxt+'</small><br><span class="badge badge-green">✅ PRONTO PARA ENVIAR</span></div></div><div class="linha"><button class="small green" style="background:#25D366" onclick="enviarCatalogoWhats(\''+c._id+'\')">🟢 Enviar no WhatsApp</button><button class="small" style="background:#111" onclick="baixarCatalogo(\''+c._id+'\')">⬇ Baixar</button></div><div class="linha"><button class="small gray" onclick="copiarLinkCatalogo(\''+c._id+'\')">📋 Copiar Link</button><button class="small red" onclick="excluirCatalogo(\''+c._id+'\')">🗑️ Excluir</button></div></div>';
+    return '<div class="cat"><div class="cat-top"><div class="cat-icon">'+emoji+'</div><div style="flex:1"><b>'+c.nome+'</b><br><small style="color:#71717a">'+c.marca+' • '+c.data+'</small><br><small style="color:#16a34a;font-weight:600">'+tipoTxt+'</small><br><span class="badge badge-green">✅ PRONTO PARA ENVIAR</span></div></div><div class="linha"><button class="small green" style="background:#25D366" onclick="enviarCatalogoWhats(\''+c._id+'\')">🟢 Enviar no WhatsApp</button><button class="small" style="background:#18181b" onclick="baixarCatalogo(\''+c._id+'\')">⬇ Baixar</button></div><div class="linha"><button class="small gray" onclick="copiarLinkCatalogo(\''+c._id+'\')">📋 Copiar Link</button><button class="small red" onclick="excluirCatalogo(\''+c._id+'\')">🗑️ Excluir</button></div></div>';
   }).join('');
 }
-// *** NOVO - CLICOU EM ENVIAR -> VAI DIRETO P/ COMPARTILHAR, SEM LISTA DE CLIENTE ***
 window.enviarCatalogoWhats = async function(id){
   let c = catalogos.find(x=>x._id===id);
   if(!c) return;
@@ -304,7 +1392,6 @@ window.enviarCatalogoWhats = async function(id){
 
   let texto = 'Oi! 💖 Olha o catálogo novo que chegou: *'+c.nome+'* - '+c.marca+'\n\nMe fala o que você gostou que eu já separo pra você! 😍';
 
-  // SE FOR LINK (Drive / Canva) -> COMPARTILHA O TEXTO COM LINK
   if(c.tipo !== 'arquivo' && !(c.link||'').startsWith('data:')){
     let msgFinal = 'Oi! 💖 Olha o catálogo novo que chegou: *'+c.nome+'* - '+c.marca+'\n\n👉 '+c.link+'\n\nMe fala o que você gostou que eu já separo pra você! 😍';
     try{
@@ -313,13 +1400,11 @@ window.enviarCatalogoWhats = async function(id){
         return;
       }
     }catch(e){}
-    // Se não tiver compartilhar, copia e abre WhatsApp
     copiarTexto(msgFinal,'📋 Mensagem copiada! Agora escolhe a cliente no WhatsApp!');
     window.open('https://wa.me/?text='+encodeURIComponent(msgFinal),'_blank');
     return;
   }
 
-  // SE FOR PDF QUE ELA SUBIU -> COMPARTILHA O PDF JUNTO!
   try{
     let res = await fetch(c.link);
     let blob = await res.blob();
@@ -360,25 +1445,26 @@ window.excluirCatalogo=async function(id){
   await carregarCatalogos();
 }
 
-window.toggleFormCliente=function(){let f=document.getElementById('formCliente');if(!f.classList.contains('hidden')){fecharFormCliente();return;}editandoClienteId=null;document.getElementById('tituloFormCliente').innerText='➕ Nova Cliente';f.classList.remove('hidden');}
+window.toggleFormCliente=function(){let f=document.getElementById('formCliente');if(!f.classList.contains('hidden')){fecharFormCliente();return;}if(!editandoClienteId && emPlanoGratis(usuarioAtual) && clientes.length>=LIMITES_GRATIS.clientes){alert('🆓 No Plano Grátis o limite é de '+LIMITES_GRATIS.clientes+' clientes. Assine um plano para cadastrar mais!');mostrarSecao('secPlanoApp');return;}editandoClienteId=null;document.getElementById('tituloFormCliente').innerText='➕ Nova Cliente';f.classList.remove('hidden');}
 window.fecharFormCliente=function(){editandoClienteId=null;document.getElementById('nNome').value='';document.getElementById('nFone').value='';document.getElementById('nEnd').value='';document.getElementById('formCliente').classList.add('hidden');}
-window.adicionarCliente=async function(){let n=document.getElementById('nNome').value.trim(),f=document.getElementById('nFone').value.trim(),e=document.getElementById('nEnd').value.trim();if(!n||!f){alert('Nome e WhatsApp são obrigatórios');return}if(editandoClienteId){await updateDoc(doc(db,"revende_users",emailToId(usuarioAtual.email),"clientes",editandoClienteId),{nome:n,fone:f,end:e});alert('✅ Cliente atualizada!');}else{await addDoc(collection(db,"revende_users",emailToId(usuarioAtual.email),"clientes"),{nome:n,fone:f,end:e,criadoEm:Date.now()});alert('✅ Cliente salva!');}fecharFormCliente();await carregar();mostrarSecao('secClientes');}
+window.adicionarCliente=async function(){if(!editandoClienteId && emPlanoGratis(usuarioAtual) && clientes.length>=LIMITES_GRATIS.clientes){alert('🆓 No Plano Grátis o limite é de '+LIMITES_GRATIS.clientes+' clientes. Assine um plano para cadastrar mais!');mostrarSecao('secPlanoApp');return;}let n=document.getElementById('nNome').value.trim(),f=document.getElementById('nFone').value.trim(),e=document.getElementById('nEnd').value.trim();if(!n||!f){alert('Nome e WhatsApp são obrigatórios');return}if(editandoClienteId){await updateDoc(doc(db,"revende_users",emailToId(usuarioAtual.email),"clientes",editandoClienteId),{nome:n,fone:f,end:e});alert('✅ Cliente atualizada!');}else{await addDoc(collection(db,"revende_users",emailToId(usuarioAtual.email),"clientes"),{nome:n,fone:f,end:e,criadoEm:Date.now()});alert('✅ Cliente salva!');}fecharFormCliente();await carregar();mostrarSecao('secClientes');}
 window.abrirDetalheCliente=function(id){let c=clientes.find(x=>x._id===id);if(!c) return;clienteDetalheId=id;document.getElementById('detNomeCliente').innerText=c.nome;document.getElementById('detSubCliente').innerText='Cliente desde '+(c.criadoEm?new Date(c.criadoEm).toLocaleDateString('pt-BR'):'-');document.getElementById('detInfoCliente').innerHTML='<b>👤 Nome completo:</b> '+c.nome+'<br><b>📱 WhatsApp:</b> '+c.fone+'<br><b>📍 Endereço / Bairro:</b> '+(c.end||'Não informado')+'<br><b>📅 Cliente desde:</b> '+(c.criadoEm?new Date(c.criadoEm).toLocaleDateString('pt-BR'):'-')+'<br><b>🏷️ Sua marca:</b> '+(usuarioAtual.marca||'-')+'<br><b>🆔 Código:</b> '+c._id;let meus=pedidos.filter(p=>p.clienteId===id);let total=meus.reduce((s,p)=>s+(parseFloat(p.valor)||0),0);let pago=meus.filter(p=>p.pag==='pago').reduce((s,p)=>s+(parseFloat(p.valor)||0),0);let dev=total-pago;document.getElementById('detTotalCliente').innerText=fmt(total);document.getElementById('detPagoCliente').innerText=fmt(pago);document.getElementById('detDevendoCliente').innerText=fmt(dev);document.getElementById('detQtdPedidos').innerText=meus.length;let html='';[...meus].reverse().forEach(p=>{html+='<div class="pedido"><b>💄 '+p.produto+'</b> - <span class="'+(p.pag==='pago'?'badge-green':'badge-red')+'">'+(p.pag==='pago'?'✅ PAGO':'💸 DEVENDO')+'</span><br><small>💰 '+fmt(p.valor)+' | 🔢 '+(p.parcelas||'1x')+'</small><br><small>📅 Entrega: '+fmtDataBR(p.dataEntrega)+' | 💰 Pagamento: '+fmtDataBR(p.dataPagamento)+'</small><br><small>📝 '+(p.obs||'Sem obs')+'</small><br><div class="linha"><button class="small green" onclick="togglePagPedido(\''+p._id+'\');abrirDetalheCliente(\''+id+'\')">'+(p.pag==='pago'?'Marcar Devendo':'Marcar Pago')+'</button><button class="small orange" onclick="cobrarCliente(\''+p.clienteFone+'\',\''+p.clienteNome+'\',\''+p.valor+'\',\''+p.produto+'\')">💰 Cobrar</button></div></div>';});document.getElementById('detPedidosCliente').innerHTML=html||'<p>Nenhum pedido ainda.</p>';mostrarSecao('secDetalheCliente');}
 window.whatsClienteDetalhe=function(){let c=clientes.find(x=>x._id===clienteDetalheId);if(!c) return;window.open('https://wa.me/55'+c.fone.replace(/\D/g,'')+'?text='+encodeURIComponent('Oi '+c.nome+'! 💄 Tudo bem?'),'_blank');}
 window.cobrarClienteDetalhe=function(){let c=clientes.find(x=>x._id===clienteDetalheId);if(!c) return;let dev=pedidos.filter(p=>p.clienteId===clienteDetalheId&&p.pag!=='pago').reduce((s,p)=>s+(parseFloat(p.valor)||0),0);if(dev<=0){alert('Ela não tá devendo nada! ✅');return;}cobrarCliente(c.fone,c.nome,dev,'seus pedidos');}
 window.editarClienteDetalhe=function(){let c=clientes.find(x=>x._id===clienteDetalheId);if(!c) return;editandoClienteId=c._id;document.getElementById('nNome').value=c.nome;document.getElementById('nFone').value=c.fone;document.getElementById('nEnd').value=c.end||'';document.getElementById('tituloFormCliente').innerText='✏️ Editando: '+c.nome;document.getElementById('formCliente').classList.remove('hidden');mostrarSecao('secClientes');}
 window.excluirClienteDetalhe=async function(){if(!confirm('Excluir essa cliente e todos os pedidos dela?')) return;await deleteDoc(doc(db,"revende_users",emailToId(usuarioAtual.email),"clientes",clienteDetalheId));let meus=pedidos.filter(p=>p.clienteId===clienteDetalheId);for(let p of meus){await deleteDoc(doc(db,"revende_users",emailToId(usuarioAtual.email),"pedidos",p._id));}clienteDetalheId=null;await carregar();mostrarSecao('secClientes');alert('Excluída!');}
 async function carregar(){if(!usuarioAtual) return;let s1=await getDocs(collection(db,"revende_users",emailToId(usuarioAtual.email),"clientes"));clientes=[];s1.forEach(d=>{let x=d.data();x._id=d.id;clientes.push(x)});let s2=await getDocs(collection(db,"revende_users",emailToId(usuarioAtual.email),"pedidos"));pedidos=[];s2.forEach(d=>{let x=d.data();x._id=d.id;pedidos.push(x)});await carregarCatalogos();listar()}
-window.salvarPedido=async function(){let cli=document.getElementById('pedCliente').value,prod=document.getElementById('pedProduto').value.trim(),val=parseFloat(document.getElementById('pedValor').value)||0,pag=document.getElementById('pedPag').value,obs=document.getElementById('pedObs').value.trim(),dataEntrega=document.getElementById('pedDataEntrega').value,dataPagamento=document.getElementById('pedDataPagamento').value,parcelas=document.getElementById('pedParcelas').value;if(!cli||!prod||!val){alert('Escolhe cliente, produto e valor');return}let c=clientes.find(x=>x._id===cli);await addDoc(collection(db,"revende_users",emailToId(usuarioAtual.email),"pedidos"),{clienteId:cli,clienteNome:c?c.nome:'',clienteFone:c?c.fone:'',produto:prod,valor:val,pag:pag,obs:obs,dataEntrega:dataEntrega||'',dataPagamento:dataPagamento||'',parcelas:parcelas||'1x',criadoEm:Date.now()});document.getElementById('pedProduto').value='';document.getElementById('pedValor').value='';document.getElementById('pedDataEntrega').value='';document.getElementById('pedDataPagamento').value='';document.getElementById('pedParcelas').value='1x';await carregar();mostrarSecao('secPedidos');alert('✅ Pedido salvo!')}
+window.salvarPedido=async function(){if(emPlanoGratis(usuarioAtual) && pedidos.length>=LIMITES_GRATIS.pedidos){alert('🆓 No Plano Grátis o limite é de '+LIMITES_GRATIS.pedidos+' pedidos. Assine um plano para registrar mais!');mostrarSecao('secPlanoApp');return;}let cli=document.getElementById('pedCliente').value,prod=document.getElementById('pedProduto').value.trim(),val=parseFloat(document.getElementById('pedValor').value)||0,pag=document.getElementById('pedPag').value,obs=document.getElementById('pedObs').value.trim(),dataEntrega=document.getElementById('pedDataEntrega').value,dataPagamento=document.getElementById('pedDataPagamento').value,parcelas=document.getElementById('pedParcelas').value;if(!cli||!prod||!val){alert('Escolhe cliente, produto e valor');return}let c=clientes.find(x=>x._id===cli);await addDoc(collection(db,"revende_users",emailToId(usuarioAtual.email),"pedidos"),{clienteId:cli,clienteNome:c?c.nome:'',clienteFone:c?c.fone:'',produto:prod,valor:val,pag:pag,obs:obs,dataEntrega:dataEntrega||'',dataPagamento:dataPagamento||'',parcelas:parcelas||'1x',criadoEm:Date.now()});document.getElementById('pedProduto').value='';document.getElementById('pedValor').value='';document.getElementById('pedDataEntrega').value='';document.getElementById('pedDataPagamento').value='';document.getElementById('pedParcelas').value='1x';await carregar();mostrarSecao('secPedidos');alert('✅ Pedido salvo!')}
 window.togglePagPedido=async function(id){let p=pedidos.find(x=>x._id===id);await updateDoc(doc(db,"revende_users",emailToId(usuarioAtual.email),"pedidos",id),{pag:p.pag==='pago'?'devendo':'pago'});await carregar()}
 window.excluirPedido=async function(id){if(!confirm('Excluir pedido?'))return;await deleteDoc(doc(db,"revende_users",emailToId(usuarioAtual.email),"pedidos",id));await carregar()}
 window.cobrarCliente=async function(fone,nome,valor,produto){let p=pedidos.find(x=>x.clienteFone===fone&&x.produto===produto);let extra='';if(p){extra='\n📅 Entrega: '+fmtDataBR(p.dataEntrega)+'\n💰 Pagamento: '+fmtDataBR(p.dataPagamento)+'\n🔢 Parcelas: '+(p.parcelas||'1x');}let msg='Oi '+nome+'! 💄 Tudo bem? Passando pra lembrar do seu pedido: '+produto+' - '+fmt(valor)+extra+'\n💸 Consegue acertar pra mim? Obrigada! 💖';window.open('https://wa.me/55'+fone.replace(/\D/g,'')+'?text='+encodeURIComponent(msg),'_blank')}
 window.abrirApp=async function(n,w,m){if(verificarBloqueio()) return;document.getElementById('nomeUser').innerText=n;document.getElementById('whatsUser').innerText=w;document.getElementById('marcaUser').innerText=m;mostrar('telaApp');mostrarSecao('secHomeApp');await carregar()}
-window.atualizarPendentes=function(){let devendo=pedidos.filter(p=>p.pag!=='pago');let total=devendo.reduce((s,p)=>s+(parseFloat(p.valor)||0),0);let clientesDevendo=[...new Set(devendo.map(p=>p.clienteId))].length;document.getElementById('pendenteTotalTxt').innerText=fmt(total);document.getElementById('pendenteQtdTxt').innerText=clientesDevendo;let html='';[...devendo].reverse().forEach(p=>{html+='<div class="pedido" style="border-left:4px solid #f97316"><b>👤 '+p.clienteNome+'</b> - <span class="badge-red">💸 DEVENDO</span><br><small>💄 '+p.produto+' | 💰 '+fmt(p.valor)+' | 🔢 '+(p.parcelas||'1x')+'</small><br><small>📅 Entrega: '+fmtDataBR(p.dataEntrega)+' | 💰 Pagamento: '+fmtDataBR(p.dataPagamento)+'</small><br><div class="linha"><button class="small green" onclick="togglePagPedido(\''+p._id+'\');atualizarPendentes()">✅ Marcar como Pago</button><button class="small orange" onclick="cobrarCliente(\''+p.clienteFone+'\',\''+p.clienteNome+'\',\''+p.valor+'\',\''+p.produto+'\')">💰 Cobrar</button><button class="small" style="background:#db2777" onclick="abrirDetalheCliente(\''+p.clienteId+'\')">👁️ Ver Cliente</button></div></div>';});document.getElementById('listaPendentes').innerHTML=html||'<div class="box" style="text-align:center;background:#f0fdf4"><div style="font-size:40px">🎉</div><b>Ninguém te devendo!</b><br><small>Você recebeu tudo!</small></div>';}
-window.cobrarTodosPendentes=function(){let devendo=pedidos.filter(p=>p.pag!=='pago');if(devendo.length===0){alert('Ninguém devendo! 🎉');return;}let total=devendo.reduce((s,p)=>s+(parseFloat(p.valor)||0),0);if(!confirm('Cobrar '+devendo.length+' pedidos pendentes? Total: '+fmt(total))) return;devendo.forEach((p,i)=>{setTimeout(()=>{let msg='Oi '+p.clienteNome+'! 💄 Lembrete: '+p.produto+' - '+fmt(p.valor)+' | 📅 Entrega: '+fmtDataBR(p.dataEntrega)+' | 💰 Pagamento: '+fmtDataBR(p.dataPagamento)+' | 🔢 '+(p.parcelas||'1x')+'\nConsegue acertar? Obrigada! 💖';window.open('https://wa.me/55'+p.clienteFone.replace(/\D/g,'')+'?text='+encodeURIComponent(msg),'_blank');},i*1200);});}
-function listar(){let busca=(document.getElementById('buscaCliente').value||'').toLowerCase();let total=0,pago=0,dev=0;pedidos.forEach(p=>{total+=parseFloat(p.valor)||0;if(p.pag==='pago')pago+=parseFloat(p.valor)||0;else dev+=parseFloat(p.valor)||0});document.getElementById('kDevendo').innerText=fmt(dev);document.getElementById('kPago').innerText=fmt(pago);document.getElementById('kClientes').innerText=clientes.length;document.getElementById('cxTotal').innerText=fmt(total);document.getElementById('cxPago').innerText=fmt(pago);document.getElementById('cxDevendo').innerText=fmt(dev);let htmlC='';clientes.filter(c=>!busca||c.nome.toLowerCase().includes(busca)).forEach(c=>{let totCliente=pedidos.filter(p=>p.clienteId===c._id).reduce((s,p)=>s+(parseFloat(p.valor)||0),0);let devCliente=pedidos.filter(p=>p.clienteId===c._id&&p.pag!=='pago').reduce((s,p)=>s+(parseFloat(p.valor)||0),0);htmlC+='<div class="cliente" style="cursor:pointer" onclick="abrirDetalheCliente(\''+c._id+'\')"><b>👤 '+c.nome+'</b> <span style="float:right">👁️ Ver tudo ›</span><br><small>📱 '+c.fone+' | 📍 '+(c.end||'-')+'</small><br><small>🛍️ Total: '+fmt(totCliente)+' | 💸 Devendo: <b style="color:red">'+fmt(devCliente)+'</b></small><br><div class="linha"><button class="small green" onclick="event.stopPropagation();cobrarCliente(\''+c.fone+'\',\''+c.nome+'\',\''+devCliente+'\',\'seus pedidos\')">💰 Cobrar</button><button class="small" style="background:#25D366" onclick="event.stopPropagation();window.open(\'https://wa.me/55'+c.fone.replace(/\D/g,'')+'?text='+encodeURIComponent('Oi '+c.nome+'! 💄')+'\')">📱 WhatsApp</button></div></div>'});document.getElementById('listaClientes').innerHTML=htmlC||'<p>Nenhuma cliente ainda.</p>';let sel=document.getElementById('pedCliente');sel.innerHTML='';clientes.forEach(c=>sel.innerHTML+='<option value="'+c._id+'">'+c.nome+'</option>');let htmlP='';[...pedidos].reverse().forEach(p=>{htmlP+='<div class="pedido"><b>👤 '+p.clienteNome+'</b> - <span class="'+(p.pag==='pago'?'badge-green':'badge-red')+'">'+(p.pag==='pago'?'✅ PAGO':'💸 DEVENDO')+'</span><br><small>💄 '+p.produto+' | 💰 '+fmt(p.valor)+' | 🔢 '+(p.parcelas||'1x')+'</small><br><small>📅 Entrega: '+fmtDataBR(p.dataEntrega)+' | 💰 Pagamento: '+fmtDataBR(p.dataPagamento)+'</small><br><small>📝 '+(p.obs||'')+'</small><br><div class="linha"><button class="small green" onclick="togglePagPedido(\''+p._id+'\')">'+(p.pag==='pago'?'Marcar Devendo':'Marcar Pago')+'</button><button class="small orange" onclick="cobrarCliente(\''+p.clienteFone+'\',\''+p.clienteNome+'\',\''+p.valor+'\',\''+p.produto+'\')">💰 Cobrar</button><button class="small red" onclick="excluirPedido(\''+p._id+'\')">🗑️</button></div></div>'});document.getElementById('listaPedidos').innerHTML=htmlP||'<p>Nenhum pedido ainda.</p>';document.getElementById('listaHome').innerHTML=htmlP||'<p>Nenhum pedido ainda.</p>';document.getElementById('listaCaixa').innerHTML=htmlP||'<p>Nada ainda.</p>';if(!document.getElementById('secPendentes').classList.contains('hidden')) atualizarPendentes();}
+window.atualizarPendentes=function(){let devendo=pedidos.filter(p=>p.pag!=='pago');let total=devendo.reduce((s,p)=>s+(parseFloat(p.valor)||0),0);let clientesDevendo=[...new Set(devendo.map(p=>p.clienteId))].length;document.getElementById('pendenteTotalTxt').innerText=fmt(total);document.getElementById('pendenteQtdTxt').innerText=clientesDevendo;let html='';[...devendo].reverse().forEach(p=>{html+='<div class="pedido" style="border-left:4px solid #f97316"><b>👤 '+p.clienteNome+'</b> - <span class="badge-red">💸 DEVENDO</span><br><small>💄 '+p.produto+' | 💰 '+fmt(p.valor)+' | 🔢 '+(p.parcelas||'1x')+'</small><br><small>📅 Entrega: '+fmtDataBR(p.dataEntrega)+' | 💰 Pagamento: '+fmtDataBR(p.dataPagamento)+'</small><br><div class="linha"><button class="small green" onclick="togglePagPedido(\''+p._id+'\');atualizarPendentes()">✅ Marcar como Pago</button><button class="small orange" onclick="cobrarCliente(\''+p.clienteFone+'\',\''+p.clienteNome+'\',\''+p.valor+'\',\''+p.produto+'\')">💰 Cobrar</button><button class="small" style="background:#db2777" onclick="abrirDetalheCliente(\''+p.clienteId+'\')">👁️ Ver Cliente</button></div></div>';});document.getElementById('listaPendentes').innerHTML=html||'<div class="box" style="text-align:center;background:#f0fdf4"><div style="font-size:36px">🎉</div><b>Ninguém te devendo!</b><br><small>Você recebeu tudo!</small></div>';}
+window.cobrarTodosPendentes=function(){if(emPlanoGratis(usuarioAtual)){alert('🆓 Cobrança em lote é recurso dos planos pagos. No Plano Grátis você pode cobrar cada cliente individualmente ou assinar um plano!');mostrarSecao('secPlanoApp');return;}let devendo=pedidos.filter(p=>p.pag!=='pago');if(devendo.length===0){alert('Ninguém devendo! 🎉');return;}let total=devendo.reduce((s,p)=>s+(parseFloat(p.valor)||0),0);if(!confirm('Cobrar '+devendo.length+' pedidos pendentes? Total: '+fmt(total))) return;devendo.forEach((p,i)=>{setTimeout(()=>{let msg='Oi '+p.clienteNome+'! 💄 Lembrete: '+p.produto+' - '+fmt(p.valor)+' | 📅 Entrega: '+fmtDataBR(p.dataEntrega)+' | 💰 Pagamento: '+fmtDataBR(p.dataPagamento)+' | 🔢 '+(p.parcelas||'1x')+'\nConsegue acertar? Obrigada! 💖';window.open('https://wa.me/55'+p.clienteFone.replace(/\D/g,'')+'?text='+encodeURIComponent(msg),'_blank');},i*1200);});}
+function listar(){let busca=(document.getElementById('buscaCliente').value||'').toLowerCase();let total=0,pago=0,dev=0;pedidos.forEach(p=>{total+=parseFloat(p.valor)||0;if(p.pag==='pago')pago+=parseFloat(p.valor)||0;else dev+=parseFloat(p.valor)||0});document.getElementById('cxTotal').innerText=fmt(total);document.getElementById('cxPago').innerText=fmt(pago);document.getElementById('cxDevendo').innerText=fmt(dev);let htmlC='';clientes.filter(c=>!busca||c.nome.toLowerCase().includes(busca)).forEach(c=>{let totCliente=pedidos.filter(p=>p.clienteId===c._id).reduce((s,p)=>s+(parseFloat(p.valor)||0),0);let devCliente=pedidos.filter(p=>p.clienteId===c._id&&p.pag!=='pago').reduce((s,p)=>s+(parseFloat(p.valor)||0),0);htmlC+='<div class="cliente" style="cursor:pointer" onclick="abrirDetalheCliente(\''+c._id+'\')"><b>👤 '+c.nome+'</b> <span style="float:right">👁️ Ver tudo ›</span><br><small>📱 '+c.fone+' | 📍 '+(c.end||'-')+'</small><br><small>🛍️ Total: '+fmt(totCliente)+' | 💸 Devendo: <b style="color:#dc2626">'+fmt(devCliente)+'</b></small><br><div class="linha"><button class="small green" onclick="event.stopPropagation();cobrarCliente(\''+c.fone+'\',\''+c.nome+'\',\''+devCliente+'\',\'seus pedidos\')">💰 Cobrar</button><button class="small" style="background:#25D366" onclick="event.stopPropagation();window.open(\'https://wa.me/55'+c.fone.replace(/\D/g,'')+'?text='+encodeURIComponent('Oi '+c.nome+'! 💄')+'\')">📱 WhatsApp</button></div></div>'});document.getElementById('listaClientes').innerHTML=htmlC||'<p>Nenhuma cliente ainda.</p>';let sel=document.getElementById('pedCliente');sel.innerHTML='';clientes.forEach(c=>sel.innerHTML+='<option value="'+c._id+'">'+c.nome+'</option>');let htmlP='';[...pedidos].reverse().forEach(p=>{htmlP+='<div class="pedido"><b>👤 '+p.clienteNome+'</b> - <span class="'+(p.pag==='pago'?'badge-green':'badge-red')+'">'+(p.pag==='pago'?'✅ PAGO':'💸 DEVENDO')+'</span><br><small>💄 '+p.produto+' | 💰 '+fmt(p.valor)+' | 🔢 '+(p.parcelas||'1x')+'</small><br><small>📅 Entrega: '+fmtDataBR(p.dataEntrega)+' | 💰 Pagamento: '+fmtDataBR(p.dataPagamento)+'</small><br><small>📝 '+(p.obs||'')+'</small><br><div class="linha"><button class="small green" onclick="togglePagPedido(\''+p._id+'\')">'+(p.pag==='pago'?'Marcar Devendo':'Marcar Pago')+'</button><button class="small orange" onclick="cobrarCliente(\''+p.clienteFone+'\',\''+p.clienteNome+'\',\''+p.valor+'\',\''+p.produto+'\')">💰 Cobrar</button><button class="small red" onclick="excluirPedido(\''+p._id+'\')">🗑️</button></div></div>'});document.getElementById('listaPedidos').innerHTML=htmlP||'<p>Nenhum pedido ainda.</p>';document.getElementById('listaHome').innerHTML=htmlP||'<p>Nenhum pedido ainda.</p>';document.getElementById('listaCaixa').innerHTML=htmlP||'<p>Nada ainda.</p>';if(!document.getElementById('secPendentes').classList.contains('hidden')) atualizarPendentes();}
 window.listar=listar;
-document.getElementById('cadSenhaConfirm').addEventListener('input',function(){let s=document.getElementById('cadSenha').value;let sc=this.value;let msg=document.getElementById('msgSenhaConfirm');if(!sc){msg.innerText='';this.style.border='1px solid #ddd';return;}if(s===sc){msg.innerText='✅ Senhas iguais!';msg.style.color='green';this.style.border='2px solid green';}else{msg.innerText='❌ Senhas diferentes';msg.style.color='red';this.style.border='2px solid red';}});
+document.getElementById('cadSenhaConfirm').addEventListener('input',function(){let s=document.getElementById('cadSenha').value;let sc=this.value;let msg=document.getElementById('msgSenhaConfirm');if(!sc){msg.innerText='';this.style.border='1px solid #e4e4e7';return;}if(s===sc){msg.innerText='✅ Senhas iguais!';msg.style.color='green';this.style.border='2px solid green';}else{msg.innerText='❌ Senhas diferentes';msg.style.color='red';this.style.border='2px solid red';}});
+carregarConfigPlanos();
 (function(){try{let s=localStorage.getItem('revende_user');if(s){let d=JSON.parse(s);getDoc(doc(db,"revende_users",emailToId(d.email))).then(snap=>{if(snap.exists()){usuarioAtual=snap.data();abrirApp(usuarioAtual.nome,usuarioAtual.whats,usuarioAtual.marca)}})}}catch(e){}})();
 </script>
 </body>
